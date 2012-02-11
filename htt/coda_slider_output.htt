@@ -1,0 +1,27 @@
+<div class="anynews">
+	<h2>{TXT_HEADER}</h2>
+</div>
+
+<div id="wrapper">
+	<div id="slider">    
+		<ul class="navigation">
+			<!-- BEGIN link_block -->
+        	<li><a href="#anynews_{NEWS_ID}">{TXT_NEWS} {NEWS_ID}</a></li>
+			<!-- END link_block -->
+        </ul>
+
+        <div class="scroll">
+        	<div class="scrollContainer">
+				<!-- BEGIN news_block -->
+            	<div class="panel" id="anynews_{NEWS_ID}">
+					<h2>{TITLE}</h2>
+					{CONTENT_SHORT}
+					<!-- BEGIN readmore_link_block -->
+					<p><a href="{LINK}">{TXT_READMORE}</a></p>
+					<!-- END readmore_link_block -->
+				</div>
+				<!-- END news_block -->
+            </div>
+        </div>
+    </div>
+</div>
