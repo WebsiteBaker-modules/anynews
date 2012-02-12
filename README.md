@@ -14,18 +14,16 @@ The anynews snippet requires ***WebsiteBaker v2.8.x*** and the WebsiteBaker ***n
 
 The installation steps are explained below:
 
-1. download the latest archive from [GitHub](https://github.com/cwsoft/wb-anynews/downloads)
-2. extract the downloaded archive on your local computer and unzip it e.g. with [7-zip](http://7-zip.org)
-3. open the extracted archive and search for a file named ***wb-anynews-installer.zip*** inside
-4. log into your WebsiteBaker backend and go to the Add-ons / Modules section
-5. install the ***wb-anynews-installer.zip*** file via the WebsiteBaker installer
-6. now go to the pages section and create a new page of type ***code***
-7. enter the following code to the code page `displayNewsItems();`
-8. open the page in the fronten of your WebsiteBaker installation
-9. news entries are fetched from the news module, so you need to add news first
+1. download latest archive from [GitHub](https://github.com/cwsoft/wb-anynews/raw/master/wb-anynews-installer.zip)
+2. log into your WebsiteBaker backend and go to the Add-ons / Modules section
+3. install the downloaded zip archive via the WebsiteBaker installer
+4. go to the pages section and create a new page of type ***code***
+5. enter the following code to the code page `displayNewsItems();`
+6. open the page in the fronten of your WebsiteBaker installation
+7. news entries are fetched from the news module, so you need to add news first
 
 ## Anynews parameter
 
 Detailed information about the available Anynews parameters and the template files can be found in the HELP file.
 
-***Hint:*** Some browser (Safari, iPad) are able to render HTML files from the GitHub repository when delivered in raw format, so you may want to give it a try [English Help](https://raw.github.com/cwsoft/wb-anynews/master/help/help_en.html).
+***Hint:*** Some browser (e.g. Safari, iPad) are able to render the HTML files from GitHub repositories in raw format, so you may want to give it a try [English Help](https://raw.github.com/cwsoft/wb-anynews/master/help/help_en.html).
