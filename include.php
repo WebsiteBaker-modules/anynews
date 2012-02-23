@@ -2,21 +2,21 @@
 /**
  * Code snippet: anynews
  *
- * This code snippets grabs news from the WB news module database
- * and displays them on any page you want by invoking the function
- * displayNewsItems() via a page of type code or the index.php 
+ * This code snippets grabs news entries from the WebsiteBaker news
+ * module and displays them on any page you want by invoking the function
+ * displayNewsItems() via a page of type code or the index.php
  * file of the template.
  *
- * This file makes the function display_news_items available for WB.
+ * This file implements the Anynews function displayNewsItems.
  * 
  * LICENSE: GNU General Public License 3.0
  * 
- * @platform    CMS Websitebaker 2.8.x
+ * @platform    CMS WebsiteBaker 2.8.x
  * @package     anynews
  * @author      cwsoft (http://cwsoft.de)
- * @version     2.0.0
+ * @version     2.1.0
  * @copyright   cwsoft
- * @license     http://www.gnu.org/licenses/gpl.html
+ * @license     http://www.gnu.org/licenses/gpl-3.0.html
 */
 
 // prevent this file from being accessed directly
@@ -159,9 +159,9 @@ if (!function_exists('displayNewsItems')) {
 			/**
 			 * Include Website Baker template parser and configure it
 			*/
-			// include template class and initiate object (set template folder: "./htt")
+			// include template class and initiate object (set template folder: "./templates")
 			require_once(WB_PATH . '/include/phplib/template.inc');
-			$tpl = new Template(dirname(__FILE__) . '/htt');
+			$tpl = new Template(dirname(__FILE__) . '/templates');
 
 			// configure handling of unknown {variables} (remove:=default, keep, comment)
 			$tpl->set_unknowns('remove');
@@ -170,7 +170,7 @@ if (!function_exists('displayNewsItems')) {
 			$tpl->debug = 0;
 
 			// set template file depending on $display_mode
-			if ($display_mode > 3 && file_exists(dirname(__FILE__) . '/htt/custom_output_display_mode_' . $display_mode . '.htt')) {
+			if ($display_mode > 3 && file_exists(dirname(__FILE__) . '/templates/custom_output_display_mode_' . $display_mode . '.htt')) {
 				// assign custom template file: 'custom_output_display_mode_X.htt' [X:=4..99] to variable/handle page
 				$tpl->set_file('page', 'custom_output_display_mode_' . $display_mode . '.htt');
 			} else {
