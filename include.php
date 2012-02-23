@@ -26,29 +26,27 @@ if (defined('WB_PATH') == false) {
 
 // function to display news items on every page via (invoke function from template or code page)
 if (! function_exists('displayNewsItems')) {
-	function displayNewsItems($group_id = 0, $max_news_items = 10, $max_news_length = -1, $display_mode = 1, $lang_id = 'AUTO', $strip_tags = true, $allowed_tags = '<p><a><img>', $custom_placeholder = false, $sort_by = 1, $sort_order = 1, $not_older_than = 0)
+	function displayNewsItems(
+		$group_id = 0,                    // group to show news from (default:= 0 all groups, X:= group X, for multiple groups: array(2,4,5) )
+		$max_news_items = 10,             // maximal number of news shown (default:= 10, min:=1, max:= 999)
+		$max_news_length = -1,            // maximal length of the short news text shown (default:=-1 => full news length)
+		$display_mode = 1,                // 1:=details (default); 2:=list; 3:=better-coda-slider; 99:=list available variables; 4-98 (custom template: custom_output_display_mode_X.htt)
+		$lang_id = 'AUTO',                // module language file ID (default:= auto, examples: AUTO, DE, EN)
+		$strip_tags = true,               // true:=remove tags from short and long text (default:=true); false:=don´t strip tags
+		$allowed_tags = '<p><a><img>',    // tags not striped off (default:='<p><a><img>')
+		$custom_placeholder = false,      // false:= none (default), array('MY_VAR_1' => '%TAG%#', ... 'MY_VAR_N' => '#regex_N#' ...)
+		$sort_by = 1,                     // 1:=position (default), 2:=posted_when, 3:=published_when (only WB 2.7), 4:= random order, 5:=number of comments
+		$sort_order = 1,                  // 1:=descending (default), 2:=ascending
+		$not_older_than = 0               // 0:=disabled (default), 0-999 (only show news `published_when` date <=x days; 12 hours:=0.5)
+	)
 	{
-		// group_id... 			group to show news from (default:= 0 all groups, X:= group X, for multiple groups: array(2,4,5) )
-		// max_news_items... 	maximal number of news shown (default:= 10, min:=1, max:= 999)
-		// max_news_length... 	maximal length of the short news text shown (default:=-1 => full news length)
-		// display_mode... 		1:=details (default); 2:=list; 3:=coda slider; 4:=all variables; 5-99 (custom template: custom_output_display_mode_X.htt)
-		// lang_id...			module language file ID (default:= auto, examples: AUTO, DE, EN)
-
-		// strip_tags... 		true:=remove tags from short and long text (default:=true); false:=don´t strip tags
-		// allowed_tags...		tags not striped off (default:='<p><a><img>')
-		// $custom_placeholder	false:= none (default), array('MY_VAR_1' => '%TAG%#', ... 'MY_VAR_N' => '#regex_N#' ...)
-
-		// sort_by..			1:=position (default), 2:=posted_when, 3:=published_when (WB 2.7), 4:= random order, 5:=number of comments
-		// sort_order..			1:=descending (default), 2:=ascending
-		// not_older_than..		0:=disabled (default), 0-999 (only show news `published_when` date <=x days; 12 hours:=0.5)
-
-		// register outside variables
 		global $wb, $database;
 
 		/**
-		 * Include module function and language file
+		 * Include required module files
 		 */
-		require_once (dirname(__file__) . '/code/anynews_functions.php');
+		require_once ('code/anynews_functions.php');
+		require_once ('thirdparty/truncate.php');
 
 		// load module language file
 		if (! isset($LANG)) global $LANG;
@@ -146,7 +144,7 @@ if (! function_exists('displayNewsItems')) {
 			 */
 			// include template class and initiate object (set template folder: "./htt")
 			require_once (WB_PATH . '/include/phplib/template.inc');
-			$tpl = new Template(dirname(__file__) . '/templates');
+			$tpl = new Template(dirname(__FILE__) . '/templates');
 
 			// configure handling of unknown {variables} (remove:=default, keep, comment)
 			$tpl->set_unknowns('remove');
@@ -155,7 +153,7 @@ if (! function_exists('displayNewsItems')) {
 			$tpl->debug = 0;
 
 			// set template file depending on $display_mode
-			if (file_exists(dirname(__file__) . '/templates/custom_output_display_mode_' . $display_mode . '.htt')) {
+			if (file_exists(dirname(__FILE__) . '/templates/custom_output_display_mode_' . $display_mode . '.htt')) {
 				// set user defined template
 				$tpl->set_file('page', 'custom_output_display_mode_' . $display_mode . '.htt');
 			} else {
@@ -214,10 +212,6 @@ if (! function_exists('displayNewsItems')) {
 				if ($max_news_length != -1 && strlen($row['content_short']) > $max_news_length) {
 					// consider start position if short content starts with <p> or <div>
 					$start_pos = (preg_match('#^(<(p|div)>)#', $row['content_short'], $match)) ? strlen($match[0]) : 0;
-					// Original line; break content_short after $max_news_length; breaks
-					// in the middle of a word!
-					//					$row['content_short'] = substr($row['content_short'], $start_pos, $max_news_length) . '...';
-					// New code; break at word boundary
 					$row['content_short'] = truncate(substr($row['content_short'], $start_pos), $max_news_length, '...', false, true);
 				}
 
@@ -228,8 +222,28 @@ if (! function_exists('displayNewsItems')) {
 				}
 
 				// replace the news article dependend template placeholders
-				$tpl->set_var(array('WB_URL' => WB_URL, 'GROUP_IMAGE' => $image, 'NEWS_ID' => $news_counter, 'POST_ID' => (int)$row['post_id'], 'SECTION_ID' => (int)$row['section_id'], 'PAGE_ID' => (int)$row['page_id'], 'GROUP_ID' => (int)$row['group_id'], 'GROUP_TITLE' => array_key_exists($row['group_id'], $news_group_titles) ? htmlentities($news_group_titles[$row['group_id']]) : '', 'POSTED_BY' => (int)$row['posted_by'], 'USERNAME' => array_key_exists($row['posted_by'], $user_list) ? htmlentities($user_list[$row['posted_by']]['USERNAME']) : '', 'DISPLAY_NAME' => array_key_exists($row['posted_by'], $user_list) ? htmlentities($user_list[$row['posted_by']]['DISPLAY_NAME']) : '', 'TITLE' => ($strip_tags) ? strip_tags($row['title']) : $row['title'], 'COMMENTS' => isset($row['comment_count']) ? $row['comment_count'] : null, 'LINK' => WB_URL . PAGES_DIRECTORY . $row['link'] . PAGE_EXTENSION, 'CONTENT_SHORT' => $image . $row['content_short'], 'CONTENT_LONG' => $row['content_long'], 'POSTED_WHEN' => date($LANG['ANYNEWS'][0]['DATE_FORMAT'],
-					$row['posted_when']), 'PUBLISHED_WHEN' => date($LANG['ANYNEWS'][0]['DATE_FORMAT'], $row['published_when']), 'PUBLISHED_UNTIL' => date($LANG['ANYNEWS'][0]['DATE_FORMAT'], $row['published_until']), ));
+				$tpl->set_var(array(
+					'WB_URL' => WB_URL, 
+					'GROUP_IMAGE' => $image, 
+					'NEWS_ID' => $news_counter, 
+					'POST_ID' => (int)$row['post_id'], 
+					'SECTION_ID' => (int)$row['section_id'], 
+					'PAGE_ID' => (int)$row['page_id'], 
+					'GROUP_ID' => (int)$row['group_id'], 
+					'GROUP_TITLE' => array_key_exists($row['group_id'], $news_group_titles) ? htmlentities($news_group_titles[$row['group_id']]) : '',
+					'POSTED_BY' => (int)$row['posted_by'], 
+					'USERNAME' => array_key_exists($row['posted_by'], $user_list) ? htmlentities($user_list[$row['posted_by']]['USERNAME']) : '', 
+					'DISPLAY_NAME' => array_key_exists($row['posted_by'], $user_list) ? htmlentities($user_list[$row['posted_by']]['DISPLAY_NAME']) : '', 
+					'TITLE' => ($strip_tags) ? strip_tags($row['title']) : $row['title'], 
+					'COMMENTS' => isset($row['comment_count']) ? $row['comment_count'] : null, 
+					'LINK' => WB_URL . PAGES_DIRECTORY . $row['link'] . PAGE_EXTENSION, 
+					'CONTENT_SHORT' => $image . $row['content_short'], 
+					'CONTENT_LONG' => $row['content_long'], 
+					'POSTED_WHEN' => date($LANG['ANYNEWS'][0]['DATE_FORMAT'],$row['posted_when']), 
+					'PUBLISHED_WHEN' => date($LANG['ANYNEWS'][0]['DATE_FORMAT'], $row['published_when']), 
+					'PUBLISHED_UNTIL' => date($LANG['ANYNEWS'][0]['DATE_FORMAT'], $row['published_until'])
+					)
+				);
 
 				// add template values in news block in append mode (add per loop)
 				$tpl->parse('link_block_handle', 'link_block', true);

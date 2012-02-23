@@ -1,9 +1,8 @@
-<div class="anynews">
-<h2>{TXT_HEADER}</h2>
-
-<ul>
-<!-- BEGIN news_block -->
-<li><a href="{LINK}">{TITLE} {POSTED_WHEN}</a></li>
-<!-- END news_block -->
-</ul>
+<div class="mod_anynews">
+	<h2>{TXT_HEADER}</h2>
+	<ul>
+	<!-- BEGIN news_block -->
+		<li><a href="{LINK}">{TITLE} {POSTED_WHEN}</a></li>
+	<!-- END news_block -->
+	</ul>
 </div>

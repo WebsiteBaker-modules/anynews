@@ -28,15 +28,13 @@ if (! isset($LANG) || (isset($LANG) && ! is_array($LANG))) {
 	$LANG = array();
 }
 
-// Text outputs for the frontend
 $LANG['ANYNEWS'][0] = array(
-	'TXT_HEADER'		=> 'Najnovije vesti',
-	'TXT_READMORE'		=> 'detaljnije',
-	'TXT_NO_NEWS'		=> 'Vesti ne postoje u bazi.',
-	'TXT_NEWS'		=> 'Novosti',
-	// English date/time format: (9:12 PM, 10/20/2008)
-	'DATE_FORMAT'		=> ' | d.m.Y. - H:i',
-	'TXT_REQUIREMENTS'	=> 'Greška, Anynews možete koristiti samo sa Website Baker verzijom 2.7 ili novijom.',
+	// text outputs for the frontend
+	'TXT_HEADER'   => 'Najnovije vesti',
+	'TXT_READMORE' => 'detaljnije',
+	'TXT_NO_NEWS'  => 'Vesti ne postoje u bazi.',
+	'TXT_NEWS'     => 'Novosti',
+	
+	// date/time format: (9:12 PM, 10/20/2008)
+	'DATE_FORMAT'  => ' | d.m.Y. - H:i'
 );
-
-?>

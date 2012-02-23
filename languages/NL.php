@@ -28,15 +28,13 @@ if (! isset($LANG) || (isset($LANG) && ! is_array($LANG))) {
 	$LANG = array();
 }
 
-// Text outputs for the frontend
 $LANG['ANYNEWS'][0] = array(
+	// text outputs for the frontend
 	'TXT_HEADER'		=> 'Laatste nieuws', 
 	'TXT_READMORE'		=> 'lees meer', 
 	'TXT_NO_NEWS'		=> 'Nog geen nieuws beschikbaar.',
 	'TXT_NEWS'			=> 'Nieuws', 
-	// English date/time format: (9:12 PM, 10/20/2008)
-	'DATE_FORMAT'		=> ' (g:i A, d-m-Y)',		
-	'TXT_REQUIREMENTS'	=> 'Helaas, Anynews vereist Website Baker 2.7 of hoger.',		
+	
+	// date/time format: (9:12 PM, 31-12-2012)
+	'DATE_FORMAT'		=> ' (g:i A, d-m-Y)'
 );
-
-?>
