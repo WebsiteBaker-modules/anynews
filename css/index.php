@@ -1,3 +1,4 @@
+<?php
 /**
  * Code snippet: anynews
  *
@@ -6,7 +7,7 @@
  * displayNewsItems() via a page of type code or the index.php
  * file of the template.
  *
- * This file includes the CSS files used by Anynews for the frontend view.
+ * This file prevents directory listing.
  * 
  * LICENSE: GNU General Public License 3.0
  * 
@@ -18,4 +19,7 @@
  * @license     http://www.gnu.org/licenses/gpl-3.0.html
 */
 
-@import "css/anynews.css";
+// prevent this file from being accessed directly
+if (defined('WB_PATH') == false) {
+	exit("Cannot access this file directly");
+}

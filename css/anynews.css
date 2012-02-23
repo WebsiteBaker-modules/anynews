@@ -6,7 +6,7 @@
  * displayNewsItems() via a page of type code or the index.php
  * file of the template.
  *
- * This file includes the CSS files used by Anynews for the frontend view.
+ * This file contains the CSS styles used in the frontend.
  * 
  * LICENSE: GNU General Public License 3.0
  * 
@@ -18,4 +18,11 @@
  * @license     http://www.gnu.org/licenses/gpl-3.0.html
 */
 
-@import "css/anynews.css";
+/**
+ * Custom CSS to style the flexslider display_output:=5 
+*/
+div.anynews h2 {
+}
+
+div.anynews p {
+}
