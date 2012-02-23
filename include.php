@@ -20,7 +20,9 @@
 */
 
 // prevent this file from being accessed directly
-if (!defined('WB_PATH')) die(header('Location: ../../index.php'));
+if (defined('WB_PATH') == false) {
+	exit("Cannot access this file directly");
+}
 
 // function to display news items on every page via (invoke function from template or code page)
 if (!function_exists('displayNewsItems')) {
@@ -57,7 +59,7 @@ if (!function_exists('displayNewsItems')) {
 		/**
 		 * Include module function and language file
 		 */
-		require_once(dirname(__FILE__) . '/functions.inc.php');
+		require_once(dirname(__FILE__) . '/code/anynews_functions.php');
 
 		// load module language file
 		if (!isset($LANG)) global $LANG;
@@ -428,4 +430,3 @@ if (!function_exists('displayNewsItems')) {
 		}
 		return $truncate;
 	}
-?>

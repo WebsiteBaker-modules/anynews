@@ -7,20 +7,22 @@
  * displayNewsItems() via a page of type code or the index.php 
  * file of the template.
  *
- * This file defines the variables required for Website Baker.
+ * This file includes utility functions used by the Anynews snippet.
  * 
  * LICENSE: GNU General Public License 3.0
  * 
  * @platform    CMS Websitebaker 2.8.x
  * @package     anynews
  * @author      cwsoft (http://cwsoft.de)
- * @version     2.0.0
+ * @version     2.1.0
  * @copyright   cwsoft
  * @license     http://www.gnu.org/licenses/gpl.html
 */
 
 // prevent this file from being accessed directly
-if (!defined('WB_PATH')) die(header('Location: ../../index.php'));
+if (defined('WB_PATH') == false) {
+	exit("Cannot access this file directly");
+}
 
 /**
  * Function to include the module language file
@@ -57,7 +59,7 @@ function loadLanguageFile($lang_id)
 	}
 	
 	// try to include specified module language file
-	require(!file_exists($lang_file) ? dirname(__FILE__) . '/languages/EN.php' : $lang_file);
+	require(!file_exists($lang_file) ? dirname(__FILE__) . '/../languages/EN.php' : $lang_file);
 }
 
 /**
