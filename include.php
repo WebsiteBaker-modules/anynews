@@ -31,7 +31,7 @@ if (! function_exists('displayNewsItems')) {
 		// group_id... 			group to show news from (default:= 0 all groups, X:= group X, for multiple groups: array(2,4,5) )
 		// max_news_items... 	maximal number of news shown (default:= 10, min:=1, max:= 999)
 		// max_news_length... 	maximal length of the short news text shown (default:=-1 => full news length)
-		// display_mode... 		1:=details (default); 2:=unsorted list; 3:=coda slider; 4-99 (custom template: custom_output_display_mode_X.htt)
+		// display_mode... 		1:=details (default); 2:=list; 3:=coda slider; 4:=all variables; 5-99 (custom template: custom_output_display_mode_X.htt)
 		// lang_id...			module language file ID (default:= auto, examples: AUTO, DE, EN)
 
 		// strip_tags... 		true:=remove tags from short and long text (default:=true); false:=don´t strip tags
@@ -46,20 +46,13 @@ if (! function_exists('displayNewsItems')) {
 		global $wb, $database;
 
 		/**
-		 * Include required Anynews files
+		 * Include module function and language file
 		 */
 		require_once (dirname(__file__) . '/code/anynews_functions.php');
-		require_once ('thirdparty/truncate.php');
 
 		// load module language file
 		if (! isset($LANG)) global $LANG;
 		loadLanguageFile($lang_id);
-
-		// output message for outdated Website Baker versions
-		if ((double)WB_VERSION < 2.7) {
-			echo $LANG[0]['TXT_REQUIREMENTS'];
-			return;
-		}
 
 		/**
 		 * Sanitize user specified function parameters
@@ -85,8 +78,7 @@ if (! function_exists('displayNewsItems')) {
 		if (is_array($group_id)) {
 			// SQL query for multiple groups
 			$sql_group_id = '`group_id` IN (' . implode(',', $group_id) . ')';
-		}
-		else {
+		} else {
 			// SQL query for single or empty groups
 			$sql_group_id = ($group_id) ? '`group_id` = \'' . $group_id . '\'' : '1';
 		}
@@ -115,7 +107,7 @@ if (! function_exists('displayNewsItems')) {
 		$sql_sort_order = ($sort_order == 1) ? 'DESC' : 'ASC';
 
 		/**
-		 * v1.15 - option to sort by number of comments
+		 * Option to sort by number of comments
 		 **/
 		$join = null;
 		$fields = '*';
@@ -152,7 +144,7 @@ if (! function_exists('displayNewsItems')) {
 			/**
 			 * Include Website Baker template parser and configure it
 			 */
-			// include template class and initiate object (set template folder: "./templates")
+			// include template class and initiate object (set template folder: "./htt")
 			require_once (WB_PATH . '/include/phplib/template.inc');
 			$tpl = new Template(dirname(__file__) . '/templates');
 
@@ -163,25 +155,12 @@ if (! function_exists('displayNewsItems')) {
 			$tpl->debug = 0;
 
 			// set template file depending on $display_mode
-			if ($display_mode > 3 && file_exists(dirname(__file__) . '/templates/custom_output_display_mode_' . $display_mode . '.htt')) {
-				// assign custom template file: 'custom_output_display_mode_X.htt' [X:=4..99] to variable/handle page
+			if (file_exists(dirname(__file__) . '/templates/custom_output_display_mode_' . $display_mode . '.htt')) {
+				// set user defined template
 				$tpl->set_file('page', 'custom_output_display_mode_' . $display_mode . '.htt');
-			}
-			else {
-				// assign one of the standard template files to variable/handle page
-				switch ($display_mode) {
-					case 2:
-						$tpl->set_file('page', 'list_output.htt');
-						break;
-
-					case 3:
-						$tpl->set_file('page', 'coda_slider_output.htt');
-						break;
-
-					default:
-						$tpl->set_file('page', 'detailed_output.htt');
-						break;
-				}
+			} else {
+				// set default template
+				$tpl->set_file('page', 'custom_output_display_mode_1.htt');
 			}
 
 			// set link block required for the coda slider (can be used in custom templates where a second block is required)
@@ -197,7 +176,7 @@ if (! function_exists('displayNewsItems')) {
 			 * Replace template placeholders with values from language file or database query
 			 */
 			// replace placeholders with values from language file
-			foreach ($LANG[0] as $key => $value) {
+			foreach ($LANG['ANYNEWS'][0] as $key => $value) {
 				$tpl->set_var($key, $value);
 			}
 
@@ -235,6 +214,10 @@ if (! function_exists('displayNewsItems')) {
 				if ($max_news_length != -1 && strlen($row['content_short']) > $max_news_length) {
 					// consider start position if short content starts with <p> or <div>
 					$start_pos = (preg_match('#^(<(p|div)>)#', $row['content_short'], $match)) ? strlen($match[0]) : 0;
+					// Original line; break content_short after $max_news_length; breaks
+					// in the middle of a word!
+					//					$row['content_short'] = substr($row['content_short'], $start_pos, $max_news_length) . '...';
+					// New code; break at word boundary
 					$row['content_short'] = truncate(substr($row['content_short'], $start_pos), $max_news_length, '...', false, true);
 				}
 
@@ -245,8 +228,8 @@ if (! function_exists('displayNewsItems')) {
 				}
 
 				// replace the news article dependend template placeholders
-				$tpl->set_var(array('WB_URL' => WB_URL, 'GROUP_IMAGE' => $image, 'NEWS_ID' => $news_counter, 'POST_ID' => (int)$row['post_id'], 'SECTION_ID' => (int)$row['section_id'], 'PAGE_ID' => (int)$row['page_id'], 'GROUP_ID' => (int)$row['group_id'], 'GROUP_TITLE' => array_key_exists($row['group_id'], $news_group_titles) ? htmlentities($news_group_titles[$row['group_id']]) : '', 'POSTED_BY' => (int)$row['posted_by'], 'USERNAME' => array_key_exists($row['posted_by'], $user_list) ? htmlentities($user_list[$row['posted_by']]['USERNAME']) : '', 'DISPLAY_NAME' => array_key_exists($row['posted_by'], $user_list) ? htmlentities($user_list[$row['posted_by']]['DISPLAY_NAME']) : '', 'TITLE' => ($strip_tags) ? strip_tags($row['title']) : $row['title'], 'COMMENTS' => isset($row['comment_count']) ? $row['comment_count'] : null, 'LINK' => WB_URL . PAGES_DIRECTORY . $row['link'] . PAGE_EXTENSION, 'CONTENT_SHORT' => $image . $row['content_short'], 'CONTENT_LONG' => $row['content_long'], 'POSTED_WHEN' => date($LANG[0]['DATE_FORMAT'],
-					$row['posted_when']), 'PUBLISHED_WHEN' => date($LANG[0]['DATE_FORMAT'], $row['published_when']), 'PUBLISHED_UNTIL' => date($LANG[0]['DATE_FORMAT'], $row['published_until']), ));
+				$tpl->set_var(array('WB_URL' => WB_URL, 'GROUP_IMAGE' => $image, 'NEWS_ID' => $news_counter, 'POST_ID' => (int)$row['post_id'], 'SECTION_ID' => (int)$row['section_id'], 'PAGE_ID' => (int)$row['page_id'], 'GROUP_ID' => (int)$row['group_id'], 'GROUP_TITLE' => array_key_exists($row['group_id'], $news_group_titles) ? htmlentities($news_group_titles[$row['group_id']]) : '', 'POSTED_BY' => (int)$row['posted_by'], 'USERNAME' => array_key_exists($row['posted_by'], $user_list) ? htmlentities($user_list[$row['posted_by']]['USERNAME']) : '', 'DISPLAY_NAME' => array_key_exists($row['posted_by'], $user_list) ? htmlentities($user_list[$row['posted_by']]['DISPLAY_NAME']) : '', 'TITLE' => ($strip_tags) ? strip_tags($row['title']) : $row['title'], 'COMMENTS' => isset($row['comment_count']) ? $row['comment_count'] : null, 'LINK' => WB_URL . PAGES_DIRECTORY . $row['link'] . PAGE_EXTENSION, 'CONTENT_SHORT' => $image . $row['content_short'], 'CONTENT_LONG' => $row['content_long'], 'POSTED_WHEN' => date($LANG['ANYNEWS'][0]['DATE_FORMAT'],
+					$row['posted_when']), 'PUBLISHED_WHEN' => date($LANG['ANYNEWS'][0]['DATE_FORMAT'], $row['published_when']), 'PUBLISHED_UNTIL' => date($LANG['ANYNEWS'][0]['DATE_FORMAT'], $row['published_until']), ));
 
 				// add template values in news block in append mode (add per loop)
 				$tpl->parse('link_block_handle', 'link_block', true);
@@ -270,10 +253,9 @@ if (! function_exists('displayNewsItems')) {
 			// ouput the final template
 			$tpl->pparse('output', 'page');
 
-		}
-		else {
+		} else {
 			// output no news message
-			echo $LANG[0]['TXT_NO_NEWS'];
+			echo $LANG['ANYNEWS'][0]['TXT_NO_NEWS'];
 		}
 	}
 }

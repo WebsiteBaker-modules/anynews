@@ -20,14 +20,14 @@
 */
 
 // OBLIGATORY WEBSITE BAKER VARIABLES
-$module_directory		= 'anynews';
-$module_name			= 'Anynews (displayNewsItems)';
-$module_function		= 'snippet';
-$module_version			= '2.1.0';
-$module_status			= 'stable';
-$module_platform		= '2.8.x';
-$module_author			= 'cwsoft (http://cwsoft.de)';
-$module_license 		= '<a href="http://www.gnu.org/licenses/gpl-3.0.html">GNU General Public Licencse (GPL) v3.0</a>';
-$module_license_terms	= '-';
-$module_requirements	= 'PHP 5.2.2 or higher, WebsiteBaker news module';
-$module_description 	= 'Call displayNewsItems(); from the index.php of your template or a code section to display news entries where you want them to be. For details visit <a href="https://github.com/cwsoft/wb-anynews">GitHub</a>.';
+$module_directory = 'anynews';
+$module_name = 'Anynews';
+$module_function = 'snippet';
+$module_version = '2.1.0_ALPHA';
+$module_status = 'alpha';
+$module_platform = '2.8.x';
+$module_author = 'cwsoft (http://cwsoft.de)';
+$module_license = '<a href="http://www.gnu.org/licenses/gpl.html">GNU General Public Licencse 3.0</a>';
+$module_license_terms = '-';
+$module_requirements = 'PHP 5.2.17 or higher, WB news module';
+$module_description = 'Call displayNewsItems(); from the index.php of your template or a code section to display news entries where you want them to be. For details see <a href="https://github.com/cwsoft/wb-anynews">GitHub</a>.';

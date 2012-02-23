@@ -1,6 +1,6 @@
 <?php
 /**
- * English language file for the code snippet: anynews
+ * Code snippet: anynews
  *
  * This code snippets grabs news from the WB news module database
  * and displays them on any page you want by invoking the function
@@ -14,19 +14,23 @@
  * @platform    CMS Websitebaker 2.8.x
  * @package     anynews
  * @author      cwsoft (http://cwsoft.de)
- * @version     2.0.0
+ * @translation	cwsoft
+ * @version     2.1.0
  * @copyright   cwsoft
- * @license     http://www.gnu.org/licenses/gpl.html
+ * @license     http://www.gnu.org/licenses/gpl-3.0.html
 */
 
 // English module description
-$module_description	= 'Snippet to display news items on any page you want. Function can be invoked from the template or a code section. Details can be found in the module <a href="{WB_URL}/modules/anynews/help/help_en.html" target="_blank">README</a> file';
+$module_description		= 'Invoke the function displayNewsItems(); from the index.php of your template or a code section to display news entries where you want them to be.';
+$module_description    .= 'For details see <a href="https://github.com/cwsoft/wb-anynews" target="_blank">GitHub</a>.';
 
-// declare module language array
-$LANG = array();
+// initialize global $LANG variable as array if needed
+if (! isset($LANG) || (isset($LANG) && ! is_array($LANG))) {
+	$LANG = array();
+}
 
 // Text outputs for the frontend
-$LANG[0] = array(
+$LANG['ANYNEWS'][0] = array(
 	'TXT_HEADER'		=> 'Latest News', 
 	'TXT_READMORE'		=> 'read more', 
 	'TXT_NO_NEWS'		=> 'No news available yet.',
@@ -35,5 +39,3 @@ $LANG[0] = array(
 	'DATE_FORMAT'		=> ' (g:i A, m/d/Y)',		
 	'TXT_REQUIREMENTS'	=> 'Sorry, Anynews requires Website Baker 2.7 or higher.',		
 );
-
-?>

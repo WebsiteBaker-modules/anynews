@@ -1,6 +1,6 @@
 <?php
 /**
- * Dutch language file for the code snippet: anynews
+ * Code snippet: anynews
  *
  * This code snippets grabs news from the WB news module database
  * and displays them on any page you want by invoking the function
@@ -14,20 +14,22 @@
  * @platform    CMS Websitebaker 2.8.x
  * @package     anynews
  * @author      cwsoft (http://cwsoft.de)
- * @translation	forum Dave (ak D72)
- * @version     2.0.0
+ * @translation	forum member Dave (ak D72)
+ * @version     2.1.0
  * @copyright   cwsoft
- * @license     http://www.gnu.org/licenses/gpl.html
+ * @license     http://www.gnu.org/licenses/gpl-3.0.html
 */
 
-// English module description
-$module_description	= 'Snippet om nieuws items te tonen op elke pagina die u maar wilt. Functie kan opgeroepen worden vanuit de template of een code sectie. Meer informatie is te vinden in de module <a href="{WB_URL}/modules/anynews/help/help_nl.html" target="_blank">LEESMIJ</a> file';
+// Dutch module description
+$module_description	= 'Snippet om nieuws items te tonen op elke pagina die u maar wilt. Functie kan opgeroepen worden vanuit de template of een code sectie. Meer informatie is te vinden in de module <a href="https://github.com/cwsoft/wb-anynews" target="_blank">GitHub</a>.';
 
-// declare module language array
-$LANG = array();
+// initialize global $LANG variable as array if needed
+if (! isset($LANG) || (isset($LANG) && ! is_array($LANG))) {
+	$LANG = array();
+}
 
 // Text outputs for the frontend
-$LANG[0] = array(
+$LANG['ANYNEWS'][0] = array(
 	'TXT_HEADER'		=> 'Laatste nieuws', 
 	'TXT_READMORE'		=> 'lees meer', 
 	'TXT_NO_NEWS'		=> 'Nog geen nieuws beschikbaar.',

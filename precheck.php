@@ -7,7 +7,7 @@
  * displayNewsItems() via a page of type code or the index.php
  * file of the template.
  *
- * This file prevents directory listing.
+ * This file checks the installation requirements atinstallation
  * 
  * LICENSE: GNU General Public License 3.0
  * 
@@ -23,3 +23,8 @@
 if (defined('WB_PATH') == false) {
 	exit("Cannot access this file directly");
 }
+
+$PRECHECK = array();
+
+// check required WebsiteBaker version
+$PRECHECK['WB_VERSION'] = array('VERSION' => '2.8.2', 'OPERATOR' => '>=');

@@ -1,12 +1,13 @@
 <?php
 /**
- * Fichier de langue en français pour le code snippet: anynews
+ * Code snippet: anynews
  *
- * Ce code snippet récupère les news dans la base de donnée du module de news
- * et affiche les news sur n'importe quelle autre page là où la fonction
- * displayNewsItems() est appellée via une page de code ou via le template index.php 
-  *
- * Ce fichier contient la langue française
+ * This code snippets grabs news from the WB news module database
+ * and displays them on any page you want by invoking the function
+ * displayNewsItems() via a page of type code or the index.php 
+ * file of the template.
+ *
+ * This file contains the French language output.
  * 
  * LICENSE: GNU General Public License 3.0
  * 
@@ -14,19 +15,21 @@
  * @package     anynews
  * @author      cwsoft (http://cwsoft.de)
  * @translation Guillaume Vielliard
- * @version     2.0.0
+ * @version     2.1.0
  * @copyright   cwsoft
- * @license     http://www.gnu.org/licenses/gpl.html
+ * @license     http://www.gnu.org/licenses/gpl-3.0.html
  */
 
-// Description du module
-$module_description	= 'Code pour afficher des news sur différentes pages . Cette fonction peut être apellée depuis le template ou dans une section de code. Plus de détails sur ce module dans le fichier suivant <a href="{WB_URL}/modules/anynews/help/help_en.html" target="_blank">LISEZMOI</a> ';
+// French module description
+$module_description	= 'Code pour afficher des news sur différentes pages . Cette fonction peut être apellée depuis le template ou dans une section de code. Plus de détails sur ce module dans le fichier suivant <a href="https://github.com/cwsoft/wb-anynews" target="_blank">GitHub</a>.';
 
-// Declaration du tableau
-$LANG = array();
+// initialize global $LANG variable as array if needed
+if (! isset($LANG) || (isset($LANG) && ! is_array($LANG))) {
+	$LANG = array();
+}
 
-// Affichage du texte dans le frontoffice
-$LANG[0] = array(
+// Text outputs for the frontend
+$LANG['ANYNEWS'][0] = array(
 	'TXT_HEADER'		=> 'Dernière news', 
 	'TXT_READMORE'		=> 'Lire la suite', 
 	'TXT_NO_NEWS'		=> 'Pas encore de news.',
