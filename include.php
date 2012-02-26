@@ -30,7 +30,7 @@ if (! function_exists('displayNewsItems')) {
 		$group_id = 0,                    // group to show news from (default:= 0 all groups, X:= group X, for multiple groups: array(2,4,5) )
 		$max_news_items = 10,             // maximal number of news shown (default:= 10, min:=1, max:= 999)
 		$max_news_length = -1,            // maximal length of the short news text shown (default:=-1 => full news length)
-		$display_mode = 1,                // 1:=details (default); 2:=list; 3:=better-coda-slider; 99:=list available variables; 4-98 (custom template: custom_output_display_mode_X.htt)
+		$display_mode = 1,                // 1:=details (default); 2:=list; 3:=coda-slider; 4:flexslider; 4-98 (custom template: display_mode_X.htt); 99:=cheat sheet
 		$lang_id = 'AUTO',                // module language file ID (default:= auto, examples: AUTO, DE, EN)
 		$strip_tags = true,               // true:=remove tags from short and long text (default:=true); false:=don´t strip tags
 		$allowed_tags = '<p><a><img>',    // tags not striped off (default:='<p><a><img>')
@@ -153,12 +153,12 @@ if (! function_exists('displayNewsItems')) {
 			$tpl->debug = 0;
 
 			// set template file depending on $display_mode
-			if (file_exists(dirname(__FILE__) . '/templates/custom_output_display_mode_' . $display_mode . '.htt')) {
+			if (file_exists(dirname(__FILE__) . '/templates/display_mode_' . $display_mode . '.htt')) {
 				// set user defined template
-				$tpl->set_file('page', 'custom_output_display_mode_' . $display_mode . '.htt');
+				$tpl->set_file('page', 'display_mode_' . $display_mode . '.htt');
 			} else {
 				// set default template
-				$tpl->set_file('page', 'custom_output_display_mode_1.htt');
+				$tpl->set_file('page', 'display_mode_1.htt');
 			}
 
 			// set link block required for the coda slider (can be used in custom templates where a second block is required)
