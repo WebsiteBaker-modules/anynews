@@ -18,7 +18,7 @@
 </script>	
 
 <div class="mod_anynews">
-	<h2>{TXT_HEADER} (better-coda-slider)</h2>
+	<h2>{TXT_HEADER}</h2>
 
 	<div id="wrapper">
 		<div id="slider">    
