@@ -1,5 +1,5 @@
 # Anynews Code Snippet for CMS WebsiteBaker (2.8.x)
-The code snippet `Anynews` is designed to fetch news entries from the [WebsiteBaker CMS](http://www.websitebaker2.org) `news` module. Just call the Anynews function ***displayNewsItems();*** where you want the news output to appear on your frontend. Optional function parameter, HTML templates, content placeholders and CSS definitions allows you to style the news output the way you want. Anynews ships with four templates - including a nice jQuery sliding effect - ready for use out of the box. 
+The code snippet `Anynews` is designed to fetch news entries from the [WebsiteBaker CMS](http://www.websitebaker2.org) `news` module. Just call the Anynews function ***displayNewsItems();*** where you want the news output to appear on your frontend. Optional function parameters, HTML templates, content placeholders and CSS definitions allows you to style the news output the way you want. Anynews ships with four templates - including two jQuery sliding effects - ready for use out of the box.
 
 Power users define their own placeholders containing information extracted from the short and/or long `news` module description. Mastering Anynews is possible - but requires you to study the information provided in the section ***Customizing Anynews***.
 
@@ -10,16 +10,14 @@ The latest stable Anynews [installation package](https://github.com/cwsoft/wb-an
 Anynews is licensed under the [GNU General Public License (GPL) v3.0](http://www.gnu.org/licenses/gpl-3.0.html).
 
 ## Requirements
-
 The minimum requirements to get Anynews running on your WebsiteBaker installation are as follows:
 
-- WebsiteBaker ***2.8.2*** or higher (recommeded last stable 2.8.x version)
-- standard WebsiteBaker `news` module installed
+- WebsiteBaker ***2.8.2*** or higher (recommended last stable 2.8.x version)
+- default WebsiteBaker `news` module
 - PHP ***5.2.2*** or higher (recommended last stable PHP 5.3.x version)
-- Optional: small modification on template file to enable jQuery support
+- Optional: small modification of your template file to enable jQuery support
 
 ## Installation
-
 1. download latest stable [WebsiteBaker installation package](https://github.com/cwsoft/wb-anynews/raw/master/wb-anynews-installer.zip) from GitHub master branch
 2. log into your WebsiteBaker backend and go to the `Add-ons/Modules` section
 3. install the downloaded zip archive via the WebsiteBaker installer
@@ -43,12 +41,11 @@ if (function_exists('register_frontend_modfiles')) {
 </pre>
 
 ## Usage
-As Anynews is designed to fetch news items from the WebsiteBaker `news` module, you need to create add news entries with the `news` module **before** you can use Anynews in a reasonable way. If no news are available, Anynews just outputs the message "No news available yet". Follow the steps below to create some news entries with the WebsiteBaker `news` module.
+As Anynews is designed to fetch news items from the WebsiteBaker `news` module, you need to add some news entries with the `news` module **before** you can use Anynews. If no news are available, Anynews just outputs the message "No news available yet". Follow the steps below to add some news entries with the WebsiteBaker `news` module.
 
 1. log into your WebsiteBaker backend and go to the `Pages` section
 2. create a new page or section of type `News` (set visibility to None)
-3. view the created news page in the WebsiteBaker backend
-4. add some news entries (2-3) from the backend
+3. add some news entries (2-3) from the `news` page in the WebsiteBaker backend
 
 ### Use Anynews from a page or section
 Create a new page or section of type `Code` in the WebsiteBaker backend and enter the following code to it.
@@ -57,7 +54,7 @@ Create a new page or section of type `Code` in the WebsiteBaker backend and ente
 		displayNewsItems();
 	}
 
-The news output created by Anynews will only be shown on pages/sections in the frontend, which contain the code above.
+The Anynews output is only visible at the pages/sections of your frontend, which contain the code above.
 
 ### Use Anynews from your template
 To display news items at a fixed position in your frontend, open the ***index.php*** file of your default frontend template with the [Addon File Editor](https://github.com/cwsoft/wb-addon-file-editor#readme). Then add the code below to the position in your template where you want the news output to appear.
@@ -71,14 +68,14 @@ To display news items at a fixed position in your frontend, open the ***index.ph
 Visit the frontend of your webiste and check the Anynews output.
 
 ## Customizing Anynews
-The Anynews output can be customized to your needs via the following three methods:
+The Anynews output can be customized to your needs by three methods:
 
-1. the ***displayNewsItems()*** parameters
-2. the template files ***templates/display_mode_X.htt***
-3. the CSS file ***/css/anynews.css***
+1. parameters of the Anynews ***displayNewsItems()*** function
+2. customized Anynews template files ***templates/display_mode_X.htt***
+3. customized CSS definitions in file ***/css/anynews.css***
 	
 ### Anynews Parametes
-Calling Anynews in it´s easiest form ***displayNewsItems();*** applies the default parameters shown below.
+Calling Anynews in it´s easiest form ***displayNewsItems();*** uses the default parameters shown below.
 
 	displayNewsItems(
 		$group_id = 0,
@@ -96,60 +93,49 @@ Calling Anynews in it´s easiest form ***displayNewsItems();*** applies the defau
 
 ***Function parameters explained:***
 
-- **$group_id**: limits news to specified group(s)
-	
+- **$group_id**: only show news from defined group(s)
 	[0:all groups, N:group N, array(2,4,5): groups 2,4 and 5]
 	
-- **$max_news_items**: max. news entries to show
-	
+- **$max_news_items**: max. number of news entries to show
 	[allowed: 1..999]
 	
-- **$max_news_length**: max news text length
-	
+- **$max_news_length**: max. news length to be shown
 	[-1:= full length]
 	
-- **$display_mode**: template number to use /templates/display_mode_.htt
-	
-	[1:details, 2:list, 3:coda-slider, 4:flexslider, 5..98 display_mode_X.htt]
-	set $display_mode=99 to show a cheat sheet with ALL Anynews placeholders
+- **$display_mode**: ID of the Anynews template to use (/templates/display_mode_X.htt)
+	[1:details, 2:list, 3:better-coda-slider, 4:flexslider, 5..98 custom template *display_mode_X.htt*]
+	Note: 99 shows a cheat sheet with ALL Anynews placeholders available in template files
 	
 - **$lang_id**: mode to detect language file to use
-	
-	[allowed: 'AUTO', 'DE', 'EN']
+	[allowed: 'AUTO', any WB language ID: 'DE', 'EN', ...]
 	
 - **$strip_tags**: flag to strip tags from news short/long text not contained in *$allowed_tags*
-	
 	[true:strip tags, false:don't strip tags]
 	
 - **$allowed_tags**: allowed tags to removed when *$strip_tags = true*
-	
 	[default: '&lt;p&gt;&lt;a&gt;&lt;img&gt;']
 
-- **$custom_placeholder**: creates placeholders usable in the template files
-	
-	[array('MY_IMG' => '%img%', 'MY_TAG' => '%author%', 'MY_REGEX' => '#(test)#i')]
-	adds the following placeholders to the Anynews template:
-	{SHORT|LONG_MY_IMG_#}, {SHORT|LONG_MY_TAG_#}, {SHORT|LONG_MY_REGEX_#}
-	**SHORT|LONG** indicates if regular expression matches the **short** or **long** news text
-	**#** number starting from 1 to the number of matches found
+- **$custom_placeholder**: create own placeholders for usage in template files
+	Example: $custom_placeholder = array('MY_IMG' => '%img%', 'MY_TAG' => '%author%', 'MY_REGEX' => '#(test)#i')
+	stores all image URLs, text inside <author></author> and all matches of "test" in placeholders:
+	{PREFIX_MY_IMG_#}, {PREFIX_MY_TAG_#}, {PREFIX_MY_REGEX_#}
+	   where ***PREFIX*** is either "SHORT" or "LONG", depending if the match was found in the short/long news text
+	   where ***#*** is a number between 1 and the number of matches found
 	
 - **$sort_by**: defines the sort criteria for the news items returned
-	
 	[1:position, 2:posted_when, 3:published_when, 4:random order, 5:number of comments]
 	
 - **$sort_order**: defines the sort order of the returned news items
-	
 	[1:descending, 2:=ascending]
 	
 - **$not_older_than**: skips all news items which are older than X days
-	
 	[0:don't skip news items, 0...999: skip news items older than x days (hint: 0.5 --> 12 hours)]
 
 ### Anynews Templates
 The HTML skeleton of the Anynews output is defined by template files ***templates/display_mode_X.htt***. The template used is defined by the Anynews function parameter ***$display_mode***, which defaults to 1 if no valid input is defined. Create a blank template file with the [Addon File Editor](https://github.com/cwsoft/wb-addon-file-editor#readme) and name as follows: **templates/display_mode_5.htt**
 
 #### Step 1:
-In a first step, add the HTML markup below conating some dummy text and ONE single news entry. Always wrap your HTML output to a div container with the class "mod_anynews" to prevent CSS clashes with other modules, templates or the WebsiteBaker core.
+In a first step, add the HTML markup below, which provides the output for ONE single news entry. Remember to wrap the entire HTML output to a div container with the class "mod_anynews" to prevent CSS clashes with other modules, templates or the WebsiteBaker core.
 
 	<div class="mod_anynews">
 		<h1>Dummy page header shown only once</h1>
@@ -160,7 +146,7 @@ In a first step, add the HTML markup below conating some dummy text and ONE sing
 	</div>
 
 #### Step 2:
-Identify the part of your template containing the content for ONE single news item. Wrap the two single HTML comment lines around this block. This tells Anynews to repeat the encapsulated HTML block for EACH news item returned by Anynews. Your template should now look like as follows.
+Identify the template part containing the content for the single news item. Wrap the two single HTML comment lines around this block. This tells Anynews to repeat the encapsulated HTML block for EACH news item returned by Anynews. Your template should now look like as follows.
 
 	<div class="mod_anynews">
 		<h1>Dummy page header shown only once</h1>
@@ -173,7 +159,7 @@ Identify the part of your template containing the content for ONE single news it
 	</div>
 
 #### Step 3:	
-Finally we need to replace the dummy text with placeholders providing the data from the WebsiteBaker `news` entries. Review the template file ***display_mode_99.htt*** (cheat sheet) to get a list of all available Anynews  placeholders. Our final result will look like this.
+Finally replace the dummy text with the Anynews content {placeholders}. The {placeholders} are replaced with data from the WebsiteBaker `news` entries. Review the template file ***display_mode_99.htt*** (cheat sheet) to get a list of all available Anynews placeholders. Our final result will look like this.
 	
 	<div class="mod_anynews">
 		<h1>Latest news from our website</h1>
@@ -185,7 +171,7 @@ Finally we need to replace the dummy text with placeholders providing the data f
 		<!-- END news_block -->
 	</div>
 
-If you want to create a custom template with jQuery effects, look at the template files ***display_mode_3.htt*** and ***display_mode_4.htt***, which implement some 3rd party jQuery sliding effects.
+If you want to create a custom template with jQuery effects, look at the template files ***display_mode_3.htt*** and ***display_mode_4.htt***, which implement 3rd party jQuery sliding effects.
 
 ### Anynews CSS
 The Anynews default templates (*/templates/display_mode_X.htt*) wrap the Anynews output in a div container as shown below.
