@@ -93,53 +93,42 @@ Calling Anynews in it´s easiest form ***displayNewsItems();*** uses the default 
 
 ***Function parameters explained:***
 
-- **$group_id**: only show news from defined group(s)
-
+- **$group_id**: only show news from defined group(s)  
 	[0:all groups, N:group N, array(2,4,5): groups 2,4 and 5]
 	
-- **$max_news_items**: max. number of news entries to show
-
+- **$max_news_items**: max. number of news entries to show  
 	[allowed: 1..999]
 	
-- **$max_news_length**: max. news length to be shown
-
+- **$max_news_length**: max. news length to be shown  
 	[-1:= full length]
 	
-- **$display_mode**: ID of the Anynews template to use (/templates/display_mode_X.htt)
-
-	[1:details, 2:list, 3:better-coda-slider, 4:flexslider, 5..98 custom template *display_mode_X.htt*]
+- **$display_mode**: ID of the Anynews template to use (/templates/display_mode_X.htt)  
+	[1:details, 2:list, 3:better-coda-slider, 4:flexslider, 5..98 custom template *display_mode_X.htt*]  
 	Note: 99 shows a cheat sheet with ALL Anynews placeholders available in template files
 	
-- **$lang_id**: mode to detect language file to use
-
+- **$lang_id**: mode to detect language file to use  
 	[allowed: 'AUTO', any WB language ID: 'DE', 'EN', ...]
 	
-- **$strip_tags**: flag to strip tags from news short/long text not contained in *$allowed_tags*
-
+- **$strip_tags**: flag to strip tags from news short/long text not contained in *$allowed_tags*  
 	[true:strip tags, false:don't strip tags]
 	
-- **$allowed_tags**: allowed tags to removed when *$strip_tags = true*
-
+- **$allowed_tags**: allowed tags to removed when *$strip_tags = true*  
 	[default: '&lt;p&gt;&lt;a&gt;&lt;img&gt;']
 
-- **$custom_placeholder**: create own placeholders for usage in template files
-
-	Example: $custom_placeholder = array('MY_IMG' => '%img%', 'MY_TAG' => '%author%', 'MY_REGEX' => '#(test)#i')
-	stores all image URLs, text inside <author></author> and all matches of "test" in placeholders:
-	{PREFIX_MY_IMG_#}, {PREFIX_MY_TAG_#}, {PREFIX_MY_REGEX_#}
-	   where ***PREFIX*** is either "SHORT" or "LONG", depending if the match was found in the short/long news text
+- **$custom_placeholder**: create own placeholders for usage in template files  
+	Example: $custom_placeholder = array('MY\_IMG' => '%img%', 'MY\_TAG' => '%author%', 'MY\_REGEX' => '#(test)#i')  
+	stores all image URLs, text inside <author></author> and all matches of "test" in placeholders:  
+	{PREFIX\_MY\_IMG\_#}, {PREFIX\_MY\_TAG\_#}, {PREFIX\_MY\_REGEX\_#}  
+	   where ***PREFIX*** is either "SHORT" or "LONG", depending if the match was found in the short/long news text  
 	   where ***#*** is a number between 1 and the number of matches found
 	
-- **$sort_by**: defines the sort criteria for the news items returned
-
+- **$sort_by**: defines the sort criteria for the news items returned  
 	[1:position, 2:posted_when, 3:published_when, 4:random order, 5:number of comments]
 	
-- **$sort_order**: defines the sort order of the returned news items
-
+- **$sort_order**: defines the sort order of the returned news items  
 	[1:descending, 2:=ascending]
 	
-- **$not_older_than**: skips all news items which are older than X days
-
+- **$not_older_than**: skips all news items which are older than X days  
 	[0:don't skip news items, 0...999: skip news items older than x days (hint: 0.5 --> 12 hours)]
 
 ### Anynews Templates
