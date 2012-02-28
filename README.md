@@ -23,22 +23,20 @@ The minimum requirements to get Anynews running on your WebsiteBaker installatio
 3. install the downloaded zip archive via the WebsiteBaker installer
 
 ### Enable jQuery support (optional)
-If you want to use jQuery effect with Anynews, you need to add one code line to your frontend template. Open the frontend template file ***index.php*** with the [Addon File Editor](https://github.com/cwsoft/wb-addon-file-editor#readme) and search for the following lines.
+If you want to use JavaScript effects or jQuery plugins with Anynews, you need to add one code line to your frontend template. Open your WebsiteBaker frontend template file ***index.php*** in the [Addon File Editor](https://github.com/cwsoft/wb-addon-file-editor#readme) and search for the following lines.
 
-<pre>
-if (function_exists('register_frontend_modfiles')) {
-    register_frontend_modfiles('css');
-    register_frontend_modfiles('js');
-</pre>
+	if (function_exists('register_frontend_modfiles')) {
+		register_frontend_modfiles('css');
+		register_frontend_modfiles('js');
+	}
 
-Change the lines above as follows:
+Change the code lines above as follows:
 
-<pre>
-if (function_exists('register_frontend_modfiles')) {
-    register_frontend_modfiles('css');
-    register_frontend_modfiles('jquery');
-    register_frontend_modfiles('js');
-</pre>
+	if (function_exists('register_frontend_modfiles')) {
+		register_frontend_modfiles('css');
+		register_frontend_modfiles('jquery');
+		register_frontend_modfiles('js');
+	}
 
 ## Usage
 As Anynews is designed to fetch news items from the WebsiteBaker `news` module, you need to add some news entries with the `news` module **before** you can use Anynews. If no news are available, Anynews just outputs the message "No news available yet". Follow the steps below to add some news entries with the WebsiteBaker `news` module.
@@ -57,7 +55,7 @@ Create a new page or section of type `Code` in the WebsiteBaker backend and ente
 The Anynews output is only visible at the pages/sections of your frontend, which contain the code above.
 
 ### Use Anynews from your template
-To display news items at a fixed position in your frontend, open the ***index.php*** file of your default frontend template with the [Addon File Editor](https://github.com/cwsoft/wb-addon-file-editor#readme). Then add the code below to the position in your template where you want the news output to appear.
+To display news items at a fixed position on every page of your frontend, open the ***index.php*** file of your default frontend template with the [Addon File Editor](https://github.com/cwsoft/wb-addon-file-editor#readme). Then add the code below to the position in your template where you want the news output to appear.
 
 	<?php
 		if (function_exists('displayNewsItems')) {
@@ -97,30 +95,28 @@ Calling Anynews in it´s easiest form ***displayNewsItems();*** uses the default 
 	[0:all groups, N:group N, array(2,4,5): groups 2,4 and 5]
 	
 - **$max_news_items**: max. number of news entries to show  
-	[allowed: 1..999]
+	[valid: 1..999]
 	
 - **$max_news_length**: max. news length to be shown  
 	[-1:= full length]
 	
 - **$display_mode**: ID of the Anynews template to use (/templates/display_mode_X.htt)  
 	[1:details, 2:list, 3:better-coda-slider, 4:flexslider, 5..98 custom template *display_mode_X.htt*]  
-	Note: 99 shows a cheat sheet with ALL Anynews placeholders available in template files
+	Hint: 99:cheat sheet with ALL Anynews placeholders available in the template files
 	
 - **$lang_id**: mode to detect language file to use  
-	[allowed: 'AUTO', any WB language ID: 'DE', 'EN', ...]
+	[allowed: 'AUTO', or a valid WB language file ID: 'DE', 'EN', ...]
 	
-- **$strip_tags**: flag to strip tags from news short/long text not contained in *$allowed_tags*  
+- **$strip_tags**: flag to strip tags from news short/long text ***not*** contained in *$allowed_tags*  
 	[true:strip tags, false:don't strip tags]
 	
-- **$allowed_tags**: allowed tags to removed when *$strip_tags = true*  
+- **$allowed_tags**: tags to keep if *$strip_tags = true*
 	[default: '&lt;p&gt;&lt;a&gt;&lt;img&gt;']
 
 - **$custom_placeholder**: create own placeholders for usage in template files  
-	Example: $custom_placeholder = array('MY\_IMG' => '%img%', 'MY\_TAG' => '%author%', 'MY\_REGEX' => '#(test)#i')  
-	stores all image URLs, text inside <author></author> and all matches of "test" in placeholders:  
-	{PREFIX\_MY\_IMG\_#}, {PREFIX\_MY\_TAG\_#}, {PREFIX\_MY\_REGEX\_#}  
-	   where ***PREFIX*** is either "SHORT" or "LONG", depending if the match was found in the short/long news text  
-	   where ***#*** is a number between 1 and the number of matches found
+	**Example:** $custom\_placeholder = array('MY\_IMG' => '%img%', 'MY\_TAG' => '%author%', 'MY\_REGEX' => '#(test)#i')  
+	
+	Stores all image URLs, all text inside &lt;author&gt;&lt;/author&gt; tags and all matches of "test" in placeholders:  {PREFIX\_MY\_IMG\_#}, {PREFIX\_MY\_TAG\_#}, {PREFIX\_MY\_REGEX\_#}, where ***PREFIX*** is either "SHORT" or "LONG", depending if the match was found in the short/long news text and ***#*** is a number between 1 and the number of matches found
 	
 - **$sort_by**: defines the sort criteria for the news items returned  
 	[1:position, 2:posted_when, 3:published_when, 4:random order, 5:number of comments]
@@ -132,7 +128,7 @@ Calling Anynews in it´s easiest form ***displayNewsItems();*** uses the default 
 	[0:don't skip news items, 0...999: skip news items older than x days (hint: 0.5 --> 12 hours)]
 
 ### Anynews Templates
-The HTML skeleton of the Anynews output is defined by template files ***templates/display_mode_X.htt***. The template used is defined by the Anynews function parameter ***$display_mode***, which defaults to 1 if no valid input is defined. Create a blank template file with the [Addon File Editor](https://github.com/cwsoft/wb-addon-file-editor#readme) and name as follows: **templates/display_mode_5.htt**
+The HTML skeleton of the Anynews output is defined by template files **templates/display_mode_X.htt**. The template to be used is defined by the Anynews function parameter **$display_mode**, which defaults to 1 if no valid input is defined. Create a blank template file with the [Addon File Editor](https://github.com/cwsoft/wb-addon-file-editor#readme) and name as follows: **templates/display_mode_5.htt**
 
 #### Step 1:
 In a first step, add the HTML markup below, which provides the output for ONE single news entry. Remember to wrap the entire HTML output to a div container with the class "mod_anynews" to prevent CSS clashes with other modules, templates or the WebsiteBaker core.
