@@ -4,7 +4,7 @@ The code snippet `Anynews` is designed to fetch news entries from the [WebsiteBa
 Power users define their own placeholders containing information extracted from the short and/or long `news` module description. Mastering Anynews is possible - but requires you to study the information provided in the section ***Customizing Anynews***.
 
 ## Download
-The latest stable Anynews [installation package](https://github.com/cwsoft/wb-anynews/raw/master/wb-anynews-installer.zip) for the WebsiteBaker CMS is always included in the GitHub master branch. Older versions are available as [archives](https://github.com/cwsoft/wb-anynews/tags), but are ***NOT*** directly installable in the WebsiteBaker CMS. The development history of Anynews can be tracked via [GitHub](https://github.com/cwsoft/wb-anynews).
+The released stable `Anynews` installation packages for the WebsiteBaker CMS can be found in the [GitHub download area](https://github.com/cwsoft/wb-anynews/downloads). It is recommended to install/update to the latest available version listed. Older versions are provided for compatibility reasons with older WebsiteBaker versions and may contain bugs or security issues. The development history of Anynews can be tracked via [GitHub](https://github.com/cwsoft/wb-anynews).
 
 ## License
 Anynews is licensed under the [GNU General Public License (GPL) v3.0](http://www.gnu.org/licenses/gpl-3.0.html).
@@ -18,7 +18,7 @@ The minimum requirements to get Anynews running on your WebsiteBaker installatio
 - Optional: small modification of your template file to enable jQuery support
 
 ## Installation
-1. download latest stable [WebsiteBaker installation package](https://github.com/cwsoft/wb-anynews/raw/master/wb-anynews-installer.zip) from GitHub master branch
+1. download the [Anynews v2.1.0](https://github.com/downloads/cwsoft/wb-anynews/cwsoft-wb-anynews-v2.1.0.zip) WebsiteBaker installation package
 2. log into your WebsiteBaker backend and go to the `Add-ons/Modules` section
 3. install the downloaded zip archive via the WebsiteBaker installer
 
@@ -186,7 +186,7 @@ The Anynews default templates (*/templates/display_mode_X.htt*) wrap the Anynews
 		<p>Dummy news text to explain</p>
 	</div>
 	
-To change the news header of aboves example to green and the news text to blue, open the ***css/anynews.css*** file in the [Addon File Editor](https://github.com/cwsoft/wb-addon-file-editor/raw/master/wb-addon-file-editor-installer.zip) and add the following CSS definitions.
+To change the news header of aboves example to green and the news text to blue, open the ***css/anynews.css*** file in the [Addon File Editor](https://github.com/cwsoft/wb-addon-file-editor#readme) and add the following CSS definitions.
 
 	div.mod_anynews h2 {
 		color: green;
