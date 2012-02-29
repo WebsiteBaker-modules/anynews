@@ -21,8 +21,7 @@
 */
 
 // English module description
-$module_description		= 'Invoke the function displayNewsItems(); from the index.php of your template or a code section to display news entries where you want them to be.';
-$module_description    .= 'For details see <a href="https://github.com/cwsoft/wb-anynews" target="_blank">GitHub</a>.';
+$module_description		= 'Invoke the function displayNewsItems(); from the index.php of your template or a code section to display news entries where you want them to be. For details see <a href="https://github.com/cwsoft/wb-anynews" target="_blank">GitHub</a>.';
 
 // initialize global $LANG variable as array if needed
 if (! isset($LANG) || (isset($LANG) && ! is_array($LANG))) {

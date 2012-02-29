@@ -127,6 +127,15 @@ Calling Anynews in it´s easiest form ***displayNewsItems();*** uses the default 
 - **$not_older_than**: skips all news items which are older than X days  
 	[0:don't skip news items, 0...999: skip news items older than x days (hint: 0.5 --> 12 hours)]
 
+	
+***Tip:*** 
+You can output a list with all *group_ids* and the *group titles* created by the WebsiteBaker `news` module, by adding the following code into a page/section of type `code`.
+
+	require_once(WB_PATH . '/modules/anynews/code/anynews_functions.php');
+	print_r(getNewsGroupTitles());
+
+Visit the created page/section in your frontend and search for the *group_id(s)* you want to use in the Anynews function call. 
+	
 ### Anynews Templates
 The HTML skeleton of the Anynews output is defined by template files **templates/display_mode_X.htt**. The template to be used is defined by the Anynews function parameter **$display_mode**, which defaults to 1 if no valid input is defined. Create a blank template file with the [Addon File Editor](https://github.com/cwsoft/wb-addon-file-editor#readme) and name as follows: **templates/display_mode_5.htt**
 
