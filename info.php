@@ -14,7 +14,7 @@
  * @platform    CMS WebsiteBaker 2.8.x
  * @package     anynews
  * @author      cwsoft (http://cwsoft.de)
- * @version     2.1.0
+ * @version     2.2.0
  * @copyright   cwsoft
  * @license     http://www.gnu.org/licenses/gpl-3.0.html
 */
@@ -23,8 +23,8 @@
 $module_directory = 'anynews';
 $module_name = 'Anynews';
 $module_function = 'snippet';
-$module_version = '2.1.0';
-$module_status = 'STABLE';
+$module_version = '2.2.0';
+$module_status = 'RC1';
 $module_platform = '2.8.x';
 $module_author = 'cwsoft (http://cwsoft.de)';
 $module_license = '<a href="http://www.gnu.org/licenses/gpl.html">GNU General Public Licencse 3.0</a>';

@@ -112,7 +112,7 @@ function sanitizeUserInputs(&$input, $filter)
 			}
 
 			// create array with list values from regular expression
-			$list_values = split(';', $match[3]);
+			$list_values = explode(';', $match[3]);
 			
 			// loop over input values
 			foreach($temp as $key => $value) {

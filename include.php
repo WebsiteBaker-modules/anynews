@@ -27,18 +27,20 @@ if (defined('WB_PATH') == false) {
 // function to display news items on every page via (invoke function from template or code page)
 if (! function_exists('displayNewsItems')) {
 	function displayNewsItems(
-		$group_id = 0,                    // group to show news from (default:= 0 all groups, X:= group X, for multiple groups: array(2,4,5) )
-		$max_news_items = 10,             // maximal number of news shown (default:= 10, min:=1, max:= 999)
-		$max_news_length = -1,            // maximal length of the short news text shown (default:=-1 => full news length)
-		$display_mode = 1,                // 1:=details (default); 2:=list; 3:=coda-slider; 4:flexslider; 4-98 (custom template: display_mode_X.htt); 99:=cheat sheet
-		$lang_id = 'AUTO',                // set Anynews language file and news filter based on defined news page language (default:= auto, examples: AUTO, DE, EN)
-		$strip_tags = true,               // true:=remove tags from short and long text (default:=true); false:=don´t strip tags
-		$allowed_tags = '<p><a><img>',    // tags not striped off (default:='<p><a><img>')
-		$custom_placeholder = false,      // false:= none (default), array('MY_VAR_1' => '%TAG%#', ... 'MY_VAR_N' => '#regex_N#' ...)
-		$sort_by = 1,                     // 1:=position (default), 2:=posted_when, 3:=published_when (only WB 2.7), 4:= random order, 5:=number of comments
-		$sort_order = 1,                  // 1:=descending (default), 2:=ascending
-		$not_older_than = 0               // 0:=disabled (default), 0-999 (only show news `published_when` date <=x days; 12 hours:=0.5)
-	)
+		$group_id = 0,                  // IDs of news to show, matching defined $group_id_type (default:=0, all news, 0..N, or array(2,4,5,N) to limit news to IDs matching $group_id_type)
+		$max_news_items = 10,           // maximal number of news shown (default:= 10, min:=1, max:= 999)
+		$max_news_length = -1,          // maximal length of the short news text shown (default:=-1 => full news length)
+		$display_mode = 1,              // 1:=details (default); 2:=list; 3:=coda-slider; 4:flexslider; 4-98 (custom template: display_mode_X.htt); 99:=cheat sheet
+		$lang_id = 'AUTO',              // language file to load and lang_id used if $lang_filer = true (default:= auto, examples: AUTO, DE, EN)
+		$strip_tags = true,             // true:=remove tags from short and long text (default:=true); false:=don´t strip tags
+		$allowed_tags = '<p><a><img>',  // tags not striped off (default:='<p><a><img>')
+		$custom_placeholder = false,    // false:= none (default), array('MY_VAR_1' => '%TAG%#', ... 'MY_VAR_N' => '#regex_N#' ...)
+		$sort_by = 1,                   // 1:=position (default), 2:=posted_when, 3:=published_when (only WB 2.7), 4:= random order, 5:=number of comments
+		$sort_order = 1,                // 1:=descending (default), 2:=ascending
+		$not_older_than = 0,            // 0:=disabled (default), 0-999 (only show news `published_when` date <=x days; 12 hours:=0.5)
+		$group_id_type = 'group_id',    // type used by group_id to extract news entries (supported: 'group_id', 'page_id', 'section_id', 'post_id')
+		$lang_filter = false            // flag to enable language filter (default:= false, show only news from a news page, which language fits $lang_id)
+  	)
 	{
 		global $wb, $database, $LANG;
 
@@ -61,6 +63,8 @@ if (! function_exists('displayNewsItems')) {
 		sanitizeUserInputs($sort_by, 'i{1;1;5}');
 		sanitizeUserInputs($sort_order, 'i{1;1;2}');
 		sanitizeUserInputs($not_older_than, 'd{0;0;999}');
+		sanitizeUserInputs($group_id_type, 'l{group_id;group_id;page_id;section_id;post_id}');
+		sanitizeUserInputs($lang_filter, 'b');
 
 		/**
 		 * Include Anynews language file depending on defined $lang_id 
@@ -109,7 +113,7 @@ if (! function_exists('displayNewsItems')) {
 		}
 
 		/**
-		 * Work out SQL query for the group_id
+		 * Work out SQL query for group_id, limiting news to display depedning by defined $news_filter
 		 * $sql_group_id:= ($group_id:=0 => '1'; $group_id:=X => `group_id` = 'X'; $group_id:=array(2,3) => `group_id` IN ('2,3'))
 		 */
 		// show all groups if group_id is array which contains 0
@@ -118,10 +122,10 @@ if (! function_exists('displayNewsItems')) {
 		// check for multiple groups or single group values
 		if (is_array($group_id)) {
 			// SQL query for multiple groups
-			$sql_group_id = '`group_id` IN (' . implode(',', $group_id) . ')';
+			$sql_group_id = "`$group_id_type` IN (" . implode(',', $group_id) . ")";
 		} else {
 			// SQL query for single or empty groups
-			$sql_group_id = ($group_id) ? '`group_id` = \'' . $group_id . '\'' : '1';
+			$sql_group_id = ($group_id) ? "`$group_id_type` = '$group_id'" : '1';
 		}
 
 		/**
@@ -161,16 +165,17 @@ if (! function_exists('displayNewsItems')) {
 		}
 
 		/**
-		 * Try to filter news entries not matching the defined $lang_id
-		 * Only works if user creates a news page for each required langauge      
-		 * and set´s the language of the news page in the backend.
+		 * Show only news entries from news pages matching defined $lang_id
+		 * Create a news page and set it´s LANGUAGE to the supported $lang_id      
 		 * Returns all news if no news page has the defined $lang_id  
 		 **/
-		// get all page_ids which language match defined $lang_id  
-		$page_ids = getPageIdsByLanguage($lang_id);
-		$sql_lang_id = '';
-		if (count($page_ids) > 0) {
-			$sql_lang_id = 'AND `page_id` in (' . implode($page_ids, ',') . ')'; 
+		$sql_lang_filter = '1';
+		if ($lang_filter) {
+			// get all page_ids which language match defined $lang_id  
+			$page_ids = getPageIdsByLanguage($lang_id);
+			if (count($page_ids) > 0) {
+				$sql_lang_filter = '`page_id` in (' . implode($page_ids, ',') . ')'; 
+			}
 		}
 
 		/**
@@ -179,8 +184,8 @@ if (! function_exists('displayNewsItems')) {
 		$table = TABLE_PREFIX . 'mod_news_posts';
 		$sql = "SELECT $fields FROM `$table` AS t1 $join
 			WHERE `active` = '1'
-			$sql_lang_id
 			AND $sql_group_id 
+			AND $sql_lang_filter
 			AND (`published_when` = '0' OR `published_when` <= '$server_time')
 			AND (`published_until` = '0' OR `published_until` >= '$server_time')
 			AND $sql_not_older_than
