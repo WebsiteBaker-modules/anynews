@@ -15,19 +15,26 @@
 </script>	
 
 <div class="mod_anynews">
-	<h2>{TXT_HEADER}</h2>
+	<!-- BEGIN news_available_block -->
+		<h2>{TXT_HEADER}</h2>
 
-	<div class="flexslider">
-		<ul class="slides">
-			<!-- BEGIN news_block -->
-			<li>
-				<h2>{TITLE}</h2>
-				{CONTENT_SHORT}
-				<!-- BEGIN readmore_link_block -->
-					<p><a href="{LINK}">{TXT_READMORE}</a></p>
-				<!-- END readmore_link_block -->
-			</li>
-			<!-- END news_block -->
-		</ul>
-	</div>
+		<div class="flexslider">
+			<ul class="slides">
+				<!-- BEGIN news_block -->
+					<li>
+						<h2>{TITLE}</h2>
+						{CONTENT_SHORT}
+					
+						<!-- BEGIN readmore_link_block -->
+							<p><a href="{LINK}">{TXT_READMORE}</a></p>
+						<!-- END readmore_link_block -->
+					</li>
+				<!-- END news_block -->
+			</ul>
+		</div>
+	<!-- END news_available_block -->
+	
+	<!-- BEGIN no_news_available_block -->
+		{TXT_NO_NEWS}
+	<!-- END no_news_available_block -->	
 </div>

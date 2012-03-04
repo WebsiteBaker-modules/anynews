@@ -14,7 +14,7 @@
  * @platform    CMS WebsiteBaker 2.8.x
  * @package     anynews
  * @author      cwsoft (http://cwsoft.de)
- * @version     2.1.0
+ * @version     2.2.0
  * @copyright   cwsoft
  * @license     http://www.gnu.org/licenses/gpl-3.0.html
  */
@@ -43,10 +43,11 @@ if (! function_exists('displayNewsItems')) {
 		global $wb, $database;
 
 		/**
-		 * Include required module files
+		 * Include required Anynews files
 		 */
 		require_once ('code/anynews_functions.php');
 		require_once ('thirdparty/truncate.php');
+		require_once (WB_PATH . '/include/phplib/template.inc');
 
 		// load module language file
 		if (! isset($LANG)) global $LANG;
@@ -64,6 +65,46 @@ if (! function_exists('displayNewsItems')) {
 		sanitizeUserInputs($sort_by, 'i{1;1;5}');
 		sanitizeUserInputs($sort_order, 'i{1;1;2}');
 		sanitizeUserInputs($not_older_than, 'd{0;0;999}');
+
+		/**
+		 * Create template object and configure it
+		 */
+		$tpl = new Template(dirname(__FILE__) . '/templates');
+
+		// configure handling of unknown {variables} (remove:=default, keep, comment)
+		$tpl->set_unknowns('remove');
+
+		// configure debug mode (0:= default, 1:=variable assignments, 2:=calls to get variable, 4:=show internals)
+		$tpl->debug = 0;
+
+		// set template file depending on $display_mode
+		if (file_exists(dirname(__FILE__) . '/templates/display_mode_' . $display_mode . '.htt')) {
+			// set user defined template
+			$tpl->set_file('page', 'display_mode_' . $display_mode . '.htt');
+		} else {
+			// set default template
+			$tpl->set_file('page', 'display_mode_1.htt');
+		}
+
+		// define "read more block" used to show/hide readmore link depending on long news content
+		$tpl->set_block('page', 'readmore_link_block', 'readmore_link_block_handle');
+
+		// define optional "custom block" which can be used in template files if needed
+		$tpl->set_block('page', 'custom_block', 'custom_block_handle');
+
+		// define "news block" used for text outputs of individual news items (news text, links etc.)  
+		$tpl->set_block('page', 'news_block', 'news_block_handle');
+
+		// define "news wrapper block" shown if at least one news entry exists
+		$tpl->set_block('page', 'news_available_block', 'news_available_block_handle');
+
+		// define "no news wrapper block" shown in no news entry exists
+		$tpl->set_block('page', 'no_news_available_block', 'no_news_available_block_handle');
+
+		// replace placeholders with values from language file
+		foreach ($LANG['ANYNEWS'][0] as $key => $value) {
+			$tpl->set_var($key, $value);
+		}
 
 		/**
 		 * Work out SQL query for the group_id
@@ -131,52 +172,13 @@ if (! function_exists('displayNewsItems')) {
 			ORDER BY $sql_order_by $sql_sort_order
 			LIMIT 0, $max_news_items";
 
-		// fetch data from the database
-		$results = $database->query($sql);
-
 		/**
 		 * Process database query and output the template files
 		 */
-		// check if at least one news article was found
+		$results = $database->query($sql);
 		if ($results && $results->numRows() > 0) {
-			/**
-			 * Include Website Baker template parser and configure it
-			 */
-			// include template class and initiate object (set template folder: "./htt")
-			require_once (WB_PATH . '/include/phplib/template.inc');
-			$tpl = new Template(dirname(__FILE__) . '/templates');
-
-			// configure handling of unknown {variables} (remove:=default, keep, comment)
-			$tpl->set_unknowns('remove');
-
-			// configure debug mode (0:= default, 1:=variable assignments, 2:=calls to get variable, 4:=show internals)
-			$tpl->debug = 0;
-
-			// set template file depending on $display_mode
-			if (file_exists(dirname(__FILE__) . '/templates/display_mode_' . $display_mode . '.htt')) {
-				// set user defined template
-				$tpl->set_file('page', 'display_mode_' . $display_mode . '.htt');
-			} else {
-				// set default template
-				$tpl->set_file('page', 'display_mode_1.htt');
-			}
-
-			// set link block required for the coda slider (can be used in custom templates where a second block is required)
-			$tpl->set_block('page', 'link_block', 'link_block_handle');
-
-			// set news block (variable/handle of file including the block, block name in file, new variable/handle for block)
-			$tpl->set_block('page', 'news_block', 'news_block_handle');
-
-			// "read more" link block
-			$tpl->set_block('news_block', 'readmore_link_block', 'readmore_link_block_handle');
-
-			/**
-			 * Replace template placeholders with values from language file or database query
-			 */
-			// replace placeholders with values from language file
-			foreach ($LANG['ANYNEWS'][0] as $key => $value) {
-				$tpl->set_var($key, $value);
-			}
+			// remove the "no news block" from template
+			$tpl->set_var('no_news_available_block_handle', '');
 
 			// fetch news group titles from news database table
 			$news_group_titles = getNewsGroupTitles();
@@ -187,14 +189,11 @@ if (! function_exists('displayNewsItems')) {
 			// loop through all news articles found
 			$news_counter = 1;
 			while ($row = $results->fetchRow()) {
-
 				// build absolute links from [wblink] tags found in news short or long text database field
 				$wb->preprocess($row['content_short']);
 				$wb->preprocess($row['content_long']);
 
-				/**
-				 * fetch custom placeholders from short/long text fields and replace template placeholders with values
-				 */
+			 	// fetch custom placeholders from short/long text fields and replace template placeholders with values
 				$custom_vars_short_text = getCustomOutputVariables($row['content_short'], $custom_placeholder, 'SHORT');
 				$custom_vars_long_text = getCustomOutputVariables($row['content_long'], $custom_placeholder, 'LONG');
 				$custom_vars = array_merge($custom_vars_short_text, $custom_vars_long_text);
@@ -215,13 +214,14 @@ if (! function_exists('displayNewsItems')) {
 					$row['content_short'] = truncate(substr($row['content_short'], $start_pos), $max_news_length, '...', false, true);
 				}
 
+				// work out group image if exists
 				$group_id = $row['group_id'];
 				$image = '';
 				if (file_exists(WB_PATH . MEDIA_DIRECTORY . '/.news/image' . $group_id . '.jpg')) {
 					$image = '<img src="' . WB_URL . MEDIA_DIRECTORY . '/.news/image' . $group_id . '.jpg' . '" alt="" />';
 				}
 
-				// replace the news article dependend template placeholders
+				// replace news article dependend template placeholders
 				$tpl->set_var(array(
 					'WB_URL' => WB_URL, 
 					'GROUP_IMAGE' => $image, 
@@ -235,7 +235,7 @@ if (! function_exists('displayNewsItems')) {
 					'USERNAME' => array_key_exists($row['posted_by'], $user_list) ? htmlentities($user_list[$row['posted_by']]['USERNAME']) : '', 
 					'DISPLAY_NAME' => array_key_exists($row['posted_by'], $user_list) ? htmlentities($user_list[$row['posted_by']]['DISPLAY_NAME']) : '', 
 					'TITLE' => ($strip_tags) ? strip_tags($row['title']) : $row['title'], 
-					'COMMENTS' => isset($row['comment_count']) ? $row['comment_count'] : null, 
+					'COMMENTS' => isset($row['comment_count']) ? $row['comment_count'] : 0, 
 					'LINK' => WB_URL . PAGES_DIRECTORY . $row['link'] . PAGE_EXTENSION, 
 					'CONTENT_SHORT' => $image . $row['content_short'], 
 					'CONTENT_LONG' => $row['content_long'], 
@@ -245,15 +245,16 @@ if (! function_exists('displayNewsItems')) {
 					)
 				);
 
-				// add template values in news block in append mode (add per loop)
-				$tpl->parse('link_block_handle', 'link_block', true);
-
-				// remove "read more" from template if no long content is available
+				// remove "read more block" from template if no long content is available
 				$tpl->parse('readmore_link_block_handle', 'readmore_link_block', false);
 				if (! isset($row['content_long']) || ! strlen($row['content_long']) > 0) {
 					$tpl->set_var('readmore_link_block_handle', '');
 				}
 
+				// add optional custom template block in append mode (add per loop)
+				$tpl->parse('custom_block_handle', 'custom_block', true);
+
+				// add template values in news block in append mode (add per loop)
 				$tpl->parse('news_block_handle', 'news_block', true);
 
 				// remove custom variables to start blank for the next news entry
@@ -263,13 +264,27 @@ if (! function_exists('displayNewsItems')) {
 
 				$news_counter++;
 			}
+			// update the total number of news items
+			$tpl->set_var('NEWS_ITEMS', $news_counter - 1);
+			
+			// remove the "no news available block" from output
+			$tpl->set_var('no_news_available_block_handle', '');
 
-			// ouput the final template
-			$tpl->pparse('output', 'page');
-
+			// parse the news content block
+			$tpl->parse('news_available_block_handle', 'news_available_block', false);
+			
 		} else {
-			// output no news message
-			echo $LANG['ANYNEWS'][0]['TXT_NO_NEWS'];
+			// update the total number of news items
+			$tpl->set_var('NEWS_ITEMS', 0);
+
+			// remove the "news available block" from output
+			$tpl->set_var('news_available_block_handle', '');
+
+			// remove blocks not used
+			$tpl->parse('no_news_available_block_handle', 'no_news_available_block', true);
 		}
+	
+		// ouput the final template
+		$tpl->pparse('output', 'page');
 	}
 }
