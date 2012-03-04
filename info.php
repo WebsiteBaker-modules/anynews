@@ -23,7 +23,7 @@
 $module_directory = 'anynews';
 $module_name = 'Anynews';
 $module_function = 'snippet';
-$module_version = '2.2.0';
+$module_version = '2.2.0-RC1';
 $module_status = 'RC1';
 $module_platform = '2.8.x';
 $module_author = 'cwsoft (http://cwsoft.de)';
