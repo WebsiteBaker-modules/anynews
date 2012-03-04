@@ -14,7 +14,7 @@
  * @platform    CMS WebsiteBaker 2.8.x
  * @package     anynews
  * @author      cwsoft (http://cwsoft.de)
- * @version     2.1.0
+ * @version     2.2.0
  * @copyright   cwsoft
  * @license     http://www.gnu.org/licenses/gpl-3.0.html
 */
@@ -25,41 +25,42 @@ if (defined('WB_PATH') == false) {
 }
 
 /**
+ * Function to work out language ID
+*/
+function getValidLanguageId($lang_id)
+{
+	$lang_id = strtoupper($lang_id);
+
+	switch($lang_id) {
+		case 'AUTO':
+			// loop over all Anynews language files ($file => DE.php, EN.php ...) and compare language id from URL
+			foreach(glob(dirname(__FILE__) . '/../languages/[A-Z]*.php') as $file) {
+				// check if actual page URL contains a language flag (e.g. /EN/ --> http://yourdomain.com/pages/en/xxx)
+				$lang_flag = '/' . substr(basename($file), 0, -4) . '/';
+				
+				if (strpos(strtoupper($_SERVER['SCRIPT_NAME']), $lang_flag) !== false) {
+					// return language id from the page URL
+					return substr(basename($file), 0, -4);
+				}
+			}
+
+			// no flag found in URL, use WebsiteBaker LANGUAGE constant
+			return strtoupper(substr(LANGUAGE, 0, 2));
+
+		default:
+			return substr($lang_id, 0, 2);
+	}
+}
+
+/**
  * Function to include the module language file
 */
 function loadLanguageFile($lang_id)
 {
+	// include Anynews language file if exists, use EN.php as fallback
 	global $LANG;
-	$lang_id = strtoupper($lang_id);
-	
-	/**
-	 * Work out path to defined module language file
-	 */
-	$lang_file = dirname(__FILE__). '/languages/';
-	switch($lang_id) {
-		case 'AUTO':
-			// loop through all Anynews language files ($file => DE.php, EN.php ...)
-			foreach(glob(dirname(__FILE__) . '/languages/[A-Z]*.php') as $file) {
-				// check if URL contains language flag of current language file (/EN/ --> http://yourdomain.com/pages/en/xxx)
-				$lang_flag = '/' . substr(basename($file), 0, -4) . '/';
-				if (strpos(strtoupper($_SERVER['PHP_SELF']), $lang_flag) !== false) {
-					// found a supported Anynews language flag in the URL
-					$lang_file .= basename($file);
-					break 2;
-				}
-			}
-
-			// no language found via URL, so take language from WB LANGUAGE constant
-			$lang_file .= basename(LANGUAGE . '.php');
-			break;
-
-		default:
-			$lang_file .= basename($lang_id . '.php');
-			break;
-	}
-	
-	// try to include specified module language file
-	require(!file_exists($lang_file) ? dirname(__FILE__) . '/../languages/EN.php' : $lang_file);
+	$lang_path = dirname(__FILE__) . '/../languages/';
+	require(file_exists($lang_path . $lang_id . '.php') ? $lang_path . $lang_id . '.php' : $lang_path . 'EN.php');
 }
 
 /**
@@ -186,6 +187,26 @@ function getCustomOutputVariables($content, $regex_array, $var_prefix = '')
 }
 
 /**
+ * Function to page_ids matching selected lang_id
+*/
+function getPageIdsByLanguage($lang_id)
+{
+	global $database;
+	
+	$table = TABLE_PREFIX . 'pages';
+	$sql = "SELECT `page_id` FROM `$table` WHERE `language` = '$lang_id'";
+
+	// fetch data from the database
+	$results = $database->query($sql);
+	
+	$page_ids = array();
+	while ($results && $row = $results->fetchRow()) {
+		$page_ids[] = $row['page_id'];
+	}
+	return $page_ids;
+}
+
+/**
  * Function to fetch news group titles from database
 */
 function getNewsGroupTitles()
@@ -194,7 +215,7 @@ function getNewsGroupTitles()
 
 	$table = TABLE_PREFIX . 'mod_news_groups';
 	$sql = "SELECT `group_id`, `title` FROM `$table` WHERE `active` = '1'";
-
+	
 	// fetch data from the database
 	$results = $database->query($sql);
 	

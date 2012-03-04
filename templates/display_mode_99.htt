@@ -8,6 +8,7 @@
 		<tt>TXT_READMORE: </tt>{TXT_READMORE}<br />
 		<tt>TXT_NO_NEWS: </tt>{TXT_NO_NEWS}<br />
 		<tt>TXT_NEWS: </tt>{TXT_NEWS}<br />
+		<tt>TXT_NUMBER_OF_COMMENTS: </tt>{TXT_NUMBER_OF_COMMENTS}<br />
 		<tt>DATE_FORMAT: </tt>{DATE_FORMAT}<br />
 
 		<!-- BEGIN news_block -->

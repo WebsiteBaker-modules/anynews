@@ -4,8 +4,9 @@
 		
 		<!-- BEGIN news_block -->
 			<p><strong>{TITLE} {POSTED_WHEN}</strong></p>
-			Number of comments: {COMMENTS}<br />
+			{TXT_NUMBER_OF_COMMENTS}: {COMMENTS}<br />
 			{GROUP_IMAGE} {CONTENT_SHORT}
+			
 			<!-- BEGIN readmore_link_block -->
 				<p><a href="{LINK}">{TXT_READMORE}</a></p>
 			<!-- END readmore_link_block -->

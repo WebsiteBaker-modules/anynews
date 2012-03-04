@@ -31,7 +31,7 @@ if (! function_exists('displayNewsItems')) {
 		$max_news_items = 10,             // maximal number of news shown (default:= 10, min:=1, max:= 999)
 		$max_news_length = -1,            // maximal length of the short news text shown (default:=-1 => full news length)
 		$display_mode = 1,                // 1:=details (default); 2:=list; 3:=coda-slider; 4:flexslider; 4-98 (custom template: display_mode_X.htt); 99:=cheat sheet
-		$lang_id = 'AUTO',                // module language file ID (default:= auto, examples: AUTO, DE, EN)
+		$lang_id = 'AUTO',                // set Anynews language file and news filter based on defined news page language (default:= auto, examples: AUTO, DE, EN)
 		$strip_tags = true,               // true:=remove tags from short and long text (default:=true); false:=don´t strip tags
 		$allowed_tags = '<p><a><img>',    // tags not striped off (default:='<p><a><img>')
 		$custom_placeholder = false,      // false:= none (default), array('MY_VAR_1' => '%TAG%#', ... 'MY_VAR_N' => '#regex_N#' ...)
@@ -40,7 +40,7 @@ if (! function_exists('displayNewsItems')) {
 		$not_older_than = 0               // 0:=disabled (default), 0-999 (only show news `published_when` date <=x days; 12 hours:=0.5)
 	)
 	{
-		global $wb, $database;
+		global $wb, $database, $LANG;
 
 		/**
 		 * Include required Anynews files
@@ -48,10 +48,6 @@ if (! function_exists('displayNewsItems')) {
 		require_once ('code/anynews_functions.php');
 		require_once ('thirdparty/truncate.php');
 		require_once (WB_PATH . '/include/phplib/template.inc');
-
-		// load module language file
-		if (! isset($LANG)) global $LANG;
-		loadLanguageFile($lang_id);
 
 		/**
 		 * Sanitize user specified function parameters
@@ -65,6 +61,12 @@ if (! function_exists('displayNewsItems')) {
 		sanitizeUserInputs($sort_by, 'i{1;1;5}');
 		sanitizeUserInputs($sort_order, 'i{1;1;2}');
 		sanitizeUserInputs($not_older_than, 'd{0;0;999}');
+
+		/**
+		 * Include Anynews language file depending on defined $lang_id 
+		 */
+		$lang_id = getValidLanguageId($lang_id);
+		loadLanguageFile($lang_id);
 
 		/**
 		 * Create template object and configure it
@@ -159,11 +161,25 @@ if (! function_exists('displayNewsItems')) {
 		}
 
 		/**
+		 * Try to filter news entries not matching the defined $lang_id
+		 * Only works if user creates a news page for each required langauge      
+		 * and set´s the language of the news page in the backend.
+		 * Returns all news if no news page has the defined $lang_id  
+		 **/
+		// get all page_ids which language match defined $lang_id  
+		$page_ids = getPageIdsByLanguage($lang_id);
+		$sql_lang_id = '';
+		if (count($page_ids) > 0) {
+			$sql_lang_id = 'AND `page_id` in (' . implode($page_ids, ',') . ')'; 
+		}
+
+		/**
 		 * Perform SQL database query for Anynews
 		 */
 		$table = TABLE_PREFIX . 'mod_news_posts';
 		$sql = "SELECT $fields FROM `$table` AS t1 $join
 			WHERE `active` = '1'
+			$sql_lang_id
 			AND $sql_group_id 
 			AND (`published_when` = '0' OR `published_when` <= '$server_time')
 			AND (`published_until` = '0' OR `published_until` >= '$server_time')

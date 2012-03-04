@@ -30,11 +30,12 @@ if (! isset($LANG) || (isset($LANG) && ! is_array($LANG))) {
 
 $LANG['ANYNEWS'][0] = array(
 	// text outputs for the frontend
-	'TXT_HEADER'		=> 'Dernière news', 
-	'TXT_READMORE'		=> 'Lire la suite', 
-	'TXT_NO_NEWS'		=> 'Pas encore de news.',
-	'TXT_NEWS'			=> 'News', 
+	'TXT_HEADER' => 'Dernière news', 
+	'TXT_READMORE' => 'Lire la suite', 
+	'TXT_NO_NEWS' => 'Pas encore de news.',
+	'TXT_NEWS' => 'News', 
+	'TXT_NUMBER_OF_COMMENTS' => 'Number of comments', 
 	
 	// date/time format: (9:12 PM, 31/12/2012)
-	'DATE_FORMAT'		=> ' (H:i A, d/m/Y)'
+	'DATE_FORMAT' => ' (H:i A, d/m/Y)'
 );

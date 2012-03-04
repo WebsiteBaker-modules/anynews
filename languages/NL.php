@@ -15,7 +15,7 @@
  * @package     anynews
  * @author      cwsoft (http://cwsoft.de)
  * @translation	forum member Dave (ak D72)
- * @version     2.1.0
+ * @version     2.2.0
  * @copyright   cwsoft
  * @license     http://www.gnu.org/licenses/gpl-3.0.html
 */
@@ -30,11 +30,12 @@ if (! isset($LANG) || (isset($LANG) && ! is_array($LANG))) {
 
 $LANG['ANYNEWS'][0] = array(
 	// text outputs for the frontend
-	'TXT_HEADER'		=> 'Laatste nieuws', 
-	'TXT_READMORE'		=> 'lees meer', 
-	'TXT_NO_NEWS'		=> 'Nog geen nieuws beschikbaar.',
-	'TXT_NEWS'			=> 'Nieuws', 
+	'TXT_HEADER' => 'Laatste nieuws', 
+	'TXT_READMORE' => 'lees meer', 
+	'TXT_NO_NEWS' => 'Nog geen nieuws beschikbaar.',
+	'TXT_NEWS' => 'Nieuws', 
+	'TXT_NUMBER_OF_COMMENTS' => 'Number of comments', 
 	
 	// date/time format: (9:12 PM, 31-12-2012)
-	'DATE_FORMAT'		=> ' (g:i A, d-m-Y)'
+	'DATE_FORMAT' => ' (g:i A, d-m-Y)'
 );
