@@ -177,9 +177,6 @@ if (! function_exists('displayNewsItems')) {
 		 */
 		$results = $database->query($sql);
 		if ($results && $results->numRows() > 0) {
-			// remove the "no news block" from template
-			$tpl->set_var('no_news_available_block_handle', '');
-
 			// fetch news group titles from news database table
 			$news_group_titles = getNewsGroupTitles();
 
