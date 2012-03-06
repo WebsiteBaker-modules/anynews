@@ -86,7 +86,9 @@ Calling Anynews in it´s easiest form ***displayNewsItems();*** uses the default 
 		$custom_placeholder = false,
 		$sort_by = 1,
 		$sort_order = 1,
-		$not_older_than = 0
+		$not_older_than = 0,
+		$group_id_type = 'group_id',
+		$lang_filter = false
 	);
 
 ***Function parameters explained:***
@@ -127,6 +129,11 @@ Calling Anynews in it´s easiest form ***displayNewsItems();*** uses the default 
 - **$not_older_than**: skips all news items which are older than X days  
 	[0:don't skip news items, 0...999: skip news items older than x days (hint: 0.5 --> 12 hours)]
 
+- **$group_id_type**: sets type used by group_id to extract news entries from  
+	[supported: 'group_id', 'page_id', 'section_id', 'post_id')]
+
+- **$lang_filter**: flag to enable language filter   
+	[default:= false, true:=only show news added from news pages, which page language match $lang_id]
 	
 ***Tip:*** 
 You can output a list with all *group_ids* and the *group titles* created by the WebsiteBaker `news` module, by adding the following code into a page/section of type `code`.
@@ -140,40 +147,60 @@ Visit the created page/section in your frontend and search for the *group_id(s)*
 The HTML skeleton of the Anynews output is defined by template files **templates/display_mode_X.htt**. The template to be used is defined by the Anynews function parameter **$display_mode**, which defaults to 1 if no valid input is defined. Create a blank template file with the [Addon File Editor](https://github.com/cwsoft/wb-addon-file-editor#readme) and name as follows: **templates/display_mode_5.htt**
 
 #### Step 1:
-In a first step, add the HTML markup below, which provides the output for ONE single news entry. Remember to wrap the entire HTML output to a div container with the class "mod_anynews" to prevent CSS clashes with other modules, templates or the WebsiteBaker core.
+Add the HTML markup below to your custom template file. The entire HTML output should be wrapped in a div with class "mod_anynews" to prevent CSS clashes with other modules, templates or the WebsiteBaker core. 
+
+The example includes two logical blocks defined by simple HTML comments following `<!-- BEGIN block_name --> and <!-- END block_name -->`. The first block provides the HTML output for ONE single news entry. The second block provides a status message if no news items exists. Please note that only one of the two blocks is visible in your frontend. If no news exists, the first block will be removed, if at least one news item exists, the second block is removed.
 
 	<div class="mod_anynews">
-		<h1>Dummy page header shown only once</h1>
+		<!-- BEGIN news_available_block -->		
+			<h1>Dummy page header shown only once</h1>
 		
-		<h2>Dummy news header</h2>
-		<p>Dummy news text </p>
-		<em>Dummy news author</em>
-	</div>
-
-#### Step 2:
-Identify the template part containing the content for the single news item. Wrap the two single HTML comment lines around this block. This tells Anynews to repeat the encapsulated HTML block for EACH news item returned by Anynews. Your template should now look like as follows.
-
-	<div class="mod_anynews">
-		<h1>Dummy page header shown only once</h1>
-		
-		<!-- BEGIN news_block -->
 			<h2>Dummy news header</h2>
 			<p>Dummy news text </p>
 			<em>Dummy news author</em>
-		<!-- END news_block -->
+		<!-- END news_available_block -->		
+
+		<!-- BEGIN no_news_available_block -->
+			<p>No news available yet</p>
+		<!-- END no_news_available_block -->
 	</div>
 
+#### Step 2:
+Identify the template part containing the content for the single news item. Wrap the two single HTML comment lines around this block. This tells Anynews to repeat the encapsulated HTML block for EACH news item returned by Anynews. Your Anynews template should now look as follows.
+
+	<div class="mod_anynews">
+		<!-- BEGIN news_available_block -->		
+			<h1>Dummy page header shown only once</h1>
+		
+			<!-- BEGIN news_block -->
+				<h2>Dummy news header</h2>
+				<p>Dummy news text </p>
+				<em>Dummy news author</em>
+			<!-- END news_block -->
+		<!-- END news_available_block -->		
+
+		<!-- BEGIN no_news_available_block -->
+			<p>No news available yet</p>
+		<!-- END no_news_available_block -->
+	</div>
+	
 #### Step 3:	
 Finally replace the dummy text with the Anynews content {placeholders}. The {placeholders} are replaced with data from the WebsiteBaker `news` entries. Review the template file ***display_mode_99.htt*** (cheat sheet) to get a list of all available Anynews placeholders. Our final result will look like this.
-	
+
 	<div class="mod_anynews">
-		<h1>Latest news from our website</h1>
+		<!-- BEGIN news_available_block -->		
+			<h1>Dummy page header shown only once</h1>
 		
-		<!-- BEGIN news_block -->
-			<h2>{TITLE}</h2>
-			<p>{CONTENT_LONG}</p>
-			<em>{POSTED_BY}</em>
-		<!-- END news_block -->
+			<!-- BEGIN news_block -->
+				<h2>{TITLE}</h2>
+				<p>{CONTENT_LONG}</p>
+				<em>{POSTED_BY}</em>
+			<!-- END news_block -->
+		<!-- END news_available_block -->		
+
+		<!-- BEGIN no_news_available_block -->
+			<p>{TXT_NO_NEWS}</p>
+		<!-- END no_news_available_block -->
 	</div>
 
 If you want to create a custom template with jQuery effects, look at the template files ***display_mode_3.htt*** and ***display_mode_4.htt***, which implement 3rd party jQuery sliding effects.
