@@ -23,8 +23,8 @@
 $module_directory = 'anynews';
 $module_name = 'Anynews';
 $module_function = 'snippet';
-$module_version = '2.2.0-RC1';
-$module_status = 'RC1';
+$module_version = '2.2.0-RC2';
+$module_status = 'RC2';
 $module_platform = '2.8.x';
 $module_author = 'cwsoft (http://cwsoft.de)';
 $module_license = '<a href="http://www.gnu.org/licenses/gpl.html">GNU General Public Licencse 3.0</a>';
