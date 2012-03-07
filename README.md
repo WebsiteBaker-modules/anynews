@@ -243,7 +243,7 @@ If you have questions or issues with Anynews, please visit the [English](http://
 ## Credits
 Credits go to the WebsiteBaker forum member [BlackBird](http://www.websitebaker2.org/forum/index.php?action=profile;u=14154), who maintained the Anynews between July 2009 and March 2010 and the following users who provided translations of the Anynews language file.
 
-- **Dutch (NL.php):** forum member [D72](http://www.websitebaker2.org/forum/index.php?action=profile;u=7298)
+- **Dutch (NL.php):** forum members [D72](http://www.websitebaker2.org/forum/index.php?action=profile;u=7298), [Argos](http://www.websitebaker2.org/forum/index.php?action=profile;u=153)
 - **French (FR.php):** by Guillaume Vielliard
 - **Estonia (EE.php):** forum member [eazybaker](http://www.websitebaker2.org/forum/index.php?action=profile;u=11394)
 - **Serbian (RS.php):** forum member [Mirens](http://www.websitebaker2.org/forum/index.php?action=profile;u=13226)
