@@ -93,8 +93,8 @@ Calling Anynews in it´s easiest form ***displayNewsItems();*** uses the default 
 
 ***Function parameters explained:***
 
-- **$group_id**: only show news from defined group(s)  
-	[0:all groups, N:group N, array(2,4,5): groups 2,4 and 5]
+- **$group_id**: IDs of displayed news, which match the defined $group_id_type  
+	[0:all news, 1..N, or array(2,4,5,N) to limit news to single Id or multiple Ids, matching *$group_id_type*]
 	
 - **$max_news_items**: max. number of news entries to show  
 	[valid: 1..999]
