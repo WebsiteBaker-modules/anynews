@@ -14,7 +14,7 @@
  * @platform    CMS WebsiteBaker 2.8.x
  * @package     anynews
  * @author      cwsoft (http://cwsoft.de)
- * @version     2.1.0
+ * @version     2.2.0
  * @copyright   cwsoft
  * @license     http://www.gnu.org/licenses/gpl-3.0.html
 */
@@ -24,7 +24,17 @@ if (defined('WB_PATH') == false) {
 	exit("Cannot access this file directly");
 }
 
-$PRECHECK = array();
+/**
+ * Check if minimum requirements for this module are fullfilled
+ * Only excecuted from WebsiteBaker 2.8 onwards
+ */
+$PRECHECK = array( 
+	// requires WebsiteBaker 2.8.x (from 2.8.2 onwards)
+	'WB_VERSION' => array('VERSION' => '2.8.2', 'OPERATOR' => '>='), 
 
-// check required WebsiteBaker version
-$PRECHECK['WB_VERSION'] = array('VERSION' => '2.8.2', 'OPERATOR' => '>=');
+	// ensure WebsiteBaker news module is installed
+	'WB_ADDONS' => array('news'),
+
+	// make sure PHP version is 5.2.2 or higher
+	'PHP_VERSION' => array('VERSION' => '5.2.2', 'OPERATOR' => '>=')
+);

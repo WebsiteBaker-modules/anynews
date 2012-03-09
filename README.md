@@ -18,12 +18,12 @@ The minimum requirements to get Anynews running on your WebsiteBaker installatio
 - Optional: small modification of your template file to enable jQuery support
 
 ## Installation
-1. download the [Anynews v2.1.0](https://github.com/downloads/cwsoft/wb-anynews/cwsoft-wb-anynews-v2.1.0.zip) WebsiteBaker installation package
+1. download the [Anynews v2.2.0](https://github.com/downloads/cwsoft/wb-anynews/cwsoft-wb-anynews-v2.2.0.zip) WebsiteBaker installation package
 2. log into your WebsiteBaker backend and go to the `Add-ons/Modules` section
 3. install the downloaded zip archive via the WebsiteBaker installer
 
 ### Enable jQuery support (optional)
-If you want to use JavaScript effects or jQuery plugins with Anynews, you need to add one code line to your frontend template. Open your WebsiteBaker frontend template file ***index.php*** in the [Addon File Editor](https://github.com/cwsoft/wb-addon-file-editor#readme) and search for the following lines.
+If you want to use JavaScript effects or jQuery plugins with Anynews, you need to add one code line to your frontend template. Open your WebsiteBaker frontend template file ***index.php*** in the [Addon File Editor](https://github.com/cwsoft/wb-addon-file-editor#readme) and search for the following lines. 
 
 	if (function_exists('register_frontend_modfiles')) {
 		register_frontend_modfiles('css');
@@ -38,6 +38,8 @@ Change the code lines above as follows:
 		register_frontend_modfiles('js');
 	}
 
+If you can't find the code above in the index.php of your template, simply at the last code block to the end of your &lt;head&gt;&lt;/head&gt; section.	
+	
 ## Usage
 As Anynews is designed to fetch news items from the WebsiteBaker `news` module, you need to add some news entries with the `news` module **before** you can use Anynews. If no news are available, Anynews just outputs the message "No news available yet". Follow the steps below to add some news entries with the WebsiteBaker `news` module.
 
@@ -93,7 +95,7 @@ Calling Anynews in it´s easiest form ***displayNewsItems();*** uses the default 
 
 ***Function parameters explained:***
 
-- **$group_id**: IDs of displayed news, which match the defined $group_id_type  
+- **$group_id**: only show news which IDs match given *$group_id_type* (default 'group_id')  
 	[0:all news, 1..N, or array(2,4,5,N) to limit news to single Id or multiple Ids, matching *$group_id_type*]
 	
 - **$max_news_items**: max. number of news entries to show  
@@ -233,11 +235,13 @@ If you have questions or issues with Anynews, please visit the [English](http://
 
 ***Always provide the following information with your support request:***
 
- - detailed error description (what happens, what have you tried ...)
+ - detailed error description (what happens, what have you already tried ...)
  - the Anynews version (go to WebsiteBaker section Add-ons / Info / Anynews)
  - your PHP version (use phpinfo(); or ask your provider if in doubt)
  - WebsiteBaker version, Service Pack number and build number of your version
  - name of the WebsiteBaker frontent template used (e.g. round, allcss ...)
+ - information about your operating system (e.g. Windows, Mac, Linux) incl. version
+ - information of your browser and browser version used
  - information about changes you made to WebsiteBaker (if any)
 
 ## Credits
