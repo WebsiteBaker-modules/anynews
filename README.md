@@ -65,7 +65,11 @@ To display news items at a fixed position on every page of your frontend, open t
 		}
 	?>
 
-Visit the frontend of your webiste and check the Anynews output.
+Visit the frontend of your webiste and check the Anynews output. 
+
+Depending on the Anynews function calls, your output can look as follows.
+
+![](https://github.com/cwsoft/wb-anynews/raw/master/.screenshots/anynews.png) 
 
 ## Customizing Anynews
 The Anynews output can be customized to your needs by three methods:
