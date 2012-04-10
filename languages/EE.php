@@ -15,7 +15,7 @@
  * @package     anynews
  * @author      cwsoft (http://cwsoft.de)
  * @translation	forum member eazybaker 
- * @version     2.2.0
+ * @version     2.2.1
  * @copyright   cwsoft
  * @license     http://www.gnu.org/licenses/gpl-3.0.html
 */
@@ -24,6 +24,7 @@
 $module_description	= 'WB Moodul, millega saad kuvada uudiseid igal lehel kus soovid. Detailid mooduli kohta leiad <a href="https://github.com/cwsoft/wb-anynews" target="_blank">GitHub</a>.';
 
 // initialize global $LANG variable as array if needed
+global $LANG;
 if (! isset($LANG) || (isset($LANG) && ! is_array($LANG))) {
 	$LANG = array();
 }

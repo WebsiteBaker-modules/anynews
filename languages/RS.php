@@ -15,7 +15,7 @@
  * @package     anynews
  * @author      cwsoft (http://cwsoft.de)
  * @translation	forum member Mirens
- * @version     2.2.0
+ * @version     2.2.1
  * @copyright   cwsoft
  * @license     http://www.gnu.org/licenses/gpl-3.0.html
 */
@@ -24,6 +24,7 @@
 $module_description	= 'Website Baker modul za prikazivanje novosti na bilo kojoj stranici vašeg web site-a. Funkcija modula može biti implementirana u sam template ili putem code sekcije. Detalji i pomo&#263; oko koriš&#263;enja ovog modula mogu se na&#263;i u samom modulu na linku <a href="https://github.com/cwsoft/wb-anynews" target="_blank">GitHub</a>.';
 
 // initialize global $LANG variable as array if needed
+global $LANG;
 if (! isset($LANG) || (isset($LANG) && ! is_array($LANG))) {
 	$LANG = array();
 }

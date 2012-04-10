@@ -15,7 +15,7 @@
  * @package     anynews
  * @author      cwsoft (http://cwsoft.de)
  * @translation Guillaume Vielliard
- * @version     2.1.0
+ * @version     2.2.1
  * @copyright   cwsoft
  * @license     http://www.gnu.org/licenses/gpl-3.0.html
  */
@@ -24,6 +24,7 @@
 $module_description	= 'Code pour afficher des news sur différentes pages . Cette fonction peut être apellée depuis le template ou dans une section de code. Plus de détails sur ce module dans le fichier suivant <a href="https://github.com/cwsoft/wb-anynews" target="_blank">GitHub</a>.';
 
 // initialize global $LANG variable as array if needed
+global $LANG;
 if (! isset($LANG) || (isset($LANG) && ! is_array($LANG))) {
 	$LANG = array();
 }
