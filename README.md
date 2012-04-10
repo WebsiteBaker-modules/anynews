@@ -235,7 +235,7 @@ To change the news header of aboves example to green and the news text to blue, 
 You can track the status of known issues or report new issues found in Anynews via GitHubs [issue tracking service](https://github.com/cwsoft/wb-anynews/issues). If you run into any issues with Anynews, please visit this page first and check if this issue is already known.
 
 ## Questions
-If you have questions or issues with Anynews, please visit the [English](http://www.websitebaker2.org/forum/index.php/topic,12122.0.html) WebsiteBaker forum support threads and ask for feedback.
+If you have questions or issues with Anynews, please visit the [English](http://www.websitebaker2.org/forum/index.php/topic,23355.0.html) WebsiteBaker forum support threads and ask for feedback.
 
 ***Always provide the following information with your support request:***
 
