@@ -2,9 +2,9 @@
 /**
  * Code snippet: anynews
  *
- * This code snippets grabs news from the WebsiteBaker news module database
- * and displays them on any page you want by invoking the function
- * displayNewsItems() via a page of type code or the index.php 
+ * This code snippets grabs news entries from the WebsiteBaker news
+ * module and displays them on any page you want by invoking the function
+ * displayNewsItems() via a page of type code or the index.php
  * file of the template.
  *
  * This file contains the Dutch language output.
@@ -31,12 +31,12 @@ if (! isset($LANG) || (isset($LANG) && ! is_array($LANG))) {
 
 $LANG['ANYNEWS'][0] = array(
 	// text outputs for the frontend
-	'TXT_HEADER' => 'Laatste nieuws', 
-	'TXT_READMORE' => 'Lees meer', 
-	'TXT_NO_NEWS' => 'Geen nieuws beschikbaar.',
-	'TXT_NEWS' => 'Nieuws', 
-	'TXT_NUMBER_OF_COMMENTS' => 'Aantal reakties', 
+	'TXT_HEADER'             => 'Laatste nieuws',
+	'TXT_READMORE'           => 'Lees meer',
+	'TXT_NO_NEWS'            => 'Geen nieuws beschikbaar.',
+	'TXT_NEWS'               => 'Nieuws',
+	'TXT_NUMBER_OF_COMMENTS' => 'Aantal reakties',
 	
 	// date/time format: (9:12 PM, 31-12-2012)
-	'DATE_FORMAT' => ' (d-m-Y, H:M)'
+	'DATE_FORMAT'            => ' (d-m-Y, H:M)'
 );
