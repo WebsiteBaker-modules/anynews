@@ -14,7 +14,7 @@
  * @platform    CMS WebsiteBaker 2.8.x
  * @package     anynews
  * @author      cwsoft (http://cwsoft.de)
- * @version     2.2.0
+ * @version     2.3.0
  * @copyright   cwsoft
  * @license     http://www.gnu.org/licenses/gpl-3.0.html
  */
@@ -49,7 +49,6 @@ if (! function_exists('displayNewsItems')) {
 		 */
 		require_once ('code/anynews_functions.php');
 		require_once ('thirdparty/truncate.php');
-		require_once (WB_PATH . '/include/phplib/template.inc');
 
 		/**
 		 * Sanitize user specified function parameters
@@ -73,45 +72,38 @@ if (! function_exists('displayNewsItems')) {
 		loadLanguageFile($lang_id);
 
 		/**
-		 * Create template object and configure it
+		 * Create Twig template object and configure it
 		 */
-		$tpl = new Template(dirname(__FILE__) . '/templates');
-
-		// configure handling of unknown {variables} (remove:=default, keep, comment)
-		$tpl->set_unknowns('remove');
-
-		// configure debug mode (0:= default, 1:=variable assignments, 2:=calls to get variable, 4:=show internals)
-		$tpl->debug = 0;
-
-		// set template file depending on $display_mode
+		require_once ('thirdparty/Twig/Twig/Autoloader.php');
+        Twig_Autoloader::register();
+        $loader = new Twig_Loader_Filesystem(dirname(__FILE__) . '/templates');
+        $twig = new Twig_Environment($loader, array(
+			'strict_variables' => true,
+			'autoescape' => false,
+			'cache' => false,
+			'debug' => false,
+		));
+        
+		/**
+		 * Load the Anynews Twig template specified by $display_mode
+		 */
 		if (file_exists(dirname(__FILE__) . '/templates/display_mode_' . $display_mode . '.htt')) {
-			// set user defined template
-			$tpl->set_file('page', 'display_mode_' . $display_mode . '.htt');
+			$tpl = $twig->loadTemplate('display_mode_' . $display_mode . '.htt');
 		} else {
-			// set default template
-			$tpl->set_file('page', 'display_mode_1.htt');
+			$tpl = $twig->loadTemplate('display_mode_1.htt');
 		}
 
-		// define "read more block" used to show/hide readmore link depending on long news content
-		$tpl->set_block('page', 'readmore_link_block', 'readmore_link_block_handle');
-
-		// define optional "custom block" which can be used in template files if needed
-		$tpl->set_block('page', 'custom_block', 'custom_block_handle');
-
-		// define "news block" used for text outputs of individual news items (news text, links etc.)  
-		$tpl->set_block('page', 'news_block', 'news_block_handle');
-
-		// define "news wrapper block" shown if at least one news entry exists
-		$tpl->set_block('page', 'news_available_block', 'news_available_block_handle');
-
-		// define "no news wrapper block" shown in no news entry exists
-		$tpl->set_block('page', 'no_news_available_block', 'no_news_available_block_handle');
-
-		// replace placeholders with values from language file
+		/**
+		 * Make WB_URL and Anynews language file available in Twig template
+		 * Access via: {{ lang.KEY }}, {{ WB_URL }}
+		 */
+		// make Anynews language file text available in Twig template via: {{ lang.KEY }}
+		$data = array();
+		$data['WB_URL'] = WB_URL; 
 		foreach ($LANG['ANYNEWS'][0] as $key => $value) {
-			$tpl->set_var($key, $value);
+			$data['lang'][$key] = $value;
 		}
-
+		
 		/**
 		 * Work out SQL query for group_id, limiting news to display depedning by defined $news_filter
 		 *  option 1: $group_id:=0 => '1'
@@ -191,6 +183,7 @@ if (! function_exists('displayNewsItems')) {
 		 * Process database query and output the template files
 		 */
 		$results = $database->query($sql);
+		$data['newsItems'] = array();
 		if ($results && $results->numRows() > 0) {
 			// fetch news group titles from news database table
 			$news_group_titles = getNewsGroupTitles();
@@ -199,21 +192,11 @@ if (! function_exists('displayNewsItems')) {
 			$user_list = getUserNames();
 
 			// loop through all news articles found
-			$news_counter = 1;
+			$news_counter = 0;
 			while ($row = $results->fetchRow()) {
 				// build absolute links from [wblink] tags found in news short or long text database field
 				$wb->preprocess($row['content_short']);
 				$wb->preprocess($row['content_long']);
-
-			 	// fetch custom placeholders from short/long text fields and replace template placeholders with values
-				$custom_vars_short_text = getCustomOutputVariables($row['content_short'], $custom_placeholder, 'SHORT');
-				$custom_vars_long_text = getCustomOutputVariables($row['content_long'], $custom_placeholder, 'LONG');
-				$custom_vars = array_merge($custom_vars_short_text, $custom_vars_long_text);
-
-				// replace custom placeholders in template with values
-				foreach ($custom_vars as $key => $value) {
-					$tpl->set_var($key, $value);
-				}
 
 				// remove tags from short and long text if defined
 				$row['content_short'] = ($strip_tags) ? strip_tags($row['content_short'], $allowed_tags) : $row['content_short'];
@@ -233,11 +216,10 @@ if (! function_exists('displayNewsItems')) {
 					$image = '<img src="' . WB_URL . MEDIA_DIRECTORY . '/.news/image' . $group_id . '.jpg' . '" alt="" />';
 				}
 
-				// replace news article dependend template placeholders
-				$tpl->set_var(array(
-					'WB_URL' => WB_URL, 
+				// make news item data available in Twig template: {{ newsItems.Counter.KEY }}
+				$data['newsItems'][$news_counter] = array(
 					'GROUP_IMAGE' => $image, 
-					'NEWS_ID' => $news_counter, 
+					'NEWS_ID' => $news_counter + 1, 
 					'POST_ID' => (int)$row['post_id'], 
 					'SECTION_ID' => (int)$row['section_id'], 
 					'PAGE_ID' => (int)$row['page_id'], 
@@ -254,49 +236,23 @@ if (! function_exists('displayNewsItems')) {
 					'POSTED_WHEN' => date($LANG['ANYNEWS'][0]['DATE_FORMAT'],$row['posted_when']), 
 					'PUBLISHED_WHEN' => date($LANG['ANYNEWS'][0]['DATE_FORMAT'], $row['published_when']), 
 					'PUBLISHED_UNTIL' => date($LANG['ANYNEWS'][0]['DATE_FORMAT'], $row['published_until'])
-					)
 				);
 
-				// remove "read more block" from template if no long content is available
-				$tpl->parse('readmore_link_block_handle', 'readmore_link_block', false);
-				if (! isset($row['content_long']) || ! strlen($row['content_long']) > 0) {
-					$tpl->set_var('readmore_link_block_handle', '');
-				}
+				// make custom placeholders available in Twig template: {{ newsItems.Counter.SHORT|LONG_REGEX_NAME_ID }}
+				$custom_vars_short_text = getCustomOutputVariables($row['content_short'], $custom_placeholder, 'SHORT');
+				$custom_vars_long_text = getCustomOutputVariables($row['content_long'], $custom_placeholder, 'LONG');
+				$custom_vars = array_merge($custom_vars_short_text, $custom_vars_long_text);
 
-				// add optional custom template block in append mode (add per loop)
-				$tpl->parse('custom_block_handle', 'custom_block', true);
-
-				// add template values in news block in append mode (add per loop)
-				$tpl->parse('news_block_handle', 'news_block', true);
-
-				// remove custom variables to start blank for the next news entry
+				// replace custom placeholders in template with values
 				foreach ($custom_vars as $key => $value) {
-					$tpl->set_var($key, '');
+					$data['newsItems'][$news_counter][$key] = $value;
 				}
-
+				
 				$news_counter++;
 			}
-			// update the total number of news items
-			$tpl->set_var('NEWS_ITEMS', $news_counter - 1);
-			
-			// remove the "no news available block" from output
-			$tpl->set_var('no_news_available_block_handle', '');
-
-			// parse the news content block
-			$tpl->parse('news_available_block_handle', 'news_available_block', false);
-			
-		} else {
-			// update the total number of news items
-			$tpl->set_var('NEWS_ITEMS', 0);
-
-			// remove the "news available block" from output
-			$tpl->set_var('news_available_block_handle', '');
-
-			// remove blocks not used
-			$tpl->parse('no_news_available_block_handle', 'no_news_available_block', true);
 		}
 	
 		// ouput the final template
-		$tpl->pparse('output', 'page');
+		$tpl->display($data);
 	}
 }

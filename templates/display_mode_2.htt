@@ -1,15 +1,42 @@
+{#
+/**
+ * Code snippet: anynews
+ *
+ * This code snippets grabs news entries from the WebsiteBaker news
+ * module and displays them on any page you want by invoking the function
+ * displayNewsItems() via a page of type code or the index.php
+ * file of the template.
+ *
+ * This file implements a minimalistic list news output ($display_mode = 2).
+ *
+ * USAGE:
+ * Text defined in Anynews language files can be used via {{ lang.KEY }}
+ * Specific news data can be used via {{ newsItems.NUMBER.KEY }}
+ * Use a for loop to extract data from all news items available
+ * Learn more about Twig: http://twig.sensiolabs.org/documentation
+ * 
+ * LICENSE: GNU General Public License 3.0
+ * 
+ * @platform    CMS WebsiteBaker 2.8.x
+ * @package     anynews
+ * @author      cwsoft (http://cwsoft.de)
+ * @version     2.3.0
+ * @copyright   cwsoft
+ * @license     http://www.gnu.org/licenses/gpl-3.0.html
+ */
+#}
 <div class="mod_anynews">
-	<!-- BEGIN news_available_block -->
-		<h2>{TXT_HEADER}</h2>
-		
-		<ul>
-			<!-- BEGIN news_block -->
-				<li><a href="{LINK}">{TITLE} {POSTED_WHEN}</a></li>
-			<!-- END news_block -->
-		</ul>
-	<!-- END news_available_block -->
+	<h2>{{ lang.TXT_HEADER }}</h2>
 
-	<!-- BEGIN no_news_available_block -->
-		{TXT_NO_NEWS}
-	<!-- END no_news_available_block -->
+	{% if newsItems %}
+	<ul>
+		{% for news in newsItems %}
+			<li><a href="{{ news.LINK }}">{{ news.TITLE }} {{ news.POSTED_WHEN }}</a></li>
+		{% endfor %}
+	</ul>
+	
+	{% else %}
+		{{ lang.TXT_NO_NEWS }}
+	{% endif %}
+
 </div>
