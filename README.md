@@ -150,66 +150,58 @@ You can output a list with all *group_ids* and the *group titles* created by the
 Visit the created page/section in your frontend and search for the *group_id(s)* you want to use in the Anynews function call. 
 	
 ### Anynews Templates
-The HTML skeleton of the Anynews output is defined by template files **templates/display_mode_X.htt**. The template to be used is defined by the Anynews function parameter **$display_mode**, which defaults to 1 if no valid input is defined. Create a blank template file with the [Addon File Editor](https://github.com/cwsoft/wb-addon-file-editor#readme) and name as follows: **templates/display_mode_5.htt**
+The HTML skeleton of the Anynews output is defined by template files **templates/display_mode_X.htt**. The template used is defined by the Anynews function parameter **$display_mode**, which defaults to 1 if no valid input is defined. Create a blank template file with the [Addon File Editor](https://github.com/cwsoft/wb-addon-file-editor#readme) and name as follows: **templates/display_mode_5.htt**
 
 #### Step 1:
-Add the HTML markup below to your custom template file. The entire HTML output should be wrapped in a div with class "mod_anynews" to prevent CSS clashes with other modules, templates or the WebsiteBaker core. 
-
-The example includes two logical blocks defined by simple HTML comments following `<!-- BEGIN block_name --> and <!-- END block_name -->`. The first block provides the HTML output for ONE single news entry. The second block provides a status message if no news items exists. Please note that only one of the two blocks is visible in your frontend. If no news exists, the first block will be removed, if at least one news item exists, the second block is removed.
+Add the HTML skeletion below to your custom template file. The entire HTML output should be wrapped in a div with class "mod_anynews" to prevent CSS clashes with other modules, templates or the WebsiteBaker core. 
 
 	<div class="mod_anynews">
-		<!-- BEGIN news_available_block -->		
-			<h1>Dummy page header shown only once</h1>
+		<h1>Anynews Header (shown only once)</h1>
 		
-			<h2>Dummy news header</h2>
-			<p>Dummy news text </p>
-			<em>Dummy news author</em>
-		<!-- END news_available_block -->		
+		<!-- next three lines will be repeated for each existing news entry -->
+		<h2>News Title (repeated for each news item)</h2>
+		<p>Dummy news text </p>
+		<em>Dummy news author</em>
 
-		<!-- BEGIN no_news_available_block -->
-			<p>No news available yet</p>
-		<!-- END no_news_available_block -->
+		<!-- this line should only show up if no news item exists -->
+		<p>No news available yet</p>
 	</div>
 
 #### Step 2:
-Identify the template part containing the content for the single news item. Wrap the two single HTML comment lines around this block. This tells Anynews to repeat the encapsulated HTML block for EACH news item returned by Anynews. Your Anynews template should now look as follows.
+In the next step, we add some control statements for the template parser [Twig](http://twig.sensiolabs.org/) used by Anynews. The line `{% for news in newsItems %}` loops over all news defined in the array newsItems. The news data available for the actual news entry is stored in the variable news. Everything wrapped between the line `{% else %}` and `{% endfor %}` will only be displayed if no news exist at all.
 
 	<div class="mod_anynews">
-		<!-- BEGIN news_available_block -->		
-			<h1>Dummy page header shown only once</h1>
+		<h1>Anynews Header (shown only once)</h1>
 		
-			<!-- BEGIN news_block -->
-				<h2>Dummy news header</h2>
-				<p>Dummy news text </p>
-				<em>Dummy news author</em>
-			<!-- END news_block -->
-		<!-- END news_available_block -->		
-
-		<!-- BEGIN no_news_available_block -->
+		{% for news in newsItems %}		
+			<h2>News Title (repeated for each news item)</h2>
+			<p>Dummy news text </p>
+			<em>Dummy news author</em>
+			
+		{% else %}
 			<p>No news available yet</p>
-		<!-- END no_news_available_block -->
+		{% endfor %}
 	</div>
-	
+
+
 #### Step 3:	
-Finally replace the dummy text with the Anynews content {placeholders}. The {placeholders} are replaced with data from the WebsiteBaker `news` entries. Review the template file ***display_mode_99.htt*** (cheat sheet) to get a list of all available Anynews placeholders. Our final result will look like this.
+Finally we replace the dummy text with placeholders. Data extracted from the WebsiteBaker `news` module is stored in the placeholder ***newsItems***. Text outputs defined in the Anynews language files can be accessed by the placeholder ***lang***. Remember to wrap the placeholders in double currly brackets {{ placeholder }}. Review the template file ***display_mode_99.htt*** (cheat sheet) to get a list of all available Anynews placeholders.
 
 	<div class="mod_anynews">
-		<!-- BEGIN news_available_block -->		
-			<h1>Dummy page header shown only once</h1>
+		<h1>{{ lang.TXT_HEADER }}</h1>
 		
-			<!-- BEGIN news_block -->
-				<h2>{TITLE}</h2>
-				<p>{CONTENT_LONG}</p>
-				<em>{POSTED_BY}</em>
-			<!-- END news_block -->
-		<!-- END news_available_block -->		
-
-		<!-- BEGIN no_news_available_block -->
-			<p>{TXT_NO_NEWS}</p>
-		<!-- END no_news_available_block -->
+		{% for news in newsItems %}		
+			<h2>{{ news.TITLE }}</h2>
+			{{ news.CONTENT_LONG }}
+			<em>{{ news.POSTED_BY }}</em>
+			
+		{% else %}
+			<p>{{ lang.TXT_NO_NEWS }}</p>
+		{% endfor %}
 	</div>
 
 If you want to create a custom template with jQuery effects, look at the template files ***display_mode_3.htt*** and ***display_mode_4.htt***, which implement 3rd party jQuery sliding effects.
+To learn more about the possibilities of the template parser Twig, please have a look at the excellent [Twig user manual](http://twig.sensiolabs.org/doc/templates.html).
 
 ### Anynews CSS
 The Anynews default templates (*/templates/display_mode_X.htt*) wrap the Anynews output in a div container as shown below.
