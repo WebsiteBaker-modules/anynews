@@ -1,7 +1,7 @@
 # Anynews Code Snippet for CMS WebsiteBaker (2.8.x)
-The code snippet `Anynews` is designed to fetch news entries from the [WebsiteBaker CMS](http://www.websitebaker2.org) `news` module. Just call the Anynews function ***displayNewsItems();*** where you want the news output to appear on your frontend. Optional function parameters, HTML templates, content placeholders and CSS definitions allows you to style the news output the way you want. Anynews ships with four templates - including two jQuery sliding effects - ready for use out of the box.
+The code snippet `Anynews` is designed to fetch news entries from the [WebsiteBaker CMS](http://www.websitebaker2.org) news module. Just call the Anynews function `displayNewsItems();` where you want the news output to appear on your frontend. Optional function parameters, HTML templates, content placeholders and CSS definitions allows you to style the news output the way you want. Anynews ships with four templates - including two jQuery sliding effects - ready to use out of the box.
 
-Power users define their own placeholders containing information extracted from the short and/or long `news` module description. Mastering Anynews is possible - but requires you to study the information provided in the section ***Customizing Anynews***.
+Power users define their own placeholders containing information extracted from the short and/or long news module description. Mastering Anynews is possible - but requires you to study the information provided in the section ***Customizing Anynews***.
 
 ## Download
 The released stable `Anynews` installation packages for the WebsiteBaker CMS can be found in the [GitHub download area](https://github.com/cwsoft/wb-anynews/downloads). It is recommended to install/update to the latest available version listed. Older versions are provided for compatibility reasons with older WebsiteBaker versions and may contain bugs or security issues. The development history of Anynews can be tracked via [GitHub](https://github.com/cwsoft/wb-anynews).
@@ -13,12 +13,12 @@ Anynews is licensed under the [GNU General Public License (GPL) v3.0](http://www
 The minimum requirements to get Anynews running on your WebsiteBaker installation are as follows:
 
 - WebsiteBaker ***2.8.2*** or higher (recommended last stable 2.8.x version)
-- default WebsiteBaker `news` module
+- WebsiteBaker news module
 - PHP ***5.2.2*** or higher (recommended last stable PHP 5.3.x version)
 - Optional: small modification of your template file to enable jQuery support
 
 ## Installation
-1. download the [Anynews v2.3.0 RC1](https://github.com/downloads/cwsoft/wb-anynews/cwsoft-wb-anynews-v2.3.0-RC1.zip) WebsiteBaker installation package
+1. download the [Anynews v2.3.0](https://github.com/downloads/cwsoft/wb-anynews/cwsoft-wb-anynews-v2.3.0.zip) WebsiteBaker installation package
 2. log into your WebsiteBaker backend and go to the `Add-ons/Modules` section
 3. install the downloaded zip archive via the WebsiteBaker installer
 
@@ -41,11 +41,11 @@ Change the code lines above as follows:
 If you can't find the code above in the index.php of your template, simply at the last code block to the end of your &lt;head&gt;&lt;/head&gt; section.	
 	
 ## Usage
-As Anynews is designed to fetch news items from the WebsiteBaker `news` module, you need to add some news entries with the `news` module **before** you can use Anynews. If no news are available, Anynews just outputs the message "No news available yet". Follow the steps below to add some news entries with the WebsiteBaker `news` module.
+As Anynews is designed to fetch news items from the WebsiteBaker news module, you need to add some news entries with the news module **before** you can use Anynews. If no news are available, Anynews just outputs the message "No news available yet". Follow the steps below to add some news entries with the WebsiteBaker news module.
 
 1. log into your WebsiteBaker backend and go to the `Pages` section
 2. create a new page or section of type `News` (set visibility to None)
-3. add some news entries (2-3) from the `news` page in the WebsiteBaker backend
+3. add some news entries (2-3) from the news page in the WebsiteBaker backend
 
 ### Use Anynews from a page or section
 Create a new page or section of type `Code` in the WebsiteBaker backend and enter the following code to it.
@@ -65,9 +65,9 @@ To display news items at a fixed position on every page of your frontend, open t
 		}
 	?>
 
-Visit the frontend of your webiste and check the Anynews output. 
+Visit the frontend of your website and check the Anynews output. 
 
-Depending on the Anynews function calls, your output can look as follows.
+Depending on the Anynews function parameters defined, the output may look as follows.
 
 ![](https://github.com/cwsoft/wb-anynews/raw/master/.screenshots/anynews.png) 
 
@@ -79,7 +79,7 @@ The Anynews output can be customized to your needs by three methods:
 3. customized CSS definitions in file ***/css/anynews.css***
 	
 ### Anynews Parametes
-Calling Anynews in it´s easiest form ***displayNewsItems();*** uses the default parameters shown below.
+When you call Anynews without any parameter like `displayNewsItems();`, the following default parameters will be used:
 
 	displayNewsItems(
 		$group_id = 0,
@@ -142,7 +142,7 @@ Calling Anynews in it´s easiest form ***displayNewsItems();*** uses the default 
 	[default:= false, true:=only show news added from news pages, which page language match $lang_id]
 	
 ***Tip:*** 
-You can output a list with all *group_ids* and the *group titles* created by the WebsiteBaker `news` module, by adding the following code into a page/section of type `code`.
+You can output a list with all *group_ids* and the *group titles* created by the WebsiteBaker news module, by adding the following code into a page/section of type code.
 
 	require_once(WB_PATH . '/modules/anynews/code/anynews_functions.php');
 	print_r(getNewsGroupTitles());
@@ -150,10 +150,10 @@ You can output a list with all *group_ids* and the *group titles* created by the
 Visit the created page/section in your frontend and search for the *group_id(s)* you want to use in the Anynews function call. 
 	
 ### Anynews Templates
-The HTML skeleton of the Anynews output is defined by template files **templates/display_mode_X.htt**. The template used is defined by the Anynews function parameter **$display_mode**, which defaults to 1 if no valid input is defined. Create a blank template file with the [Addon File Editor](https://github.com/cwsoft/wb-addon-file-editor#readme) and name as follows: **templates/display_mode_5.htt**
+The HTML skeleton of the Anynews output is defined by template files **display_mode_X.htt** stored in the Anynews subfolder **templates**. The template file used is defined by the Anynews function parameter **$display_mode**, which defaults to 1 if no valid input is defined. To create your own Anynews template, create a new file in the Anynews template folder and rename it to **templates/display_mode_5.htt**. You can use the [Addon File Editor](https://github.com/cwsoft/wb-addon-file-editor#readme) to create and edit this file via the WebsiteBaker backend.
 
 #### Step 1:
-Add the HTML skeletion below to your custom template file. The entire HTML output should be wrapped in a div with class "mod_anynews" to prevent CSS clashes with other modules, templates or the WebsiteBaker core. 
+Add the HTML skeleton below to your custom template file. All Anynews output should be wrapped in a div with class "mod_anynews" to prevent CSS clashes with other modules, templates or the WebsiteBaker core. 
 
 	<div class="mod_anynews">
 		<h1>Anynews Header (shown only once)</h1>
@@ -168,7 +168,7 @@ Add the HTML skeletion below to your custom template file. The entire HTML outpu
 	</div>
 
 #### Step 2:
-In the next step, we add some control statements for the template parser [Twig](http://twig.sensiolabs.org/) used by Anynews. The line `{% for news in newsItems %}` loops over all news defined in the array newsItems. The news data available for the actual news entry is stored in the variable news. Everything wrapped between the line `{% else %}` and `{% endfor %}` will only be displayed if no news exist at all.
+Now we add control statements for the template parser [Twig](http://twig.sensiolabs.org/) used by Anynews. The line `{% for news in newsItems %}` loops over all news defined in the variable `newsItems` created by Anynews. Inside the loop, news data extracted from the WebsiteBaker news module is accessible from the variable `news` created by Twig. Outputs enclosed in `{% else %}` and `{% endfor %}` is only displayed if no news exist at all.
 
 	<div class="mod_anynews">
 		<h1>Anynews Header (shown only once)</h1>
@@ -185,7 +185,7 @@ In the next step, we add some control statements for the template parser [Twig](
 
 
 #### Step 3:	
-Finally we replace the dummy text with placeholders. Data extracted from the WebsiteBaker `news` module is stored in the placeholder ***newsItems***. Text outputs defined in the Anynews language files can be accessed by the placeholder ***lang***. Remember to wrap the placeholders in double currly brackets {{ placeholder }}. Review the template file ***display_mode_99.htt*** (cheat sheet) to get a list of all available Anynews placeholders.
+Finally we replace the dummy text with placeholders provided by Anynews. Data from the WebsiteBaker news module is stored in the placeholder `newsItems`. Text outputs from Anynews language files is stored in the placeholder `lang`. Review the template file ***display_mode_99.htt*** (cheat sheet) to get a list of all available Anynews placeholders. Remember to wrap your placeholders with double currly brackets {{ placeholder }}.
 
 	<div class="mod_anynews">
 		<h1>{{ lang.TXT_HEADER }}</h1>

@@ -45,10 +45,12 @@ if (! function_exists('displayNewsItems')) {
 		global $wb, $database, $LANG;
 
 		/**
-		 * Include required Anynews files
+		 * Include required Anynews files and language files
 		 */
 		require_once ('code/anynews_functions.php');
 		require_once ('thirdparty/truncate.php');
+		$lang_id = getValidLanguageId($lang_id);
+		loadLanguageFile($lang_id);
 
 		/**
 		 * Sanitize user specified function parameters
@@ -66,26 +68,20 @@ if (! function_exists('displayNewsItems')) {
 		sanitizeUserInputs($lang_filter, 'b');
 
 		/**
-		 * Include Anynews language file depending on defined $lang_id 
-		 */
-		$lang_id = getValidLanguageId($lang_id);
-		loadLanguageFile($lang_id);
-
-		/**
 		 * Create Twig template object and configure it
 		 */
 		require_once ('thirdparty/Twig/Twig/Autoloader.php');
         Twig_Autoloader::register();
         $loader = new Twig_Loader_Filesystem(dirname(__FILE__) . '/templates');
         $twig = new Twig_Environment($loader, array(
-			'strict_variables' => true,
-			'autoescape' => false,
-			'cache' => false,
-			'debug' => false,
+			'autoescape'       => false,
+			'cache'            => false,
+			'strict_variables' => false,
+			'debug'            => false,
 		));
         
 		/**
-		 * Load the Anynews Twig template specified by $display_mode
+		 * Load Anynews Twig template specified via $display_mode
 		 */
 		if (file_exists(dirname(__FILE__) . '/templates/display_mode_' . $display_mode . '.htt')) {
 			$tpl = $twig->loadTemplate('display_mode_' . $display_mode . '.htt');
@@ -218,23 +214,23 @@ if (! function_exists('displayNewsItems')) {
 
 				// make news item data available in Twig template: {{ newsItems.Counter.KEY }}
 				$data['newsItems'][$news_counter] = array(
-					'GROUP_IMAGE' => $image, 
-					'NEWS_ID' => $news_counter + 1, 
-					'POST_ID' => (int)$row['post_id'], 
-					'SECTION_ID' => (int)$row['section_id'], 
-					'PAGE_ID' => (int)$row['page_id'], 
-					'GROUP_ID' => (int)$row['group_id'], 
-					'GROUP_TITLE' => array_key_exists($row['group_id'], $news_group_titles) ? htmlentities($news_group_titles[$row['group_id']]) : '',
-					'POSTED_BY' => (int)$row['posted_by'], 
-					'USERNAME' => array_key_exists($row['posted_by'], $user_list) ? htmlentities($user_list[$row['posted_by']]['USERNAME']) : '', 
-					'DISPLAY_NAME' => array_key_exists($row['posted_by'], $user_list) ? htmlentities($user_list[$row['posted_by']]['DISPLAY_NAME']) : '', 
-					'TITLE' => ($strip_tags) ? strip_tags($row['title']) : $row['title'], 
-					'COMMENTS' => isset($row['comments']) ? $row['comments'] : 0, 
-					'LINK' => WB_URL . PAGES_DIRECTORY . $row['link'] . PAGE_EXTENSION, 
-					'CONTENT_SHORT' => $image . $row['content_short'], 
-					'CONTENT_LONG' => $row['content_long'], 
-					'POSTED_WHEN' => date($LANG['ANYNEWS'][0]['DATE_FORMAT'],$row['posted_when']), 
-					'PUBLISHED_WHEN' => date($LANG['ANYNEWS'][0]['DATE_FORMAT'], $row['published_when']), 
+					'GROUP_IMAGE'     => $image, 
+					'NEWS_ID'         => $news_counter + 1, 
+					'POST_ID'         => (int)$row['post_id'], 
+					'SECTION_ID'      => (int)$row['section_id'], 
+					'PAGE_ID'         => (int)$row['page_id'], 
+					'GROUP_ID'        => (int)$row['group_id'], 
+					'GROUP_TITLE'     => array_key_exists($row['group_id'], $news_group_titles) ? htmlentities($news_group_titles[$row['group_id']]) : '',
+					'POSTED_BY'       => (int)$row['posted_by'], 
+					'USERNAME'        => array_key_exists($row['posted_by'], $user_list) ? htmlentities($user_list[$row['posted_by']]['USERNAME']) : '', 
+					'DISPLAY_NAME'    => array_key_exists($row['posted_by'], $user_list) ? htmlentities($user_list[$row['posted_by']]['DISPLAY_NAME']) : '', 
+					'TITLE'           => ($strip_tags) ? strip_tags($row['title']) : $row['title'], 
+					'COMMENTS'        => isset($row['comments']) ? $row['comments'] : 0, 
+					'LINK'            => WB_URL . PAGES_DIRECTORY . $row['link'] . PAGE_EXTENSION, 
+					'CONTENT_SHORT'   => $image . $row['content_short'], 
+					'CONTENT_LONG'    => $row['content_long'], 
+					'POSTED_WHEN'     => date($LANG['ANYNEWS'][0]['DATE_FORMAT'],$row['posted_when']), 
+					'PUBLISHED_WHEN'  => date($LANG['ANYNEWS'][0]['DATE_FORMAT'], $row['published_when']), 
 					'PUBLISHED_UNTIL' => date($LANG['ANYNEWS'][0]['DATE_FORMAT'], $row['published_until'])
 				);
 
