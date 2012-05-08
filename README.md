@@ -18,7 +18,7 @@ The minimum requirements to get Anynews running on your WebsiteBaker installatio
 - Optional: small modification of your template file to enable jQuery support
 
 ## Installation
-1. download the [Anynews v2.3.0](https://github.com/downloads/cwsoft/wb-anynews/cwsoft-wb-anynews-v2.3.0.zip) WebsiteBaker installation package
+1. download the [Anynews v2.4.0](https://github.com/downloads/cwsoft/wb-anynews/cwsoft-wb-anynews-v2.4.0.zip) WebsiteBaker installation package
 2. log into your WebsiteBaker backend and go to the `Add-ons/Modules` section
 3. install the downloaded zip archive via the WebsiteBaker installer
 

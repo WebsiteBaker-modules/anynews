@@ -14,7 +14,7 @@
  * @platform    CMS WebsiteBaker 2.8.x
  * @package     anynews
  * @author      cwsoft (http://cwsoft.de)
- * @version     2.3.0
+ * @version     2.4.0
  * @copyright   cwsoft
  * @license     http://www.gnu.org/licenses/gpl-3.0.html
  */
@@ -70,8 +70,11 @@ if (! function_exists('displayNewsItems')) {
 		/**
 		 * Create Twig template object and configure it
 		 */
-		require_once ('thirdparty/Twig/Twig/Autoloader.php');
-        Twig_Autoloader::register();
+		// register Twig shipped with Anynews if not already done by the WB core (included since WB 2.8.3 #1688)  
+		if (! class_exists('Twig_Autoloader')) {
+			require_once ('thirdparty/Twig/Twig/Autoloader.php');
+			Twig_Autoloader::register();
+		}
         $loader = new Twig_Loader_Filesystem(dirname(__FILE__) . '/templates');
         $twig = new Twig_Environment($loader, array(
 			'autoescape'       => false,
