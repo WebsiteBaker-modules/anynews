@@ -15,7 +15,6 @@
  * @package     anynews
  * @author      cwsoft (http://cwsoft.de)
  * @translation	forum member Mirens
- * @version     2.2.2
  * @copyright   cwsoft
  * @license     http://www.gnu.org/licenses/gpl-3.0.html
 */
@@ -38,5 +37,5 @@ $LANG['ANYNEWS'][0] = array(
 	'TXT_NUMBER_OF_COMMENTS' => 'Number of comments',
 	
 	// date/time format: (9:12 PM, 10/20/2008)
-	'DATE_FORMAT'            => ' (d.m.Y. - H:i)'
+	'DATE_FORMAT'            => 'd.m.Y. - H:i'
 );

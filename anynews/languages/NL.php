@@ -15,7 +15,6 @@
  * @package     anynews
  * @author      cwsoft (http://cwsoft.de)
  * @translation	forum member Dave (ak D72), Argos
- * @version     2.2.2
  * @copyright   cwsoft
  * @license     http://www.gnu.org/licenses/gpl-3.0.html
 */
@@ -38,5 +37,5 @@ $LANG['ANYNEWS'][0] = array(
 	'TXT_NUMBER_OF_COMMENTS' => 'Aantal reakties',
 	
 	// date/time format: (31-12-2012, 09:12)
-	'DATE_FORMAT'            => ' (d-m-Y, H:i)'
+	'DATE_FORMAT'            => 'd-m-Y, H:i'
 );
