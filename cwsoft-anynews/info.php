@@ -20,7 +20,7 @@
 
 // set WebsiteBaker module variables
 $module_directory     = 'cwsoft-anynews';
-$module_name          = 'Anynews (cwsoft)';
+$module_name          = 'cwsoft - Anynews';
 $module_function      = 'snippet';
 $module_version       = '2.5.0';
 $module_status        = 'STABLE';
