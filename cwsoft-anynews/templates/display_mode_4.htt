@@ -1,0 +1,66 @@
+{#
+/**
+ * Code snippet: anynews
+ *
+ * This code snippets grabs news entries from the WebsiteBaker news
+ * module and displays them on any page you want by invoking the function
+ * displayNewsItems() via a page of type code or the index.php
+ * file of the template.
+ *
+ * This file implements the jQuery flexslider news output ($display_mode = 4).
+ *
+ * USAGE:
+ * Text defined in Anynews language files can be used via {{ lang.KEY }}
+ * Specific news data can be used via {{ newsItems.NUMBER.KEY }}
+ * Use a for loop to extract data from all news items available
+ * Learn more about Twig: http://twig.sensiolabs.org/documentation
+ * 
+ * LICENSE: GNU General Public License 3.0
+ * 
+ * @platform    CMS WebsiteBaker 2.8.x
+ * @package     cwsoft-anynews
+ * @author      cwsoft (http://cwsoft.de)
+ * @copyright   cwsoft
+ * @license     http://www.gnu.org/licenses/gpl-3.0.html
+ */
+#}
+
+<script type="text/javascript">
+	// check if jQuery is included via template index.php or equivalent method
+	showJqueryStatus("Anynews (flexslider)");
+
+	// include flexslider files
+	$.include([
+		// load thirdparty jQuery plugin components of flexslider
+		'{{ WB_URL }}/modules/cwsoft-anynews/thirdparty/flexslider/flexslider.css',
+		'{{ WB_URL }}/modules/cwsoft-anynews/thirdparty/flexslider/jquery.flexslider-min.js',
+		
+		// include YOUR flexslider CSS and settings (adjust these two files to your needs)
+		'{{ WB_URL }}/modules/cwsoft-anynews/css/custom-settings-flexslider.css',
+		'{{ WB_URL }}/modules/cwsoft-anynews/javascript/custom-settings-flexslider.js'
+	]); 
+</script>	
+
+<div class="mod_anynews">
+	<h2>{{ lang.TXT_HEADER }}</h2>
+	
+	{% if newsItems %}
+		<div class="flexslider">
+			<ul class="slides">
+				{% for news in newsItems %}
+					<li>
+						<h2>{{ news.TITLE }}</h2>
+						{{ news.CONTENT_SHORT }}
+						{% if news.CONTENT_LONG %}
+							<a href="{{ news.LINK }}">{{ lang.TXT_READMORE }}</a>
+						{% endif %}
+					</li>
+				{% endfor %}
+			</ul>
+		</div>
+	
+	{% else %}
+		{{ lang.TXT_NO_NEWS }}
+	{% endif %}
+
+</div>
