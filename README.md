@@ -18,7 +18,7 @@ The minimum requirements to get Anynews running on your WebsiteBaker installatio
 - Optional: small modification of your template file to enable jQuery support
 
 ## Installation
-1. download the [Anynews v2.4.0](https://github.com/downloads/cwsoft/wb-anynews/cwsoft-wb-anynews-v2.4.0.zip) WebsiteBaker installation package
+1. download the [Anynews v2.5.0](https://github.com/downloads/cwsoft/wb-anynews/cwsoft-anynews-v2.5.0.zip) WebsiteBaker installation package
 2. log into your WebsiteBaker backend and go to the `Add-ons/Modules` section
 3. install the downloaded zip archive via the WebsiteBaker installer
 
@@ -144,7 +144,7 @@ When you call Anynews without any parameter like `displayNewsItems();`, the foll
 ***Tip:*** 
 You can output a list with all *group_ids* and the *group titles* created by the WebsiteBaker news module, by adding the following code into a page/section of type code.
 
-	require_once(WB_PATH . '/modules/anynews/code/anynews_functions.php');
+	require_once(WB_PATH . '/modules/cwsoft-anynews/code/anynews_functions.php');
 	print_r(getNewsGroupTitles());
 
 Visit the created page/section in your frontend and search for the *group_id(s)* you want to use in the Anynews function call. 
