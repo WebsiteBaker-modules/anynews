@@ -1,16 +1,16 @@
-# Anynews Code Snippet for CMS WebsiteBaker (2.8.x)
-The code snippet `Anynews` is designed to fetch news entries from the [WebsiteBaker CMS](http://www.websitebaker2.org) news module. Just call the Anynews function `displayNewsItems();` where you want the news output to appear on your frontend. Optional function parameters, HTML templates, content placeholders and CSS definitions allows you to style the news output the way you want. Anynews ships with four templates - including two jQuery sliding effects - ready to use out of the box.
+# cwsoft-anynews module for CMS WebsiteBaker 2.8.x
+The code snippet `cwsoft-anynews` (short form Anynews) is designed to fetch news entries from the [WebsiteBaker CMS](http://www.websitebaker2.org) news module. Just call the cwsoft-anynews function `displayNewsItems();` where you want the news output to appear on your frontend. Optional function parameters, HTML templates, content placeholders and CSS definitions allows you to style the news output the way you want. The cwsoft-anynews snippet ships with four templates - including two jQuery sliding effects - ready to use out of the box.
 
-Power users define their own placeholders containing information extracted from the short and/or long news module description. Mastering Anynews is possible - but requires you to study the information provided in the section ***Customizing Anynews***.
+Power users define their own placeholders containing information extracted from the short and/or long news module description. Mastering cwsoft-anynews is possible - but requires you to study the information provided in the section [Customize](https://github.com/cwsoft/wb-anynews#customize).
 
 ## Download
-The released stable `Anynews` installation packages for the WebsiteBaker CMS can be found in the [GitHub download area](https://github.com/cwsoft/wb-anynews/downloads). It is recommended to install/update to the latest available version listed. Older versions are provided for compatibility reasons with older WebsiteBaker versions and may contain bugs or security issues. The development history of Anynews can be tracked via [GitHub](https://github.com/cwsoft/wb-anynews).
+The released stable `cwsoft-anynews` installation packages for the WebsiteBaker CMS can be found in the [GitHub download area](https://github.com/cwsoft/wb-anynews/downloads). It is recommended to install/update to the latest available version listed. Older versions are provided for compatibility reasons with older WebsiteBaker versions and may contain bugs or security issues. The development history of Anynews can be tracked via [GitHub](https://github.com/cwsoft/wb-anynews).
 
 ## License
-Anynews is licensed under the [GNU General Public License (GPL) v3.0](http://www.gnu.org/licenses/gpl-3.0.html).
+The `cwsoft-anynews` code snippet is licensed under the [GNU General Public License (GPL) v3.0](http://www.gnu.org/licenses/gpl-3.0.html).
 
 ## Requirements
-The minimum requirements to get Anynews running on your WebsiteBaker installation are as follows:
+The minimum requirements to get cwsoft-anynews running on your WebsiteBaker installation are as follows:
 
 - WebsiteBaker ***2.8.2*** or higher (recommended last stable 2.8.x version)
 - WebsiteBaker news module
@@ -18,12 +18,12 @@ The minimum requirements to get Anynews running on your WebsiteBaker installatio
 - Optional: small modification of your template file to enable jQuery support
 
 ## Installation
-1. download the [Anynews v2.5.0](https://github.com/downloads/cwsoft/wb-anynews/cwsoft-anynews-v2.5.0.zip) WebsiteBaker installation package
+1. download the [cwsoft-anynews v2.5.0](https://github.com/downloads/cwsoft/wb-anynews/cwsoft-anynews-v2.5.0.zip) WebsiteBaker installation package
 2. log into your WebsiteBaker backend and go to the `Add-ons/Modules` section
 3. install the downloaded zip archive via the WebsiteBaker installer
 
 ### Enable jQuery support (optional)
-If you want to use JavaScript effects or jQuery plugins with Anynews, you need to add one code line to your frontend template. Open your WebsiteBaker frontend template file ***index.php*** in the [Addon File Editor](https://github.com/cwsoft/wb-addon-file-editor#readme) and search for the following lines. 
+If you want to use JavaScript effects or jQuery plugins with cwsoft-anynews, you need to add one code line to your frontend template. Open your WebsiteBaker frontend template file ***index.php*** in the [cwsoft-addon-file-editor](https://github.com/cwsoft/wb-addon-file-editor#readme) and search for the following lines. 
 
 	if (function_exists('register_frontend_modfiles')) {
 		register_frontend_modfiles('css');
@@ -41,7 +41,7 @@ Change the code lines above as follows:
 If you can't find the code above in the index.php of your template, simply at the last code block to the end of your &lt;head&gt;&lt;/head&gt; section.	
 	
 ## Usage
-As Anynews is designed to fetch news items from the WebsiteBaker news module, you need to add some news entries with the news module **before** you can use Anynews. If no news are available, Anynews just outputs the message "No news available yet". Follow the steps below to add some news entries with the WebsiteBaker news module.
+As `cwsoft-anynews` is designed to fetch news items from the WebsiteBaker news module, you need to add some news entries with the news module **before** you can use cwsoft-anynews. If no news are available, the message "No news available yet" is shown. Follow the steps below to add some news entries with the WebsiteBaker news module.
 
 1. log into your WebsiteBaker backend and go to the `Pages` section
 2. create a new page or section of type `News` (set visibility to None)
@@ -54,10 +54,10 @@ Create a new page or section of type `Code` in the WebsiteBaker backend and ente
 		displayNewsItems();
 	}
 
-The Anynews output is only visible at the pages/sections of your frontend, which contain the code above.
+The cwsoft-anynews output is only visible at the pages/sections of your frontend, which contain the code above.
 
 ### Use Anynews from your template
-To display news items at a fixed position on every page of your frontend, open the ***index.php*** file of your default frontend template with the [Addon File Editor](https://github.com/cwsoft/wb-addon-file-editor#readme). Then add the code below to the position in your template where you want the news output to appear.
+To display news items at a fixed position on every page of your frontend, open the ***index.php*** file of your default frontend template with the [cwsoft-addon-file-editor](https://github.com/cwsoft/wb-addon-file-editor#readme). Then add the code below to the position in your template where you want the news output to appear.
 
 	<?php
 		if (function_exists('displayNewsItems')) {
@@ -65,17 +65,17 @@ To display news items at a fixed position on every page of your frontend, open t
 		}
 	?>
 
-Visit the frontend of your website and check the Anynews output. 
+Visit the frontend of your website and check the cwsoft-anynews output. 
 
 Depending on the Anynews function parameters defined, the output may look as follows.
 
 ![](https://github.com/cwsoft/wb-anynews/raw/master/.screenshots/anynews.png) 
 
-## Customizing Anynews
-The Anynews output can be customized to your needs by three methods:
+## Customize
+The cwsoft-anynews output can be customized to your needs by three methods:
 
-1. parameters of the Anynews ***displayNewsItems()*** function
-2. customized Anynews template files ***templates/display_mode_X.htt***
+1. parameters of the cwsoft-anynews ***displayNewsItems()*** function
+2. customized cwsoft-anynews template files ***templates/display_mode_X.htt***
 3. customized CSS definitions in file ***/css/anynews.css***
 	
 ### Anynews Parametes
@@ -150,7 +150,7 @@ You can output a list with all *group_ids* and the *group titles* created by the
 Visit the created page/section in your frontend and search for the *group_id(s)* you want to use in the Anynews function call. 
 	
 ### Anynews Templates
-The HTML skeleton of the Anynews output is defined by template files **display_mode_X.htt** stored in the Anynews subfolder **templates**. The template file used is defined by the Anynews function parameter **$display_mode**, which defaults to 1 if no valid input is defined. To create your own Anynews template, create a new file in the Anynews template folder and rename it to **templates/display_mode_5.htt**. You can use the [Addon File Editor](https://github.com/cwsoft/wb-addon-file-editor#readme) to create and edit this file via the WebsiteBaker backend.
+The HTML skeleton of the Anynews output is defined by template files **display_mode_X.htt** stored in the Anynews subfolder **templates**. The template file used is defined by the Anynews function parameter **$display_mode**, which defaults to 1 if no valid input is defined. To create your own Anynews template, create a new file in the Anynews template folder and rename it to **templates/display_mode_5.htt**. You can use the [cwsoft-addon-file-editor](https://github.com/cwsoft/wb-addon-file-editor#readme) to create and edit this file via the WebsiteBaker backend.
 
 #### Step 1:
 Add the HTML skeleton below to your custom template file. All Anynews output should be wrapped in a div with class "mod_anynews" to prevent CSS clashes with other modules, templates or the WebsiteBaker core. 
@@ -185,7 +185,7 @@ Now we add control statements for the template parser [Twig](http://twig.sensiol
 
 
 #### Step 3:	
-Finally we replace the dummy text with placeholders provided by Anynews. Data from the WebsiteBaker news module is stored in the placeholder `newsItems`. Text outputs from Anynews language files is stored in the placeholder `lang`. Review the template file ***display_mode_99.htt*** (cheat sheet) to get a list of all available Anynews placeholders. Remember to wrap your placeholders with double currly brackets {{ placeholder }}.
+Finally we replace the dummy text with placeholders provided by cwsoft-anynews. Data from the WebsiteBaker news module is stored in the placeholder `newsItems`. Text outputs from Anynews language files is stored in the placeholder `lang`. Review the template file ***display_mode_99.htt*** (cheat sheet) to get a list of all available Anynews placeholders. Remember to wrap your placeholders with double currly brackets {{ placeholder }}.
 
 	<div class="mod_anynews">
 		<h1>{{ lang.TXT_HEADER }}</h1>
@@ -221,10 +221,10 @@ To change the news header of aboves example to green and the news text to blue, 
 		color: blue;
 	}
 
-***Note:*** This is common practice to limit the scope of the CSS defintions to the Anynews container. This practice ensures that your CSS definitions do not overwrite styles defined in other modules, templates or the WebsiteBaker core. You should stick to this good practice when creating your own template files.
+***Note:*** It is common practice to limit the scope of the CSS defintions to the div mod_anynews. This practice ensures that your CSS definitions do not overwrite styles defined in other modules, templates or the WebsiteBaker core. You should stick to this good practice when creating your own template files.
 	
 ## Known Issues
-You can track the status of known issues or report new issues found in Anynews via GitHubs [issue tracking service](https://github.com/cwsoft/wb-anynews/issues). If you run into any issues with Anynews, please visit this page first and check if this issue is already known.
+You can track the status of known issues or report new issues found in cwsoft-anynews via GitHubs [issue tracking service](https://github.com/cwsoft/wb-anynews/issues). If you run into any issues with Anynews, please visit this page first and check if this issue is already known.
 
 ## Questions
 If you have questions or issues with Anynews, please visit the [English](http://www.websitebaker2.org/forum/index.php/topic,23355.0.html) WebsiteBaker forum support threads and ask for feedback.
@@ -241,7 +241,7 @@ If you have questions or issues with Anynews, please visit the [English](http://
  - information about changes you made to WebsiteBaker (if any)
 
 ## Credits
-Credits go to the WebsiteBaker forum member [BlackBird](http://www.websitebaker2.org/forum/index.php?action=profile;u=14154), who maintained the Anynews between July 2009 and March 2010 and the following users who provided translations of the Anynews language file.
+Credits go to the WebsiteBaker forum member [BlackBird](http://www.websitebaker2.org/forum/index.php?action=profile;u=14154), who maintained the cwsoft-anynews snippet between July 2009 and March 2010 and the following users for providing translations.
 
 - **Dutch (NL.php):** forum members [D72](http://www.websitebaker2.org/forum/index.php?action=profile;u=7298), [Argos](http://www.websitebaker2.org/forum/index.php?action=profile;u=153)
 - **French (FR.php):** by Guillaume Vielliard
