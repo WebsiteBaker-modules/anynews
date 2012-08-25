@@ -1,6 +1,6 @@
 <?php
 /**
- * Code snippet: anynews
+ * Code snippet: cwsoft-anynews
  *
  * This code snippets grabs news entries from the WebsiteBaker news
  * module and displays them on any page you want by invoking the function
@@ -14,13 +14,13 @@
  * @platform    CMS WebsiteBaker 2.8.x
  * @package     cwsoft-anynews
  * @author      cwsoft (http://cwsoft.de)
- * @translation	forum member Mirens
+ * @translation	Serbian translation by forum member Mirens
  * @copyright   cwsoft
  * @license     http://www.gnu.org/licenses/gpl-3.0.html
 */
 
 // Serbian module description
-$module_description	= 'Website Baker modul za prikazivanje novosti na bilo kojoj stranici va&scaron;eg web site-a. Funkcija modula mo&#0158;e biti implementirana u sam template ili putem code sekcije. Detalji i pomo&#263; oko kori&scaron;&#263;enja ovog modula mogu se na&#263;i u samom modulu na linku <a href="https://github.com/cwsoft/wb-anynews" target="_blank">GitHub</a>.';
+$module_description	= 'WebsiteBaker modul za prikazivanje novosti na bilo kojoj stranici va&scaron;eg web site-a. Funkcija modula mo&#0158;e biti implementirana u sam template ili putem code sekcije. Detalji i pomo&#263; oko kori&scaron;&#263;enja ovog modula mogu se na&#263;i u samom modulu na linku <a href="https://github.com/cwsoft/wb-anynews" target="_blank">GitHub</a>.';
 
 // initialize global $LANG variable as array if needed
 global $LANG;

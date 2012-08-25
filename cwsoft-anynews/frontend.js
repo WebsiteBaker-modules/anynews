@@ -1,5 +1,5 @@
 /**
- * Code snippet: anynews
+ * Code snippet: cwsoft-anynews
  *
  * This code snippets grabs news entries from the WebsiteBaker news
  * module and displays them on any page you want by invoking the function

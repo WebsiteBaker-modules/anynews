@@ -1,6 +1,6 @@
 <?php
 /**
- * Code snippet: anynews
+ * Code snippet: cwsoft-anynews
  *
  * This code snippets grabs news entries from the WebsiteBaker news
  * module and displays them on any page you want by invoking the function
@@ -14,13 +14,13 @@
  * @platform    CMS WebsiteBaker 2.8.x
  * @package     cwsoft-anynews
  * @author      cwsoft (http://cwsoft.de)
- * @translation	forum member eazybaker 
+ * @translation	Estonian translation by forum member eazybaker
  * @copyright   cwsoft
  * @license     http://www.gnu.org/licenses/gpl-3.0.html
 */
 
 // Estonian module description
-$module_description	= 'WB Moodul, millega saad kuvada uudiseid igal lehel kus soovid. Detailid mooduli kohta leiad <a href="https://github.com/cwsoft/wb-anynews" target="_blank">GitHub</a>.';
+$module_description	= 'WebsiteBaker Moodul, millega saad kuvada uudiseid igal lehel kus soovid. Detailid mooduli kohta leiad <a href="https://github.com/cwsoft/wb-anynews" target="_blank">GitHub</a>.';
 
 // initialize global $LANG variable as array if needed
 global $LANG;

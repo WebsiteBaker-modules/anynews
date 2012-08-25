@@ -1,6 +1,6 @@
 <?php
 /**
- * Code snippet: anynews
+ * Code snippet: cwsoft-anynews
  *
  * This code snippets grabs news entries from the WebsiteBaker news
  * module and displays them on any page you want by invoking the function
@@ -14,13 +14,12 @@
  * @platform    CMS WebsiteBaker 2.8.x
  * @package     cwsoft-anynews
  * @author      cwsoft (http://cwsoft.de)
- * @translation	cwsoft
  * @copyright   cwsoft
  * @license     http://www.gnu.org/licenses/gpl-3.0.html
 */
 
 // English module description
-$module_description = 'Invoke the function displayNewsItems(); from the index.php of your template or a code section to display news entries where you want them to be. For details see <a href="https://github.com/cwsoft/wb-anynews" target="_blank">GitHub</a>.';
+$module_description = 'The snippet cwsoft-anynews allows to display news entries from the WebsiteBaker news module at any place you want. Invoke the function from a code section or your template index.php file. For details see <a href="https://github.com/cwsoft/wb-anynews" target="_blank">GitHub</a>.';
 
 // initialize global $LANG variable as array if needed
 global $LANG;
