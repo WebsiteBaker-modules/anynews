@@ -20,7 +20,7 @@
 */
 
 // Serbian module description
-$module_description	= 'WebsiteBaker modul za prikazivanje novosti na bilo kojoj stranici va&scaron;eg web site-a. Funkcija modula mo&#0158;e biti implementirana u sam template ili putem code sekcije. Detalji i pomo&#263; oko kori&scaron;&#263;enja ovog modula mogu se na&#263;i u samom modulu na linku <a href="https://github.com/cwsoft/wb-anynews" target="_blank">GitHub</a>.';
+$module_description	= 'WebsiteBaker modul za prikazivanje novosti na bilo kojoj stranici va&scaron;eg web site-a. Funkcija modula mo&#0158;e biti implementirana u sam template ili putem code sekcije. Detalji i pomo&#263; oko kori&scaron;&#263;enja ovog modula mogu se na&#263;i u samom modulu na linku <a href="https://github.com/cwsoft/wb-cwsoft-anynews#readme" target="_blank">GitHub</a>.';
 
 // initialize global $LANG variable as array if needed
 global $LANG;

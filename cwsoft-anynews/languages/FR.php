@@ -20,7 +20,7 @@
  */
 
 // French module description
-$module_description	= 'Code pour afficher des news sur diff&egrave;rentes pages . Cette fonction peut &ecirc;tre apell&egrave;e depuis le template ou dans une section de code. Plus de d&egrave;tails sur ce module dans le fichier suivant <a href="https://github.com/cwsoft/wb-anynews" target="_blank">GitHub</a>.';
+$module_description	= 'Code pour afficher des news sur diff&egrave;rentes pages . Cette fonction peut &ecirc;tre apell&egrave;e depuis le template ou dans une section de code. Plus de d&egrave;tails sur ce module dans le fichier suivant <a href="https://github.com/cwsoft/wb-cwsoft-anynews#readme" target="_blank">GitHub</a>.';
 
 // initialize global $LANG variable as array if needed
 global $LANG;

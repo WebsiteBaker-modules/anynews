@@ -19,7 +19,7 @@
 */
 
 // English module description
-$module_description = 'The snippet cwsoft-anynews allows to display news entries from the WebsiteBaker news module at any place you want. Invoke the function from a code section or your template index.php file. For details see <a href="https://github.com/cwsoft/wb-anynews" target="_blank">GitHub</a>.';
+$module_description = 'The snippet cwsoft-anynews allows to display news entries from the WebsiteBaker news module at any place you want. Invoke the function from a code section or your template index.php file. For details see <a href="https://github.com/cwsoft/wb-cwsoft-anynews#readme" target="_blank">GitHub</a>.';
 
 // initialize global $LANG variable as array if needed
 global $LANG;

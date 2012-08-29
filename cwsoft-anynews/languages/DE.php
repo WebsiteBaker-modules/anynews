@@ -19,7 +19,7 @@
 */
 
 // German module description
-$module_description	= 'Das Snippet cwsoft-anynews erlaubt das anzeigen von Beitr&auml;gen des News-Moduls auf beliebigen Seiten. Die Funktion kann im Template oder von einer Seite/Abschnitt des Typs Code aufgerufen werden. Weitere Informationen auf <a href="https://github.com/cwsoft/wb-anynews" target="_blank">GitHub</a>.';
+$module_description	= 'Das Snippet cwsoft-anynews erlaubt das anzeigen von Beitr&auml;gen des News-Moduls auf beliebigen Seiten. Die Funktion kann im Template oder von einer Seite/Abschnitt des Typs Code aufgerufen werden. Weitere Informationen auf <a href="https://github.com/cwsoft/wb-cwsoft-anynews#readme" target="_blank">GitHub</a>.';
 
 // initialize global $LANG variable as array if needed
 global $LANG;

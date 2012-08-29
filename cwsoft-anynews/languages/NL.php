@@ -20,7 +20,7 @@
 */
 
 // Dutch module description
-$module_description	= 'Snippet om nieuwsberichten te tonen op elke pagina die u maar wilt. Functie kan opgeroepen worden vanuit de template of een code-sectie. Meer informatie is te vinden op <a href="https://github.com/cwsoft/wb-anynews" target="_blank">GitHub</a>.';
+$module_description	= 'Snippet om nieuwsberichten te tonen op elke pagina die u maar wilt. Functie kan opgeroepen worden vanuit de template of een code-sectie. Meer informatie is te vinden op <a href="https://github.com/cwsoft/wb-cwsoft-anynews#readme" target="_blank">GitHub</a>.';
 
 // initialize global $LANG variable as array if needed
 global $LANG;
