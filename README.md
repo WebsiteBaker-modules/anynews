@@ -211,7 +211,7 @@ The Anynews default templates (*/templates/display_mode_X.htt*) wrap the Anynews
 		<p>Dummy news text to explain</p>
 	</div>
 	
-To change the news header of aboves example to green and the news text to blue, open the ***css/anynews.css*** file in the [Addon File Editor](https://github.com/cwsoft/wb-cwsoft-addon-file-editor#readme) and add the following CSS definitions.
+To change the news header of aboves example to green and the news text to blue, open the ***css/anynews.css*** file in the [cwsoft-addon-file-editor](https://github.com/cwsoft/wb-cwsoft-addon-file-editor#readme) and add the following CSS definitions.
 
 	div.mod_anynews h2 {
 		color: green;
