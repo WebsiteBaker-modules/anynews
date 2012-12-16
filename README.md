@@ -4,7 +4,9 @@ The code snippet `cwsoft-anynews` (short form Anynews) is designed to fetch news
 Power users define their own placeholders containing information extracted from the short and/or long news module description. Mastering cwsoft-anynews is possible - but requires you to study the information provided in the section [Customize](https://github.com/cwsoft/wb-cwsoft-anynews#customize).
 
 ## Download
-The released stable `cwsoft-anynews` installation packages for the WebsiteBaker CMS can be found in the [GitHub download area](https://github.com/cwsoft/wb-cwsoft-anynews/downloads). It is recommended to install/update to the latest available version listed. Older versions are provided for compatibility reasons with older WebsiteBaker versions and may contain bugs or security issues. The development history of Anynews can be tracked via [GitHub](https://github.com/cwsoft/wb-cwsoft-anynews).
+You can download an archive of the latest development branch of the `cwsoft-anynews` module using GitHubs [ZIP button](https://github.com/cwsoft/wb-cwsoft-anynews/archive/master.zip). The archives of previous module releases can be found in GitHubs [Tags section](https://github.com/cwsoft/wb-cwsoft-anynews/tags). The development history is tracked via [GitHub](https://github.com/cwsoft/wb-cwsoft-anynews/commits/master).
+
+***Please note: ***The archives downloaded from GitHub are not ready for installation in WebsiteBaker, as GitHub includes the archive subfolder. To create a working WebsiteBaker installation archive, unpack the downloaded archive on your local computer and zip the contents of the folder ***cwsoft-anynews*** (without the folder itself). Alternatively download an installable archive from the WebsiteBaker [module section](http://addons.websitebaker2.org/pages/en/browse-add-ons.php).
 
 ## License
 The `cwsoft-anynews` code snippet is licensed under the [GNU General Public License (GPL) v3.0](http://www.gnu.org/licenses/gpl-3.0.html).
@@ -18,9 +20,11 @@ The minimum requirements to get cwsoft-anynews running on your WebsiteBaker inst
 - Optional: small modification of your template file to enable jQuery support
 
 ## Installation
-1. download the [cwsoft-anynews v2.6.0](https://github.com/downloads/cwsoft/wb-cwsoft-anynews/cwsoft-anynews-v2.6.0.zip) WebsiteBaker installation package
+1. download latest [module archive](https://github.com/cwsoft/wb-cwsoft-anynews/archive/master.zip) from GitHub
+2. unpack the archive on your local computer
+3. zip the contents of the folder ***cwsoft-anynews*** (without the folder itself)
 2. log into your WebsiteBaker backend and go to the `Add-ons/Modules` section
-3. install the downloaded zip archive via the WebsiteBaker installer
+3. install the newly zipped archive via the WebsiteBaker installer
 
 ### Enable jQuery support (optional)
 If you want to use JavaScript effects or jQuery plugins with cwsoft-anynews, you need to add one code line to your frontend template. Open your WebsiteBaker frontend template file ***index.php*** in the [cwsoft-addon-file-editor](https://github.com/cwsoft/wb-cwsoft-addon-file-editor#readme) and search for the following lines. 
