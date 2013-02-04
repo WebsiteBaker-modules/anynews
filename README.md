@@ -251,3 +251,4 @@ Credits go to the WebsiteBaker forum member [BlackBird](http://www.websitebaker2
 - **French (FR.php):** by Guillaume Vielliard
 - **Estonia (EE.php):** forum member [eazybaker](http://www.websitebaker2.org/forum/index.php?action=profile;u=11394)
 - **Serbian (RS.php):** forum member [Mirens](http://www.websitebaker2.org/forum/index.php?action=profile;u=13226)
+- **Czech (CS.php):** forum member [dana](http://www.websitebaker2.org/forum/index.php?action=profile;u=62603)
