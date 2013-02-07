@@ -82,7 +82,7 @@ The cwsoft-anynews output can be customized to your needs by three methods:
 2. customized cwsoft-anynews template files ***templates/display_mode_X.htt***
 3. customized CSS definitions in file ***/css/anynews.css***
 	
-### Anynews Parametes
+### Anynews Parameters
 When you call Anynews without any parameter like `displayNewsItems();`, the following default parameters will be used:
 
 	displayNewsItems(
