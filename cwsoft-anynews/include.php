@@ -202,9 +202,8 @@ if (! function_exists('displayNewsItems')) {
 
 				// shorten news text to defined news length (-1 for full text length)
 				if ($max_news_length != -1 && strlen($row['content_short']) > $max_news_length) {
-					// consider start position if short content starts with <p> or <div>
-					$start_pos = (preg_match('#^(<(p|div)>)#', $row['content_short'], $match)) ? strlen($match[0]) : 0;
-					$row['content_short'] = truncate(substr($row['content_short'], $start_pos), $max_news_length, '...', false, true);
+					// truncate text if user asked for using CakePHP truncate function
+					$row['content_short'] = truncate($row['content_short'], $max_news_length);
 				}
 
 				// work out group image if exists
