@@ -74,8 +74,8 @@ if (! function_exists('displayNewsItems')) {
 			require_once ('thirdparty/Twig/Twig/Autoloader.php');
 			Twig_Autoloader::register();
 		}
-        $loader = new Twig_Loader_Filesystem(dirname(__FILE__) . '/templates');
-        $twig = new Twig_Environment($loader, array(
+		$loader = new Twig_Loader_Filesystem(dirname(__FILE__) . '/templates');
+		$twig = new Twig_Environment($loader, array(
 			'autoescape'       => false,
 			'cache'            => false,
 			'strict_variables' => false,

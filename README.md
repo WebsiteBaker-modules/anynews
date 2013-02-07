@@ -73,7 +73,7 @@ Visit the frontend of your website and check the cwsoft-anynews output.
 
 Depending on the Anynews function parameters defined, the output may look as follows.
 
-![](.screenshots/anynews.png) 
+![](docs/anynews.png) 
 
 ## Customize
 The cwsoft-anynews output can be customized to your needs by three methods:

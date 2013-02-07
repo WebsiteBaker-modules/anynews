@@ -67,11 +67,11 @@ function loadLanguageFile($lang_id)
 */
 function sanitizeUserInputs(&$input, $filter)
 {
-	// $input...	input variable to filter
-	// $filter...	filter to apply for input variable
-	//	Numeric filter:		b|i¦d{default;min;max}
-	//	List filter:		l{default;string1;string2;..;stringN}
-	//	String filter:		s{TRIM|STRIP|ENTITY}
+	// $input...        input variable to filter
+	// $filter...       filter to apply for input variable
+	//	Numeric filter: b|i¦d{default;min;max}
+	//	List filter:    l{default;string1;string2;..;stringN}
+	//	String filter:  s{TRIM|STRIP|ENTITY}
 
 	// check if a valid filter was supplied
 	if (!preg_match('#(b|i|d|s|l)#i', $filter, $match)) {
