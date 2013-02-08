@@ -247,10 +247,10 @@ If you have questions or issues with Anynews, please visit the [English](http://
 ## Credits
 Credits go to the following WebsiteBaker community members:
 
-- **Maintenance/support from Jul-2009 to Mar-2010):** forum member [BlackBird](http://www.websitebaker2.org/forum/index.php?action=profile;u=14154)
-- **Czech file (CS.php):** forum member [dana](http://www.websitebaker2.org/forum/index.php?action=profile;u=62603)
-- **Dutch file (NL.php):** forum members [D72](http://www.websitebaker2.org/forum/index.php?action=profile;u=7298), [Argos](http://www.websitebaker2.org/forum/index.php?action=profile;u=153)
-- **Estonia file (EE.php):** forum member [eazybaker](http://www.websitebaker2.org/forum/index.php?action=profile;u=11394)
-- **French file (FR.php):** by Guillaume Vielliard
-- **Russian file (RU.php):** forum member [owk444](http://www.websitebaker2.org/forum/index.php?action=profile;u=81800)
-- **Serbian file (RS.php):** forum member [Mirens](http://www.websitebaker2.org/forum/index.php?action=profile;u=13226)
+- [BlackBird](http://www.websitebaker2.org/forum/index.php?action=profile;u=14154): maintenance/support (July 2009 to March 2010)
+- [D72](http://www.websitebaker2.org/forum/index.php?action=profile;u=7298), [Argos](http://www.websitebaker2.org/forum/index.php?action=profile;u=153): Dutch translation (NL.php)
+- Guillaume Vielliard: French translation (FR.php)
+- [eazybaker](http://www.websitebaker2.org/forum/index.php?action=profile;u=11394): Estonia translation (EE.php)
+- [Mirens](http://www.websitebaker2.org/forum/index.php?action=profile;u=13226): Serbian translation (RS.php)
+- [dana](http://www.websitebaker2.org/forum/index.php?action=profile;u=62603): Czech translation (CS.php)
+- [owk444](http://www.websitebaker2.org/forum/index.php?action=profile;u=81800): Russian translation (RU.php)
