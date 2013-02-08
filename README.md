@@ -245,6 +245,17 @@ If you have questions or issues with Anynews, please visit the [English](http://
  - information about changes you made to WebsiteBaker (if any)
 
 ## Credits
+<<<<<<< HEAD
+Credits go to the following WebsiteBaker community members:
+
+- **Maintenance/support from Jul-2009 to Mar-2010):** forum member [BlackBird](http://www.websitebaker2.org/forum/index.php?action=profile;u=14154)
+- **Czech file (CS.php):** forum member [dana](http://www.websitebaker2.org/forum/index.php?action=profile;u=62603)
+- **Dutch file (NL.php):** forum members [D72](http://www.websitebaker2.org/forum/index.php?action=profile;u=7298), [Argos](http://www.websitebaker2.org/forum/index.php?action=profile;u=153)
+- **Estonia file (EE.php):** forum member [eazybaker](http://www.websitebaker2.org/forum/index.php?action=profile;u=11394)
+- **French file (FR.php):** by Guillaume Vielliard
+- **Russian file (RU.php):** forum member [owk444](http://www.websitebaker2.org/forum/index.php?action=profile;u=81800)
+- **Serbian file (RS.php):** forum member [Mirens](http://www.websitebaker2.org/forum/index.php?action=profile;u=13226)
+=======
 Credits go to the WebsiteBaker forum member [BlackBird](http://www.websitebaker2.org/forum/index.php?action=profile;u=14154), who maintained the cwsoft-anynews snippet between July 2009 and March 2010 and the following users for providing translations.
 
 - **Dutch (NL.php):** forum members [D72](http://www.websitebaker2.org/forum/index.php?action=profile;u=7298), [Argos](http://www.websitebaker2.org/forum/index.php?action=profile;u=153)
@@ -252,3 +263,4 @@ Credits go to the WebsiteBaker forum member [BlackBird](http://www.websitebaker2
 - **Estonia (EE.php):** forum member [eazybaker](http://www.websitebaker2.org/forum/index.php?action=profile;u=11394)
 - **Serbian (RS.php):** forum member [Mirens](http://www.websitebaker2.org/forum/index.php?action=profile;u=13226)
 - **Czech (CS.php):** forum member [dana](http://www.websitebaker2.org/forum/index.php?action=profile;u=62603)
+>>>>>>> 1fb852db6f53f5a29fe7698bbb908ed5d8a942ed
