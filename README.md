@@ -143,7 +143,7 @@ When you call Anynews without any parameter like `displayNewsItems();`, the foll
 To customize the Anynews output, you can specify the parameters you want to modify in an configuration array, using an arbitrary order. A customized call with a different template and sort order is shown below:
 
 	$config = array(
-		'sort_order' => 2
+		'sort_order' => 2,
 		'display_mode' => 4,
 	);
 	echo getNewsItems($config);
