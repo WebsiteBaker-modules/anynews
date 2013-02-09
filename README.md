@@ -1,5 +1,5 @@
 # cwsoft-anynews module for CMS WebsiteBaker 2.8.x
-The code snippet `cwsoft-anynews` (short form Anynews) is designed to fetch news entries from the [WebsiteBaker CMS](http://www.websitebaker2.org) news module. Just call the cwsoft-anynews function `displayNewsItems();` where you want the news output to appear on your frontend. Optional function parameters, HTML templates, content placeholders and CSS definitions allows you to style the news output the way you want. The cwsoft-anynews snippet ships with four templates - including two jQuery sliding effects - ready to use out of the box.
+The code snippet `cwsoft-anynews` (short form Anynews) is designed to fetch news entries from the [WebsiteBaker CMS](http://www.websitebaker2.org) news module. Just call the cwsoft-anynews function `displayNewsItems();` respective where you want the news output to appear on your frontend. Optional function parameters, HTML templates, content placeholders and CSS definitions allows you to style the news output the way you want. The cwsoft-anynews snippet ships with four templates - including two jQuery sliding effects - ready to use out of the box.
 
 Power users define their own placeholders containing information extracted from the short and/or long news module description. Mastering cwsoft-anynews is possible - but requires you to study the information provided in the section [Customize](https://github.com/cwsoft/wb-cwsoft-anynews#customize).
 
@@ -54,8 +54,14 @@ As `cwsoft-anynews` is designed to fetch news items from the WebsiteBaker news m
 ### Use Anynews from a page or section
 Create a new page or section of type `Code` in the WebsiteBaker backend and enter the following code to it.
 
+	OUTDATED SINCE CWSOFT-ANYNEWS V2.8.0:
 	if (function_exists('displayNewsItems')) {
 		displayNewsItems();
+	}
+	
+	BETTER USE:
+	if (function_exists('getNewsItems')) {
+		echo getNewsItems();
 	}
 
 The cwsoft-anynews output is only visible at the pages/sections of your frontend, which contain the code above.
@@ -63,28 +69,52 @@ The cwsoft-anynews output is only visible at the pages/sections of your frontend
 ### Use Anynews from your template
 To display news items at a fixed position on every page of your frontend, open the ***index.php*** file of your default frontend template with the [cwsoft-addon-file-editor](https://github.com/cwsoft/wb-cwsoft-addon-file-editor#readme). Then add the code below to the position in your template where you want the news output to appear.
 
+	OUTDATED SINCE CWSOFT-ANYNEWS V2.8.0:
 	<?php
 		if (function_exists('displayNewsItems')) {
 			displayNewsItems();
 		}
 	?>
 
+	BETTER USE:
+	<?php
+		if (function_exists('getNewsItems')) {
+			echo getNewsItems();
+		}
+	?>
+	
 Visit the frontend of your website and check the cwsoft-anynews output. 
 
 Depending on the Anynews function parameters defined, the output may look as follows.
 
 ![](docs/anynews.png) 
 
+### Use Anynews from a Droplet
+Since v2.8.0, cwsoft-anynews contains droplet code, allowing you to invoke Anynews via a self created droplet inside your WYSIWYG editor or template. The droplet code uses the getNewsItems function and accepts any configuration option in arbitrary order provided by URL strings from the droplet. To create your own Anynews Droplet, follow the steps below.
+
+1. create a new Droplet called `getNewsItems` via WebsiteBaker Admin-Tools --> Droplets
+2. enter the following code into the Droplet code section:
+
+	require_once(WB_PATH . '/modules/cwsoft-anynews/droplet/cwsoft-anynews-droplet.php');
+	return $output;
+
+3. enter the following code into a WYSIWYG editor to get the Droplet working
+
+	[[getNewsItems?group_id=1,2&display_mode=4]]
+
+You can use any Anynews configuration parameter available in the Droplet.
+
 ## Customize
 The cwsoft-anynews output can be customized to your needs by three methods:
 
-1. parameters of the cwsoft-anynews ***displayNewsItems()*** function
+1. parameters/configuration array passed to the cwsoft-anynews function
 2. customized cwsoft-anynews template files ***templates/display_mode_X.htt***
 3. customized CSS definitions in file ***/css/anynews.css***
 	
-### Anynews Parameters
+### Anynews configuration
 When you call Anynews without any parameter like `displayNewsItems();`, the following default parameters will be used:
 
+	OUTDATED SINCE CWSOFT-ANYNEWS V2.8.0:
 	displayNewsItems(
 		$group_id = 0,
 		$max_news_items = 10,
@@ -101,48 +131,65 @@ When you call Anynews without any parameter like `displayNewsItems();`, the foll
 		$lang_filter = false
 	);
 
-***Function parameters explained:***
+	BETTER USE (SAME DEFAULT VALUES AS OLD FUNCTION CALL):
+	echo getNewsItems();
 
-- **$group_id**: only show news which IDs match given *$group_id_type* (default 'group_id')  
+	
+***Note:*** With cwsoft-anynews v2.8.0 the more flexible function getNewsItems() was introduced, allowing to specify parameters in arbitrary order via a configuration array. It's recommended to use the new function in all your newer projects. To achieve the same output as above, you would need to add the following code to your code section or template:
+
+	$output = getNewsItems();
+	echo $output;
+
+To customize the Anynews output, you can specify the parameters you want to modify in an configuration array, using an arbitrary order. A customized call with a different template and sort order is shown below:
+
+	$config = array(
+		'sort_order' => 2
+		'display_mode' => 4,
+	);
+	echo getNewsItems($config);
+	
+***Anynews parameters explained:***
+
+- **group_id**: only show news which IDs match given *$group_id_type* (default 'group_id')  
 	[0:all news, 1..N, or array(2,4,5,N) to limit news to single Id or multiple Ids, matching *$group_id_type*]
 	
-- **$max_news_items**: max. number of news entries to show  
+- **max_news_items**: max. number of news entries to show  
 	[valid: 1..999]
 	
-- **$max_news_length**: max. news length to be shown  
+- **max_news_length**: max. news length to be shown  
 	[-1:= full length]
 	
-- **$display_mode**: ID of the Anynews template to use (/templates/display_mode_X.htt)  
+- **display_mode**: ID of the Anynews template to use (/templates/display_mode_X.htt)  
 	[1:details, 2:list, 3:better-coda-slider, 4:flexslider, 5..98 custom template *display_mode_X.htt*]  
 	Hint: 99:cheat sheet with ALL Anynews placeholders available in the template files
 	
-- **$lang_id**: mode to detect language file to use  
+- **lang_id**: mode to detect language file to use  
 	[allowed: 'AUTO', or a valid WB language file ID: 'DE', 'EN', ...]
 	
-- **$strip_tags**: flag to strip tags from news short/long text ***not*** contained in *$allowed_tags*  
+- **strip_tags**: flag to strip tags from news short/long text ***not*** contained in *$allowed_tags*  
 	[true:strip tags, false:don't strip tags]
 	
-- **$allowed_tags**: tags to keep if *$strip_tags = true*
+- **allowed_tags**: tags to keep if *$strip_tags = true*
 	[default: '&lt;p&gt;&lt;a&gt;&lt;img&gt;']
 
-- **$custom_placeholder**: create own placeholders for usage in template files  
+- **custom_placeholder**: create own placeholders for usage in template files  
 	**Example:** $custom\_placeholder = array('MY\_IMG' => '%img%', 'MY\_TAG' => '%author%', 'MY\_REGEX' => '#(test)#i')  
 	
 	Stores all image URLs, all text inside &lt;author&gt;&lt;/author&gt; tags and all matches of "test" in placeholders:  {PREFIX\_MY\_IMG\_#}, {PREFIX\_MY\_TAG\_#}, {PREFIX\_MY\_REGEX\_#}, where ***PREFIX*** is either "SHORT" or "LONG", depending if the match was found in the short/long news text and ***#*** is a number between 1 and the number of matches found
 	
-- **$sort_by**: defines the sort criteria for the news items returned  
+- **sort_by**: defines the sort criteria for the news items returned  
 	[1:position, 2:posted_when, 3:published_when, 4:random order, 5:number of comments]
 	
-- **$sort_order**: defines the sort order of the returned news items  
+- **sort_order**: defines the sort order of the returned news items  
 	[1:descending, 2:=ascending]
 	
-- **$not_older_than**: skips all news items which are older than X days  
+- **not_older_than**: skips all news items which are older than X days  
 	[0:don't skip news items, 0...999: skip news items older than x days (hint: 0.5 --> 12 hours)]
 
-- **$group_id_type**: sets type used by group_id to extract news entries from  
+- **group_id_type**: sets type used by group_id to extract news entries from  
 	[supported: 'group_id', 'page_id', 'section_id', 'post_id')]
 
-- **$lang_filter**: flag to enable language filter   
+- **lang_filter**: flag to enable language filter   
 	[default:= false, true:=only show news added from news pages, which page language match $lang_id]
 	
 ***Tip:*** 
