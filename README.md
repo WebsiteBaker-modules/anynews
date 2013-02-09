@@ -1,5 +1,5 @@
 # cwsoft-anynews module for CMS WebsiteBaker 2.8.x
-The code snippet `cwsoft-anynews` (short form Anynews) is designed to fetch news entries from the [WebsiteBaker CMS](http://www.websitebaker2.org) news module. Just call the cwsoft-anynews function `displayNewsItems();` respective where you want the news output to appear on your frontend. Optional function parameters, HTML templates, content placeholders and CSS definitions allows you to style the news output the way you want. The cwsoft-anynews snippet ships with four templates - including two jQuery sliding effects - ready to use out of the box.
+The code snippet `cwsoft-anynews` (short form Anynews) is designed to fetch news entries from the [WebsiteBaker CMS](http://www.websitebaker2.org) news module. Invoke the cwsoft-anynews function where you want the news output to appear on your frontend. Optional configuration parameters, HTML templates, content placeholders and CSS definitions allows you to style the news output the way you want. The cwsoft-anynews snippet ships with four templates - including two jQuery sliding effects - ready to use out of the box.
 
 Power users define their own placeholders containing information extracted from the short and/or long news module description. Mastering cwsoft-anynews is possible - but requires you to study the information provided in the section [Customize](https://github.com/cwsoft/wb-cwsoft-anynews#customize).
 
@@ -54,12 +54,12 @@ As `cwsoft-anynews` is designed to fetch news items from the WebsiteBaker news m
 ### Use Anynews from a page or section
 Create a new page or section of type `Code` in the WebsiteBaker backend and enter the following code to it.
 
-	OUTDATED SINCE CWSOFT-ANYNEWS V2.8.0:
+	OUTDATED (SINCE V2.8.0):
 	if (function_exists('displayNewsItems')) {
 		displayNewsItems();
 	}
 	
-	BETTER USE:
+	BETTER USE (FROM V2.8.0 ONWARDS)
 	if (function_exists('getNewsItems')) {
 		echo getNewsItems();
 	}
@@ -69,14 +69,14 @@ The cwsoft-anynews output is only visible at the pages/sections of your frontend
 ### Use Anynews from your template
 To display news items at a fixed position on every page of your frontend, open the ***index.php*** file of your default frontend template with the [cwsoft-addon-file-editor](https://github.com/cwsoft/wb-cwsoft-addon-file-editor#readme). Then add the code below to the position in your template where you want the news output to appear.
 
-	OUTDATED SINCE CWSOFT-ANYNEWS V2.8.0:
+	OUTDATED (SINCE V2.8.0):
 	<?php
 		if (function_exists('displayNewsItems')) {
 			displayNewsItems();
 		}
 	?>
 
-	BETTER USE:
+	BETTER USE (FROM V2.8.0 ONWARDS)
 	<?php
 		if (function_exists('getNewsItems')) {
 			echo getNewsItems();
@@ -90,17 +90,21 @@ Depending on the Anynews function parameters defined, the output may look as fol
 ![](docs/anynews.png) 
 
 ### Use Anynews from a Droplet
-Since v2.8.0, cwsoft-anynews contains droplet code, allowing you to invoke Anynews via a self created droplet inside your WYSIWYG editor or template. The droplet code uses the getNewsItems function and accepts any configuration option in arbitrary order provided by URL strings from the droplet. To create your own Anynews Droplet, follow the steps below.
+Since v2.8.0 cwsoft-anynews allows you to invoke Anynews via a self created Droplet from your WYSIWYG editor or template more easily. The Droplet code makes use of the `getNewsItems` function and accepts optional configuration option in arbitrary provided via the Droplet. To create your own Anynews Droplet, please follow the steps below.
 
 1. create a new Droplet called `getNewsItems` via WebsiteBaker Admin-Tools --> Droplets
 2. enter the following code into the Droplet code section:
 
+
 	require_once(WB_PATH . '/modules/cwsoft-anynews/droplet/cwsoft-anynews-droplet.php');
 	return $output;
 
+
 3. enter the following code into a WYSIWYG editor to get the Droplet working
 
+
 	[[getNewsItems?group_id=1,2&display_mode=4]]
+
 
 You can use any Anynews configuration parameter available in the Droplet.
 
@@ -114,7 +118,7 @@ The cwsoft-anynews output can be customized to your needs by three methods:
 ### Anynews configuration
 When you call Anynews without any parameter like `displayNewsItems();`, the following default parameters will be used:
 
-	OUTDATED SINCE CWSOFT-ANYNEWS V2.8.0:
+	OUTDATED (SINCE V2.8.0):
 	displayNewsItems(
 		$group_id = 0,
 		$max_news_items = 10,
@@ -131,7 +135,7 @@ When you call Anynews without any parameter like `displayNewsItems();`, the foll
 		$lang_filter = false
 	);
 
-	BETTER USE (SAME DEFAULT VALUES AS OLD FUNCTION CALL):
+	BETTER USE (FROM V2.8.0 ONWARDS)
 	echo getNewsItems();
 
 	
