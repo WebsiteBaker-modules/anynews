@@ -98,15 +98,12 @@ Since v2.8.0 cwsoft-anynews allows you to invoke Anynews via a self created Drop
 
 	require_once(WB_PATH . '/modules/cwsoft-anynews/droplet/cwsoft-anynews-droplet.php');
 	return $output;
-
-
-3. enter the following code into a WYSIWYG editor to get the Droplet working
-
+	
+You can use the Droplet via the following command from your WYSIWYG editor or template file:
 
 	[[getNewsItems?group_id=1,2&display_mode=4]]
 
-
-You can use any Anynews configuration parameter available in the Droplet.
+You can pass over available Anynews configuration parameter in arbitrary order to the Droplet call.
 
 ## Customize
 The cwsoft-anynews output can be customized to your needs by three methods:
