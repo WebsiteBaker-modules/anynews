@@ -93,11 +93,10 @@ Depending on the Anynews function parameters defined, the output may look as fol
 Since v2.8.0 cwsoft-anynews allows you to invoke Anynews via a self created Droplet from your WYSIWYG editor or template more easily. The Droplet code makes use of the `getNewsItems` function and accepts optional configuration option in arbitrary provided via the Droplet. To create your own Anynews Droplet, please follow the steps below.
 
 1. create a new Droplet called `getNewsItems` via WebsiteBaker Admin-Tools --> Droplets
-2. enter the following code into the Droplet code section:
+2. enter the following code into the Droplet code section
 
-
-	require_once(WB_PATH . '/modules/cwsoft-anynews/droplet/cwsoft-anynews-droplet.php');
-	return $output;
+		require_once(WB_PATH . '/modules/cwsoft-anynews/droplet/cwsoft-anynews-droplet.php');
+		return $output;
 	
 You can use the Droplet via the following command from your WYSIWYG editor or template file:
 
