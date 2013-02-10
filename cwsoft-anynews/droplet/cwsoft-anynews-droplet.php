@@ -11,6 +11,7 @@
 
 // ensure we have the right cwsoft-anynews version
 $output = '';
+if (! defined('WB_PATH')) return;
 require_once(WB_PATH . '/modules/cwsoft-anynews/include.php');
 if (! function_exists('getNewsItems')) return;
 
