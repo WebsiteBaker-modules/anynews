@@ -20,7 +20,7 @@ The minimum requirements to get cwsoft-anynews running on your WebsiteBaker inst
 - Optional: small modification of your template file to enable jQuery support
 
 ## Installation
-1. download latest archive from [GitHub](https://github.com/cwsoft/wb-cwsoft-anynews/archive/master.zip) or [url=http://addons.websitebaker2.org/pages/en/browse-add-ons.php?id=0C80D11]WB repository[/url]
+1. download latest archive from [GitHub](https://github.com/cwsoft/wb-cwsoft-anynews/archive/master.zip) or [WB repository](http://addons.websitebaker2.org/pages/en/browse-add-ons.php?id=0C80D11)
    (you can skip steps 2-3 if you use the archive from the WebsiteBaker repository)
 2. unpack the archive on your local computer
 3. zip the contents of the folder ***cwsoft-anynews*** (without the folder itself)
