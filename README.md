@@ -103,7 +103,7 @@ Now you can use the Droplet from your WYSIWYG editor or template file by enterin
 
 	[[getNewsItems?group_id=1,2&display_mode=4]]
 
-***Please note:*** The Droplet accepts the optional Anynews paramters in any given order. The optional parameter `'custom_placeholder'` is not yet supported.
+***Note:*** The Anynews Droplet supports all Anynews parameters (except the rarely used parameter 'custom_placeholder').
 
 ## Customize
 The cwsoft-anynews output can be customized to your needs by three methods:
