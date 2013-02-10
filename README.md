@@ -42,7 +42,7 @@ Change the code lines above as follows:
 		register_frontend_modfiles('js');
 	}
 
-If you can't find the code above in the index.php of your template, simply at the last code block to the end of your &lt;head&gt;&lt;/head&gt; section.	
+If you can't find the code above in the index.php of your template, simply add the last code block to the end of your &lt;head&gt;&lt;/head&gt; section.	
 	
 ## Usage
 As `cwsoft-anynews` is designed to fetch news items from the WebsiteBaker news module, you need to add some news entries with the news module **before** you can use cwsoft-anynews. If no news are available, the message "No news available yet" is shown. Follow the steps below to add some news entries with the WebsiteBaker news module.
