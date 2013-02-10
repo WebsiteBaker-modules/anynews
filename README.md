@@ -96,14 +96,14 @@ Anynews v2.8.0 contains an option, which allows you to call the Anynews function
 2. enter the following code into the Droplet code section
 
 		if (! file_exists(WB_PATH . '/modules/cwsoft-anynews/droplet/cwsoft-anynews-droplet.php')) return;
-		require_once(WB_PATH . '/modules/cwsoft-anynews/droplet/cwsoft-anynews-droplet.php');
+		include(WB_PATH . '/modules/cwsoft-anynews/droplet/cwsoft-anynews-droplet.php');
 		return $output;
 	
 Now you can use the Droplet from your WYSIWYG editor or template file by entering:
 
 	[[getNewsItems?group_id=1,2&display_mode=4]]
 
-***Please note:*** The Droplet accepts the optional Anynews paramters in any given order. The optional parameter `'custom_placeholder'` is not yet supported. If you want to use more than one Anynews Droplet call per page/section, you must copy the entire code in **cwsoft-anynews/droplet/cwsoft-anynews-droplet.php** into the Droplet code section and add a `echo $output;` as last line. Otherwise only the first Droplet call will be executed.
+***Please note:*** The Droplet accepts the optional Anynews paramters in any given order. The optional parameter `'custom_placeholder'` is not yet supported.
 
 ## Customize
 The cwsoft-anynews output can be customized to your needs by three methods:
