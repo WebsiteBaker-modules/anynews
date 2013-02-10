@@ -20,7 +20,8 @@ The minimum requirements to get cwsoft-anynews running on your WebsiteBaker inst
 - Optional: small modification of your template file to enable jQuery support
 
 ## Installation
-1. download latest [module archive](https://github.com/cwsoft/wb-cwsoft-anynews/archive/master.zip) from GitHub
+1. download latest archive from [GitHub](https://github.com/cwsoft/wb-cwsoft-anynews/archive/master.zip) or [url=http://addons.websitebaker2.org/pages/en/browse-add-ons.php?id=0C80D11]WB repository[/url]
+   (you can skip steps 2-3 if you use the archive from the WebsiteBaker repository)
 2. unpack the archive on your local computer
 3. zip the contents of the folder ***cwsoft-anynews*** (without the folder itself)
 2. log into your WebsiteBaker backend and go to the `Add-ons/Modules` section
@@ -90,7 +91,7 @@ Depending on the Anynews function parameters defined, the output may look as fol
 ![](docs/anynews.png) 
 
 ### Use Anynews from a Droplet
-Since v2.8.0 cwsoft-anynews allows you to invoke Anynews via a self created Droplet from your WYSIWYG editor or template more easily. The Droplet code makes use of the `getNewsItems` function and accepts optional configuration option in arbitrary provided via the Droplet. To create your own Anynews Droplet, please follow the steps below.
+Anynews v2.8.0 contains an option, which allows you to call the Anynews function from a Droplet inside your WYSIWYG editor or template more easily. Anynews parameters can be passed by the Droplet in any order. To create your own Anynews Droplet, follow the steps below.
 
 1. create a new Droplet called `getNewsItems` via WebsiteBaker Admin-Tools --> Droplets
 2. enter the following code into the Droplet code section
@@ -99,11 +100,11 @@ Since v2.8.0 cwsoft-anynews allows you to invoke Anynews via a self created Drop
 		require_once(WB_PATH . '/modules/cwsoft-anynews/droplet/cwsoft-anynews-droplet.php');
 		return $output;
 	
-You can use the Droplet via the following command from your WYSIWYG editor or template file:
+Now you can use the Droplet from your WYSIWYG editor or template file by entering:
 
 	[[getNewsItems?group_id=1,2&display_mode=4]]
 
-You can pass over available Anynews configuration parameter in arbitrary order to the Droplet call.
+***Note:*** The Droplet accepts the optional Anynews paramters in any given order. Not yet supported by the Droplet is the optional custom_placeholder parameter.
 
 ## Customize
 The cwsoft-anynews output can be customized to your needs by three methods:
@@ -113,7 +114,7 @@ The cwsoft-anynews output can be customized to your needs by three methods:
 3. customized CSS definitions in file ***/css/anynews.css***
 	
 ### Anynews configuration
-When you call Anynews without any parameter like `displayNewsItems();`, the following default parameters will be used:
+When you call Anynews without parameter, the following default parameters will be used:
 
 	OUTDATED (SINCE V2.8.0):
 	displayNewsItems(
@@ -135,13 +136,9 @@ When you call Anynews without any parameter like `displayNewsItems();`, the foll
 	BETTER USE (FROM V2.8.0 ONWARDS)
 	echo getNewsItems();
 
-	
-***Note:*** With cwsoft-anynews v2.8.0 the more flexible function getNewsItems() was introduced, allowing to specify parameters in arbitrary order via a configuration array. It's recommended to use the new function in all your newer projects. To achieve the same output as above, you would need to add the following code to your code section or template:
+***Note:*** With cwsoft-anynews v2.8.0 the more flexible function `getNewsItems()` was introduced, allowing you to specify parameters in arbitrary order via a configuration array. It's recommended to use the new function in all newer projects. Invoking `getNewsItems()`without configuration array will use the same default values as listed above.
 
-	$output = getNewsItems();
-	echo $output;
-
-To customize the Anynews output, you can specify the parameters you want to modify in an configuration array, using an arbitrary order. A customized call with a different template and sort order is shown below:
+You can customize the Anynews output by passing over a configuration array with your settings. An example with a different template and sort order is shown below:
 
 	$config = array(
 		'sort_order' => 2,
@@ -149,10 +146,10 @@ To customize the Anynews output, you can specify the parameters you want to modi
 	);
 	echo getNewsItems($config);
 	
-***Anynews parameters explained:***
+***Anynews configuration options:***
 
-- **group_id**: only show news which IDs match given *$group_id_type* (default 'group_id')  
-	[0:all news, 1..N, or array(2,4,5,N) to limit news to single Id or multiple Ids, matching *$group_id_type*]
+- **group_id**: only show news which IDs match given *group_id_type* (default 'group_id')  
+	[0:all news, 1..N, or array(2,4,5,N) to limit news to single Id or multiple Ids, matching *group_id_type*]
 	
 - **max_news_items**: max. number of news entries to show  
 	[valid: 1..999]
@@ -167,14 +164,14 @@ To customize the Anynews output, you can specify the parameters you want to modi
 - **lang_id**: mode to detect language file to use  
 	[allowed: 'AUTO', or a valid WB language file ID: 'DE', 'EN', ...]
 	
-- **strip_tags**: flag to strip tags from news short/long text ***not*** contained in *$allowed_tags*  
+- **strip_tags**: flag to strip tags from news short/long text ***not*** contained in *allowed_tags*  
 	[true:strip tags, false:don't strip tags]
 	
-- **allowed_tags**: tags to keep if *$strip_tags = true*
+- **allowed_tags**: tags to keep if *strip_tags = true*
 	[default: '&lt;p&gt;&lt;a&gt;&lt;img&gt;']
 
 - **custom_placeholder**: create own placeholders for usage in template files  
-	**Example:** $custom\_placeholder = array('MY\_IMG' => '%img%', 'MY\_TAG' => '%author%', 'MY\_REGEX' => '#(test)#i')  
+	**Example:** custom\_placeholder = array('MY\_IMG' => '%img%', 'MY\_TAG' => '%author%', 'MY\_REGEX' => '#(test)#i')  
 	
 	Stores all image URLs, all text inside &lt;author&gt;&lt;/author&gt; tags and all matches of "test" in placeholders:  {PREFIX\_MY\_IMG\_#}, {PREFIX\_MY\_TAG\_#}, {PREFIX\_MY\_REGEX\_#}, where ***PREFIX*** is either "SHORT" or "LONG", depending if the match was found in the short/long news text and ***#*** is a number between 1 and the number of matches found
 	
