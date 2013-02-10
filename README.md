@@ -137,11 +137,11 @@ When you call Anynews without parameter, the following default parameters will b
 
 ***Note:*** Version 2.8.0 implements the new function `getNewsItems()`, which provides a more flexible configuration via a configuration array. This allows you to specifiy ONLY the parameters you want to change, without taking care of position and order of other possible parameters. To ensure backward compatibility, the function `displayNewsItems()` will work as before, but was marked DEPRECATED in favour of the new and more flexible `getNewsItems()` function. It's recommended to use the latter function for all your new projects. When `getNewsItems()` is invoked without configuration array, the default values as listed above are used.
 
-An example of a customized function call with a different template and sort order is shown below:
+An example of a customized function call to display only news linked to sectionID=8 is shown below:
 
 	$config = array(
-		'sort_order' => 2,
-		'display_mode' => 4,
+		'group_id' => 8,
+		'group_id_type' => 'section_id',
 	);
 	echo getNewsItems($config);
 	
