@@ -103,7 +103,7 @@ Now you can use the Droplet from your WYSIWYG editor or template file by enterin
 
 	[[getNewsItems?group_id=1,2&display_mode=4]]
 
-***Note:*** The Droplet accepts the optional Anynews paramters in any given order. Not yet supported by the Droplet is the optional custom_placeholder parameter.
+***Please note:*** The Droplet accepts the optional Anynews paramters in any given order. The optional parameter `'custom_placeholder'` is not yet supported. If you want to use more than one Anynews Droplet call per page/section, you must copy the entire code in **cwsoft-anynews/droplet/cwsoft-anynews-droplet.php** into the Droplet code section and add a `echo $output;` as last line. Otherwise only the first Droplet call will be executed.
 
 ## Customize
 The cwsoft-anynews output can be customized to your needs by three methods:
