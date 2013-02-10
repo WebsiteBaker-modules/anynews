@@ -59,7 +59,7 @@ Create a new page or section of type `Code` in the WebsiteBaker backend and ente
 		displayNewsItems();
 	}
 	
-	BETTER USE (FROM V2.8.0 ONWARDS)
+	RECOMMENDED (FROM V2.8.0 ONWARDS):
 	if (function_exists('getNewsItems')) {
 		echo getNewsItems();
 	}
@@ -76,7 +76,7 @@ To display news items at a fixed position on every page of your frontend, open t
 		}
 	?>
 
-	BETTER USE (FROM V2.8.0 ONWARDS)
+	RECOMMENDED (FROM V2.8.0 ONWARDS):
 	<?php
 		if (function_exists('getNewsItems')) {
 			echo getNewsItems();
@@ -132,12 +132,12 @@ When you call Anynews without parameter, the following default parameters will b
 		$lang_filter = false
 	);
 
-	BETTER USE (FROM V2.8.0 ONWARDS)
+	RECOMMENDED (FROM V2.8.0 ONWARDS):
 	echo getNewsItems();
 
-***Note:*** With cwsoft-anynews v2.8.0 the more flexible function `getNewsItems()` was introduced, allowing you to specify parameters in arbitrary order via a configuration array. It's recommended to use the new function in all newer projects. Invoking `getNewsItems()`without configuration array will use the same default values as listed above.
+***Note:*** Version 2.8.0 implements the new function `getNewsItems()`, which provides a more flexible configuration via a configuration array. This allows you to specifiy ONLY the parameters you want to change, without taking care of position and order of other possible parameters. To ensure backward compatibility, the function `displayNewsItems()` will work as before, but was marked DEPRECATED in favour of the new and more flexible `getNewsItems()` function. It's recommended to use the latter function for all your new projects. When `getNewsItems()` is invoked without configuration array, the default values as listed above are used.
 
-You can customize the Anynews output by passing over a configuration array with your settings. An example with a different template and sort order is shown below:
+An example of a customized function call with a different template and sort order is shown below:
 
 	$config = array(
 		'sort_order' => 2,
@@ -145,7 +145,7 @@ You can customize the Anynews output by passing over a configuration array with 
 	);
 	echo getNewsItems($config);
 	
-***Anynews configuration options:***
+***Supported Anynews configuration options:***
 
 - **group_id**: only show news which IDs match given *group_id_type* (default 'group_id')  
 	[0:all news, 1..N, or array(2,4,5,N) to limit news to single Id or multiple Ids, matching *group_id_type*]
