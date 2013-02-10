@@ -95,6 +95,7 @@ Since v2.8.0 cwsoft-anynews allows you to invoke Anynews via a self created Drop
 1. create a new Droplet called `getNewsItems` via WebsiteBaker Admin-Tools --> Droplets
 2. enter the following code into the Droplet code section
 
+		if (! file_exists(WB_PATH . '/modules/cwsoft-anynews/droplet/cwsoft-anynews-droplet.php')) return;
 		require_once(WB_PATH . '/modules/cwsoft-anynews/droplet/cwsoft-anynews-droplet.php');
 		return $output;
 	
