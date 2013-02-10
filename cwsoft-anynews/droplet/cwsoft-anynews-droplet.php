@@ -4,11 +4,13 @@
  * USAGE:
  *   1. create a new droplet "getNewsItems" via Admin-Tools --> Droplets
  *   2. enter the following code into the droplet code section:
+ *      if (! file_exists(WB_PATH . '/modules/cwsoft-anynews/droplet/cwsoft-anynews-droplet.php')) return;
  *      require_once(WB_PATH . '/modules/cwsoft-anynews/droplet/cwsoft-anynews-droplet.php');
  *      return $output;
  */
 
 // ensure we have the right cwsoft-anynews version
+$output = '';
 require_once(WB_PATH . '/modules/cwsoft-anynews/include.php');
 if (! function_exists('getNewsItems')) return;
 
