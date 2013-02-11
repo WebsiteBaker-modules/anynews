@@ -9,9 +9,13 @@
  *      return $output;
  */
 
+// prevent this file from being accessed directly
+if (defined('WB_PATH') == false) {
+	exit("Cannot access this file directly");
+}
+
 // ensure we have the right cwsoft-anynews version
 $output = '';
-if (! defined('WB_PATH')) return;
 require_once(WB_PATH . '/modules/cwsoft-anynews/include.php');
 if (! function_exists('getNewsItems')) return;
 
