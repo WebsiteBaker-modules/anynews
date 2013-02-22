@@ -117,9 +117,7 @@ The cwsoft-anynews output can be customized to your needs by three methods:
 3. customized CSS definitions in file ***/css/anynews.css***
 	
 ### Anynews configuration
-With `cwsoft-anynews v2.8.0` the new function `getNewsItems()` was introduced, providing a more flexible configuration via a configuration array. This allows you to specifiy ONLY the parameters you want to change, without taking care of position and order of other possible parameters. To ensure backward compatibility, the function `displayNewsItems()` works as before, but was marked DEPRECATED in favour of the new and more flexible `getNewsItems()` function. It's recommended to use `getNewsItems` for all your new projects. When `getNewsItems()` is invoked without a configuration array, the default values as listed above are used.
-
-An overview of all supported configuration options is given in the section [supported configuration options](#supported-configuration-options).
+With cwsoft-anynews v2.8.0 the new function `getNewsItems()` was introduced, providing a more flexible configuration via a configuration array. This allows you to specifiy ONLY the parameters you want to change, without taking care of position and order of other possible parameters. To ensure backward compatibility, the function `displayNewsItems()` works as before, but was marked DEPRECATED in favour of the more flexible `getNewsItems()` function. An overview of all supported configuration options is given in the section [supported configuration options](#supported-configuration-options).
 
 Calling `getNewsItems` without configuration array uses the DEFAULTS below:
 
@@ -139,11 +137,11 @@ Calling `getNewsItems` without configuration array uses the DEFAULTS below:
 		'lang_filter' => false,
 	);
 	
-	// calling getNewsItems() without configuration array uses the defaults shown above
+	// calling getNewsItems() without configuration array uses the defaults above
 	echo getNewsItems();
 
 
-To display only news items associated to the sectionID=8 and change the display_mode to 4, you can use the following code. Optional configuration paramters not defined fall back to the DEFAULTS shown above.
+**Example:*** To show only news associated to sectionID=8 and to set display_mode=4 the default configuration can be overwritten. Omitted paramters are set to the DEFAULTS shown above.
 
 	// customized cwsoft-anynews function call
 	$config = array(
@@ -154,6 +152,7 @@ To display only news items associated to the sectionID=8 and change the display_
 	echo getNewsItems($config);
 	
 ***Deprecated since cwsoft-anynews 2.8.0:***
+
 Calling the outdated `displayNewsItems` function without configuration parameters uses the DEFAULTS below:
 
 	displayNewsItems(
