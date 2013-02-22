@@ -54,32 +54,32 @@ As `cwsoft-anynews` is designed to fetch news items from the WebsiteBaker news m
 ### Use Anynews from a page or section
 Create a new page or section of type `Code` in the WebsiteBaker backend and enter the following code to it.
 
-	OUTDATED (SINCE V2.8.0):
-	if (function_exists('displayNewsItems')) {
-		displayNewsItems();
-	}
-	
-	RECOMMENDED (FROM V2.8.0 ONWARDS):
+	RECOMMENDED (FROM ANYNEWS V2.8.0 ONWARDS):
 	if (function_exists('getNewsItems')) {
 		echo getNewsItems();
 	}
 
+	DEPRECATED (SINCE ANYNEWS V2.8.0):
+	if (function_exists('displayNewsItems')) {
+		displayNewsItems();
+	}
+	
 The cwsoft-anynews output is only visible at the pages/sections of your frontend, which contain the code above.
 
 ### Use Anynews from your template
 To display news items at a fixed position on every page of your frontend, open the ***index.php*** file of your default frontend template with the [cwsoft-addon-file-editor](https://github.com/cwsoft/wb-cwsoft-addon-file-editor#readme). Then add the code below to the position in your template where you want the news output to appear.
 
-	OUTDATED (SINCE V2.8.0):
-	<?php
-		if (function_exists('displayNewsItems')) {
-			displayNewsItems();
-		}
-	?>
-
-	RECOMMENDED (FROM V2.8.0 ONWARDS):
+	RECOMMENDED (FROM ANYNEWS V2.8.0 ONWARDS):
 	<?php
 		if (function_exists('getNewsItems')) {
 			echo getNewsItems();
+		}
+	?>
+
+	DEPRECATED (SINCE ANYNEWS V2.8.0):
+	<?php
+		if (function_exists('displayNewsItems')) {
+			displayNewsItems();
 		}
 	?>
 	
@@ -90,7 +90,7 @@ Depending on the Anynews function parameters defined, the output may look as fol
 ![](docs/anynews.png) 
 
 ### Use Anynews from a Droplet
-Anynews v2.8.0 contains an option, which allows you to call the Anynews function from a Droplet inside your WYSIWYG editor or template more easily. Anynews parameters can be passed by the Droplet in any order. To create your own Anynews Droplet, follow the steps below.
+Since cwsoft-anynews v2.8.0 you can call the Anynews function via a Droplet within the WYSIWYG editor. The Droplet accepts the Anynews function parameters in any order. To create an Anynews Droplet, follow the steps below.
 
 1. create a new Droplet called `getNewsItems` via WebsiteBaker Admin-Tools --> Droplets
 2. enter the following code into the Droplet code section
@@ -99,7 +99,7 @@ Anynews v2.8.0 contains an option, which allows you to call the Anynews function
 		include(WB_PATH . '/modules/cwsoft-anynews/droplet/cwsoft-anynews-droplet.php');
 		return $output;
 	
-Now you can use the Droplet from your WYSIWYG editor or template file by entering:
+Now you can use the Droplet from your WYSIWYG editor or template file via:
 
 	[[getNewsItems?group_id=1,2&display_mode=4]]
 
@@ -113,9 +113,47 @@ The cwsoft-anynews output can be customized to your needs by three methods:
 3. customized CSS definitions in file ***/css/anynews.css***
 	
 ### Anynews configuration
-When you call Anynews without parameter, the following default parameters will be used:
+With `cwsoft-anynews v2.8.0` the new function `getNewsItems()` was introduced, providing a more flexible configuration via a configuration array. This allows you to specifiy ONLY the parameters you want to change, without taking care of position and order of other possible parameters. To ensure backward compatibility, the function `displayNewsItems()` works as before, but was marked DEPRECATED in favour of the new and more flexible `getNewsItems()` function. It's recommended to use `getNewsItems` for all your new projects. When `getNewsItems()` is invoked without a configuration array, the default values as listed above are used.
 
-	OUTDATED (SINCE V2.8.0):
+An overview of all supported configuration options is given in the section [supported configuration options](#supported-configuration-options).
+
+Calling `getNewsItems` without configuration array uses the DEFAULTS below:
+
+	RECOMMENDED (FROM ANYNEWS V2.8.0 ONWARDS):
+	$config = array(
+		'group_id' => 0,
+		'max_news_items' => 10,
+		'max_news_length' => -1,
+		'display_mode' => 1,
+		'lang_id' => 'AUTO',
+		'strip_tags' => true,
+		'allowed_tags' => '<p><a><img>',
+		'custom_placeholder' => false,
+		'sort_by' => 1,
+		'sort_order' => 1,
+		'not_older_than' => 0,
+		'group_id_type' => 'group_id',
+		'lang_filter' => false,
+	);
+	
+	// calling getNewsItems() without configuration array uses the defaults shown above
+	echo getNewsItems();
+
+
+To display only news items associated to the sectionID=8 and change the display_mode to 4, you can use the following code. Optional configuration paramters not defined fall back to the DEFAULTS shown above.
+
+	// customized cwsoft-anynews function call
+	$config = array(
+		'group_id' => 8,
+		'group_id_type' => 'section_id',
+		'display_mode' => 4,
+	);
+	echo getNewsItems($config);
+	
+
+***DEPCREATED:*** Calling the outdated `displayNewsItems` function without configuration parameters uses the DEFAULTS below:
+
+	DEPRECATED (SINCE ANYNEWS V2.8.0):
 	displayNewsItems(
 		$group_id = 0,
 		$max_news_items = 10,
@@ -131,21 +169,9 @@ When you call Anynews without parameter, the following default parameters will b
 		$group_id_type = 'group_id',
 		$lang_filter = false
 	);
-
-	RECOMMENDED (FROM V2.8.0 ONWARDS):
-	echo getNewsItems();
-
-***Note:*** Version 2.8.0 implements the new function `getNewsItems()`, which provides a more flexible configuration via a configuration array. This allows you to specifiy ONLY the parameters you want to change, without taking care of position and order of other possible parameters. To ensure backward compatibility, the function `displayNewsItems()` will work as before, but was marked DEPRECATED in favour of the new and more flexible `getNewsItems()` function. It's recommended to use the latter function for all your new projects. When `getNewsItems()` is invoked without configuration array, the default values as listed above are used.
-
-An example of a customized function call to display only news linked to sectionID=8 is shown below:
-
-	$config = array(
-		'group_id' => 8,
-		'group_id_type' => 'section_id',
-	);
-	echo getNewsItems($config);
 	
-***Supported Anynews configuration options:***
+
+#### Supported configuration options
 
 - **group_id**: only show news which IDs match given *group_id_type* (default 'group_id')  
 	[0:all news, 1..N, or array(2,4,5,N) to limit news to single Id or multiple Ids, matching *group_id_type*]
