@@ -141,7 +141,7 @@ Calling `getNewsItems` without configuration array uses the DEFAULTS below:
 	echo getNewsItems();
 
 
-**Example:*** To show only news associated to sectionID=8 and to set display_mode=4 the default configuration can be overwritten. Omitted paramters are set to the DEFAULTS shown above.
+**Example:** To show only news associated to sectionID=8 and to set display_mode=4 the default configuration can be overwritten. Omitted paramters are set to the DEFAULTS shown above.
 
 	// customized cwsoft-anynews function call
 	$config = array(
