@@ -54,13 +54,13 @@ As `cwsoft-anynews` is designed to fetch news items from the WebsiteBaker news m
 ### Use Anynews from a page or section
 Create a new page or section of type `Code` in the WebsiteBaker backend and enter the following code to it.
 
-***Recommended from cwsoft-anynews 2.8.0 onwards:***
+**Recommended from cwsoft-anynews 2.8.0 onwards:**
 
 	if (function_exists('getNewsItems')) {
 		echo getNewsItems();
 	}
 
-***Deprecated since cwsoft-anynews 2.8.0:***
+<span style="color: red;">***Deprecated since cwsoft-anynews 2.8.0:***</span>
 	
 	if (function_exists('displayNewsItems')) {
 		displayNewsItems();
@@ -71,7 +71,7 @@ The cwsoft-anynews output is only visible at the pages/sections of your frontend
 ### Use Anynews from your template
 To display news items at a fixed position on every page of your frontend, open the ***index.php*** file of your default frontend template with the [cwsoft-addon-file-editor](https://github.com/cwsoft/wb-cwsoft-addon-file-editor#readme). Then add the code below to the position in your template where you want the news output to appear.
 
-***Recommended from cwsoft-anynews 2.8.0 onwards:***
+**Recommended from cwsoft-anynews 2.8.0 onwards:**
 
 	<?php
 		if (function_exists('getNewsItems')) {
@@ -79,7 +79,8 @@ To display news items at a fixed position on every page of your frontend, open t
 		}
 	?>
 
-***Deprecated since cwsoft-anynews 2.8.0:***
+<span style="color: red;">***Deprecated since cwsoft-anynews 2.8.0:***</span>
+
 	<?php
 		if (function_exists('displayNewsItems')) {
 			displayNewsItems();
@@ -152,7 +153,7 @@ To display only news items associated to the sectionID=8 and change the display_
 	);
 	echo getNewsItems($config);
 	
-***Deprecated since cwsoft-anynews 2.8.0:***
+<span style="color: red;">***Deprecated since cwsoft-anynews 2.8.0:***</span>
 Calling the outdated `displayNewsItems` function without configuration parameters uses the DEFAULTS below:
 
 	displayNewsItems(
