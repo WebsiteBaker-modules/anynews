@@ -54,12 +54,14 @@ As `cwsoft-anynews` is designed to fetch news items from the WebsiteBaker news m
 ### Use Anynews from a page or section
 Create a new page or section of type `Code` in the WebsiteBaker backend and enter the following code to it.
 
-	RECOMMENDED (FROM ANYNEWS V2.8.0 ONWARDS):
+***Recommended from cwsoft-anynews 2.8.0 onwards:***
+
 	if (function_exists('getNewsItems')) {
 		echo getNewsItems();
 	}
 
-	DEPRECATED (SINCE ANYNEWS V2.8.0):
+***Deprecated since cwsoft-anynews 2.8.0:***
+	
 	if (function_exists('displayNewsItems')) {
 		displayNewsItems();
 	}
@@ -69,14 +71,15 @@ The cwsoft-anynews output is only visible at the pages/sections of your frontend
 ### Use Anynews from your template
 To display news items at a fixed position on every page of your frontend, open the ***index.php*** file of your default frontend template with the [cwsoft-addon-file-editor](https://github.com/cwsoft/wb-cwsoft-addon-file-editor#readme). Then add the code below to the position in your template where you want the news output to appear.
 
-	RECOMMENDED (FROM ANYNEWS V2.8.0 ONWARDS):
+***Recommended from cwsoft-anynews 2.8.0 onwards:***
+
 	<?php
 		if (function_exists('getNewsItems')) {
 			echo getNewsItems();
 		}
 	?>
 
-	DEPRECATED (SINCE ANYNEWS V2.8.0):
+***Deprecated since cwsoft-anynews 2.8.0:***
 	<?php
 		if (function_exists('displayNewsItems')) {
 			displayNewsItems();
@@ -119,7 +122,6 @@ An overview of all supported configuration options is given in the section [supp
 
 Calling `getNewsItems` without configuration array uses the DEFAULTS below:
 
-	RECOMMENDED (FROM ANYNEWS V2.8.0 ONWARDS):
 	$config = array(
 		'group_id' => 0,
 		'max_news_items' => 10,
@@ -150,10 +152,9 @@ To display only news items associated to the sectionID=8 and change the display_
 	);
 	echo getNewsItems($config);
 	
+***Deprecated since cwsoft-anynews 2.8.0:***
+Calling the outdated `displayNewsItems` function without configuration parameters uses the DEFAULTS below:
 
-***DEPCREATED:*** Calling the outdated `displayNewsItems` function without configuration parameters uses the DEFAULTS below:
-
-	DEPRECATED (SINCE ANYNEWS V2.8.0):
 	displayNewsItems(
 		$group_id = 0,
 		$max_news_items = 10,
