@@ -60,7 +60,7 @@ Create a new page or section of type `Code` in the WebsiteBaker backend and ente
 		echo getNewsItems();
 	}
 
-<span style="color: red;">***Deprecated since cwsoft-anynews 2.8.0:***</span>
+<span style="color: red; font-style: italic; font-weight: bold">Deprecated since cwsoft-anynews 2.8.0:</span>
 	
 	if (function_exists('displayNewsItems')) {
 		displayNewsItems();
@@ -79,7 +79,7 @@ To display news items at a fixed position on every page of your frontend, open t
 		}
 	?>
 
-<span style="color: red;">***Deprecated since cwsoft-anynews 2.8.0:***</span>
+<span style="color: red; font-style: italic; font-weight: bold">Deprecated since cwsoft-anynews 2.8.0:</span>
 
 	<?php
 		if (function_exists('displayNewsItems')) {
@@ -153,7 +153,7 @@ To display only news items associated to the sectionID=8 and change the display_
 	);
 	echo getNewsItems($config);
 	
-<span style="color: red;">***Deprecated since cwsoft-anynews 2.8.0:***</span>
+<span style="color: red; font-style: italic; font-weight: bold">Deprecated since cwsoft-anynews 2.8.0:</span>
 Calling the outdated `displayNewsItems` function without configuration parameters uses the DEFAULTS below:
 
 	displayNewsItems(
