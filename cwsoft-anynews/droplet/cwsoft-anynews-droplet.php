@@ -48,7 +48,7 @@ foreach($options as $key => $value) {
 	if ($key == 'group_id') {
 		$options[$key] = explode(',', ${$key});
 	} else {
-		$options[$key] = ${$key};
+		$options[$key] = trim(${$key}, '"\'');
 	}
 }
 
