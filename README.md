@@ -71,11 +71,10 @@ To display news items at a fixed position on every page of your frontend, open t
 		}
 	?>
 
-Visit the frontend of your website and check the cwsoft-anynews output. 
-
-Depending on the Anynews function parameters defined, the output may look as follows.
-
 **Please note:** The above code requires cwsoft-anynews v2.8.0 or higher. For older versions read the [README](https://github.com/cwsoft/wb-cwsoft-anynews/blob/v2.7.0/README.md) of your version.
+
+Visit the frontend of your website and check the cwsoft-anynews output. Depending on the Anynews function parameters defined, the output may look as follows.
+
 ![](docs/anynews.png) 
 
 ### Use Anynews from a Droplet
