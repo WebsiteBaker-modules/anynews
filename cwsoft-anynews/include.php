@@ -98,7 +98,17 @@ if (! function_exists('getNewsItems')) {
 			'strict_variables' => false,
 			'debug'            => false,
 		));
-        
+
+		/**
+		 * Add Twig filter to allow datetime conversion via PHP strftime function
+		 * Example: {{ timestamp | strftime('%A, %B %Y', ['de_DE','german','deu']) }}
+		 * Help on format strings: http://ch1.php.net/manual/en/function.strftime.php
+		 */
+		$twig->addFilter(new Twig_SimpleFilter('strftime', function ($timestamp, $format, $locales) {
+			setlocale(LC_ALL, $locales);
+			return strftime($format, $timestamp);
+		}));
+
 		/**
 		 * Load Anynews Twig template specified via $display_mode
 		 */
