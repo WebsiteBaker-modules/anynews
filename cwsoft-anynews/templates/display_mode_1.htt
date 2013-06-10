@@ -29,7 +29,7 @@
 	
 	{% for news in newsItems %}
 		<p>
-			<strong>{{ news.TITLE }} ({{ news.POSTED_WHEN }})</strong>
+			<strong>{{ news.TITLE }} ({{ news.TS_POSTED_WHEN | date(lang.DATE_FORMAT) }})</strong>
 		</p>
 
 		{{ lang.TXT_NUMBER_OF_COMMENTS }}: 
