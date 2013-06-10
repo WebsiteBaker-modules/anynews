@@ -60,7 +60,7 @@ Create a new page or section of type `Code` in the WebsiteBaker backend and ente
 
 The cwsoft-anynews output is only visible at the pages/sections of your frontend, which contain the code above.
 
-**Please note:** The above code requires cwsoft-anynews v2.8.0 or higher. For older versions read the [README](blob/e473badd70bff5310f1c63a3c318c1e1611e63a3/README.md) of your version.
+**Please note:** The above code requires cwsoft-anynews v2.8.0 or higher. For older versions read the [README](https://github.com/cwsoft/wb-cwsoft-anynews/blob/v2.7.0/README.md) of your version.
 
 ### Use Anynews from your template
 To display news items at a fixed position on every page of your frontend, open the ***index.php*** file of your default frontend template with the [cwsoft-addon-file-editor](https://github.com/cwsoft/wb-cwsoft-addon-file-editor#readme). Then add the code below to the position in your template where you want the news output to appear.
@@ -75,8 +75,7 @@ Visit the frontend of your website and check the cwsoft-anynews output.
 
 Depending on the Anynews function parameters defined, the output may look as follows.
 
-**Please note:** The above code requires cwsoft-anynews v2.8.0 or higher. For older versions read the [README](blob/e473badd70bff5310f1c63a3c318c1e1611e63a3/README.md) of your version.
-
+**Please note:** The above code requires cwsoft-anynews v2.8.0 or higher. For older versions read the [README](https://github.com/cwsoft/wb-cwsoft-anynews/blob/v2.7.0/README.md) of your version.
 ![](docs/anynews.png) 
 
 ### Use Anynews from a Droplet
@@ -137,7 +136,7 @@ Calling `getNewsItems` without configuration array uses the DEFAULTS below:
 	);
 	echo getNewsItems($config);
 	
-**Please note:** The above code requires cwsoft-anynews v2.8.0 or higher. For older versions read the [README](blob/e473badd70bff5310f1c63a3c318c1e1611e63a3/README.md) of your version.
+**Please note:** The above code requires cwsoft-anynews v2.8.0 or higher. For older versions read the [README](https://github.com/cwsoft/wb-cwsoft-anynews/blob/v2.7.0/README.md) of your version.
 
 #### Supported configuration options
 
