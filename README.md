@@ -54,24 +54,16 @@ As `cwsoft-anynews` is designed to fetch news items from the WebsiteBaker news m
 ### Use Anynews from a page or section
 Create a new page or section of type `Code` in the WebsiteBaker backend and enter the following code to it.
 
-**Recommended from cwsoft-anynews 2.8.0 onwards:**
-
 	if (function_exists('getNewsItems')) {
 		echo getNewsItems();
 	}
 
-***Deprecated since cwsoft-anynews 2.8.0:***
-	
-	if (function_exists('displayNewsItems')) {
-		displayNewsItems();
-	}
-	
 The cwsoft-anynews output is only visible at the pages/sections of your frontend, which contain the code above.
+
+**Please note:** The above code requires cwsoft-anynews v2.8.0 or higher. For older versions, checkout the [README](/blob/e473badd70bff5310f1c63a3c318c1e1611e63a3/README.md) of your version.
 
 ### Use Anynews from your template
 To display news items at a fixed position on every page of your frontend, open the ***index.php*** file of your default frontend template with the [cwsoft-addon-file-editor](https://github.com/cwsoft/wb-cwsoft-addon-file-editor#readme). Then add the code below to the position in your template where you want the news output to appear.
-
-**Recommended from cwsoft-anynews 2.8.0 onwards:**
 
 	<?php
 		if (function_exists('getNewsItems')) {
@@ -79,17 +71,11 @@ To display news items at a fixed position on every page of your frontend, open t
 		}
 	?>
 
-***Deprecated since cwsoft-anynews 2.8.0:***
-
-	<?php
-		if (function_exists('displayNewsItems')) {
-			displayNewsItems();
-		}
-	?>
-	
 Visit the frontend of your website and check the cwsoft-anynews output. 
 
 Depending on the Anynews function parameters defined, the output may look as follows.
+
+**Please note:** The above code requires cwsoft-anynews v2.8.0 or higher. For older versions, checkout the [README](/blob/e473badd70bff5310f1c63a3c318c1e1611e63a3/README.md) of your version.
 
 ![](docs/anynews.png) 
 
@@ -151,26 +137,7 @@ Calling `getNewsItems` without configuration array uses the DEFAULTS below:
 	);
 	echo getNewsItems($config);
 	
-***Deprecated since cwsoft-anynews 2.8.0:***
-
-Calling the outdated `displayNewsItems` function without configuration parameters uses the DEFAULTS below:
-
-	displayNewsItems(
-		$group_id = 0,
-		$max_news_items = 10,
-		$max_news_length = -1,
-		$display_mode = 1,
-		$lang_id = 'AUTO',
-		$strip_tags = true,
-		$allowed_tags = '<p><a><img>',
-		$custom_placeholder = false,
-		$sort_by = 1,
-		$sort_order = 1,
-		$not_older_than = 0,
-		$group_id_type = 'group_id',
-		$lang_filter = false
-	);
-	
+**Please note:** The above code requires cwsoft-anynews v2.8.0 or higher. For older versions, checkout the [README](/blob/e473badd70bff5310f1c63a3c318c1e1611e63a3/README.md) of your version.	
 
 #### Supported configuration options
 
