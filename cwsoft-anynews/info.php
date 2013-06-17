@@ -22,7 +22,7 @@
 $module_directory     = 'cwsoft-anynews';
 $module_name          = 'cwsoft-anynews';
 $module_function      = 'snippet';
-$module_version       = '2.8.2';
+$module_version       = '2.9.0';
 $module_status        = 'STABLE';
 $module_platform      = '2.8.x';
 $module_author        = 'cwsoft (http://cwsoft.de)';
@@ -30,4 +30,3 @@ $module_license       = '<a href="http://www.gnu.org/licenses/gpl.html">GNU Gene
 $module_license_terms = '-';
 $module_requirements  = 'PHP>=5.2.2, WB>=2.8.2, WB news module';
 $module_description   = 'The snippet cwsoft-anynews allows to display news entries from the WebsiteBaker news module at any place you want. Invoke the function from a code section or your template index.php file. For details see <a href="https://github.com/cwsoft/wb-cwsoft-anynews#readme" target="_blank">GitHub</a>.';
-
