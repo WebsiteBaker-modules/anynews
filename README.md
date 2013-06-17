@@ -53,12 +53,11 @@ As `cwsoft-anynews` is designed to fetch news items from the WebsiteBaker news m
 
 ### Use Anynews from a page or section
 Create a new page or section of type `Code` in the WebsiteBaker backend and enter the following code to it.
+The cwsoft-anynews output is only visible at the pages/sections of your frontend, which contain this code.
 
 	if (function_exists('getNewsItems')) {
 		echo getNewsItems();
 	}
-
-The cwsoft-anynews output is only visible at the pages/sections of your frontend, which contain the code above.
 
 **Please note:** The above code requires cwsoft-anynews v2.8.0 or higher. For older versions read the [README](https://github.com/cwsoft/wb-cwsoft-anynews/blob/v2.7.0/README.md) of your version.
 
@@ -101,7 +100,7 @@ The cwsoft-anynews output can be customized to your needs by three methods:
 3. customized CSS definitions in file ***/css/anynews.css***
 	
 ### Anynews configuration
-With cwsoft-anynews v2.8.0 the new function `getNewsItems()` was introduced, providing a more flexible configuration via a configuration array. This allows you to specifiy ONLY the parameters you want to change, without taking care of position and order of other possible parameters. To ensure backward compatibility, the function `displayNewsItems()` works as before, but was marked DEPRECATED in favour of the more flexible `getNewsItems()` function. An overview of all supported configuration options is given in the section [supported configuration options](#supported-configuration-options).
+With cwsoft-anynews v2.8.0 a more flexible configuration was introduced. This allows you to specifiy ONLY the parameters you want to change, without taking care of position and order of other possible parameters. To ensure backward compatibility, the function `displayNewsItems()` works as before, but was marked DEPRECATED in favour of the more flexible `getNewsItems()` function. An overview of all supported configuration options is given in the section [supported configuration options](#supported-configuration-options).
 
 Calling `getNewsItems` without configuration array uses the DEFAULTS below:
 
