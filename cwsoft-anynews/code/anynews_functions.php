@@ -244,3 +244,13 @@ function getUserNames()
 	}
 	return $users;
 }
+
+/**
+ * Function to convert a timestamp via the PHP strftime function
+ * Help on format strings: http://ch1.php.net/manual/en/function.strftime.php
+ */
+function strftime_filter($timestamp, $format, $locales) {
+	// convert timestamp using PHP strftime function
+	setlocale(LC_ALL, $locales);
+	return strftime($format, $timestamp);
+}
