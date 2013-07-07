@@ -34,6 +34,6 @@ $PRECHECK = array(
 	// ensure WebsiteBaker news module is installed
 	'WB_ADDONS' => array('news'),
 
-	// make sure PHP version is 5.2.2 or higher
-	'PHP_VERSION' => array('VERSION' => '5.2.2', 'OPERATOR' => '>=')
+	// make sure PHP version is 5.2.4 or higher
+	'PHP_VERSION' => array('VERSION' => '5.2.4', 'OPERATOR' => '>=')
 );

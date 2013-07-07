@@ -16,7 +16,7 @@ The minimum requirements to get cwsoft-anynews running on your WebsiteBaker inst
 
 - WebsiteBaker ***2.8.2*** or higher (recommended last stable 2.8.x version)
 - WebsiteBaker news module
-- PHP ***5.2.2*** or higher (recommended last stable PHP 5.4.x version)
+- PHP ***5.2.4*** or higher (recommended last stable PHP 5.4.x version)
 - Optional: small modification of your template file to enable jQuery support
 
 ## Installation
