@@ -105,18 +105,18 @@ With cwsoft-anynews v2.8.0 a more flexible configuration was introduced. This al
 Calling `getNewsItems` without configuration array uses the DEFAULTS below:
 
 	$config = array(
+		'group_id_type' => 'group_id',
 		'group_id' => 0,
+		'display_mode' => 1,
 		'max_news_items' => 10,
 		'max_news_length' => -1,
-		'display_mode' => 1,
-		'lang_id' => 'AUTO',
 		'strip_tags' => true,
 		'allowed_tags' => '<p><a><img>',
 		'custom_placeholder' => false,
 		'sort_by' => 1,
 		'sort_order' => 1,
 		'not_older_than' => 0,
-		'group_id_type' => 'group_id',
+		'lang_id' => 'AUTO',
 		'lang_filter' => false,
 	);
 	
@@ -128,8 +128,8 @@ Calling `getNewsItems` without configuration array uses the DEFAULTS below:
 
 	// customized cwsoft-anynews function call
 	$config = array(
-		'group_id' => 8,
 		'group_id_type' => 'section_id',
+		'group_id' => 8,
 		'display_mode' => 4,
 	);
 	echo getNewsItems($config);
@@ -138,8 +138,15 @@ Calling `getNewsItems` without configuration array uses the DEFAULTS below:
 
 #### Supported configuration options
 
-- **group_id**: only show news which IDs match given *group_id_type* (default 'group_id')  
+- **group_id_type**: defines group type used by group_id to extract news entries from
+	[supported: 'group_id', 'page_id', 'section_id', 'post_id')]
+
+- **group_id**: only show news which IDs match given *group_id_type* (default 'group_id')
 	[0:all news, 1..N, or array(2,4,5,N) to limit news to single Id or multiple Ids, matching *group_id_type*]
+
+- **display_mode**: ID of the Anynews template to use (/templates/display_mode_X.htt)
+	[1:details, 2:list, 3:better-coda-slider, 4:flexslider, 5..98 custom template *display_mode_X.htt*]
+	Hint: 99:cheat sheet with ALL Anynews placeholders available in the template files
 	
 - **max_news_items**: max. number of news entries to show  
 	[valid: 1..999]
@@ -147,21 +154,14 @@ Calling `getNewsItems` without configuration array uses the DEFAULTS below:
 - **max_news_length**: max. news length to be shown  
 	[-1:= full length]
 	
-- **display_mode**: ID of the Anynews template to use (/templates/display_mode_X.htt)  
-	[1:details, 2:list, 3:better-coda-slider, 4:flexslider, 5..98 custom template *display_mode_X.htt*]  
-	Hint: 99:cheat sheet with ALL Anynews placeholders available in the template files
-	
-- **lang_id**: mode to detect language file to use  
-	[allowed: 'AUTO', or a valid WB language file ID: 'DE', 'EN', ...]
-	
-- **strip_tags**: flag to strip tags from news short/long text ***not*** contained in *allowed_tags*  
+- **strip_tags**: flag to strip tags from news short/long text ***not*** contained in *allowed_tags*
 	[true:strip tags, false:don't strip tags]
 	
 - **allowed_tags**: tags to keep if *strip_tags = true*
 	[default: '&lt;p&gt;&lt;a&gt;&lt;img&gt;']
 
 - **custom_placeholder**: create own placeholders for usage in template files  
-	**Example:** custom\_placeholder = array('MY\_IMG' => '%img%', 'MY\_TAG' => '%author%', 'MY\_REGEX' => '#(test)#i')  
+	**Example:** custom\_placeholder = array('MY\_IMG' => '%img%', 'MY\_TAG' => '%author%', 'MY\_REGEX' => '#(test)#i')
 	
 	Stores all image URLs, all text inside &lt;author&gt;&lt;/author&gt; tags and all matches of "test" in placeholders:  {PREFIX\_MY\_IMG\_#}, {PREFIX\_MY\_TAG\_#}, {PREFIX\_MY\_REGEX\_#}, where ***PREFIX*** is either "SHORT" or "LONG", depending if the match was found in the short/long news text and ***#*** is a number between 1 and the number of matches found
 	
@@ -174,11 +174,11 @@ Calling `getNewsItems` without configuration array uses the DEFAULTS below:
 - **not_older_than**: skips all news items which are older than X days  
 	[0:don't skip news items, 0...999: skip news items older than x days (hint: 0.5 --> 12 hours)]
 
-- **group_id_type**: sets type used by group_id to extract news entries from  
-	[supported: 'group_id', 'page_id', 'section_id', 'post_id')]
+- **lang_id**: defines Anynews language file to be used
+	[allowed: 'AUTO', or a valid WB language file flag: 'DE', 'EN', ...]
 
-- **lang_filter**: flag to enable language filter   
-	[default:= false, true:=only show news added from news pages, which page language match $lang_id]
+- **lang_filter**: flag to enable language filter (requires a language flag in page URL like domain.com/EN/news.php)
+	[default:= false, true:=only show news, which page language match given $lang_id]
 	
 ***Tip:*** 
 You can output a list with all *group_ids* and the *group titles* created by the WebsiteBaker news module, by adding the following code into a page/section of type code.
