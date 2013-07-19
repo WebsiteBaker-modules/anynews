@@ -289,3 +289,4 @@ Credits go to the following WebsiteBaker community members:
 - [Mirens](http://www.websitebaker2.org/forum/index.php?action=profile;u=13226): Serbian translation (RS.php)
 - [dana](http://www.websitebaker2.org/forum/index.php?action=profile;u=62603): Czech translation (CS.php)
 - [owk444](http://www.websitebaker2.org/forum/index.php?action=profile;u=81800): Russian translation (RU.php)
+- [fordfairlane](http://www.websitebaker.org/forum/index.php?action=profile;u=15221): Danish translation (DA.php)
