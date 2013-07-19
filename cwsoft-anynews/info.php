@@ -4,7 +4,7 @@
  *
  * This code snippets grabs news entries from the WebsiteBaker news
  * module and displays them on any page you want by invoking the function
- * displayNewsItems() via a page of type code or the index.php
+ * getNewsItems() via a page of type code or the index.php
  * file of the template.
  *
  * This file defines the variables required for WebsiteBaker.
