@@ -200,22 +200,22 @@ Add the HTML skeleton below to your custom template file. All Anynews output sho
 		<!-- next three lines will be repeated for each existing news entry -->
 		<h2>News Title (repeated for each news item)</h2>
 		<p>Dummy news text </p>
-		<em>Dummy news author</em>
 
 		<!-- this line should only show up if no news item exists -->
 		<p>No news available yet</p>
 	</div>
 
 #### Step 2:
-Now we add control statements for the template parser [Twig](http://twig.sensiolabs.org/) used by Anynews. The line `{% for news in newsItems %}` loops over all news defined in the variable `newsItems` created by Anynews. Inside the loop, news data extracted from the WebsiteBaker news module is accessible from the variable `news` created by Twig. Outputs enclosed in `{% else %}` and `{% endfor %}` is only displayed if no news exist at all.
+Now we add control statements for the template parser [Twig](http://twig.sensiolabs.org/) used by Anynews. The line `{% for news in newsItems %}` loops over all news defined in the variable `newsItems` created by Anynews. The line `{% if news.TS_POSTED_WHEN > 0 %}` is a workaround for a bug in the WebsiteBaker News module and prevents that news not just created but not yet stored are shown. Inside the loop, news data extracted from the WebsiteBaker news module is accessible from the variable `news` created by Twig. Outputs enclosed in `{% else %}` and `{% endfor %}` is only displayed if no news exist at all.
 
 	<div class="mod_anynews">
 		<h1>Anynews Header (shown only once)</h1>
 		
 		{% for news in newsItems %}		
-			<h2>News Title (repeated for each news item)</h2>
-			<p>Dummy news text </p>
-			<em>Dummy news author</em>
+			{% if news.TS_POSTED_WHEN > 0 %}
+				<h2>News Title (repeated for each news item)</h2>
+				<p>Dummy news text </p>
+			{% endif %}
 			
 		{% else %}
 			<p>No news available yet</p>
@@ -229,10 +229,11 @@ Finally we replace the dummy text with placeholders provided by cwsoft-anynews. 
 	<div class="mod_anynews">
 		<h1>{{ lang.TXT_HEADER }}</h1>
 		
-		{% for news in newsItems %}		
-			<h2>{{ news.TITLE }}</h2>
-			{{ news.CONTENT_LONG }}
-			<em>{{ news.POSTED_BY }}</em>
+		{% for news in newsItems %}
+			{% if news.TS_POSTED_WHEN > 0 %}
+				<h2>{{ news.TITLE }}</h2>
+				{{ news.CONTENT_LONG }}
+			{% endif %}
 			
 		{% else %}
 			<p>{{ lang.TXT_NO_NEWS }}</p>

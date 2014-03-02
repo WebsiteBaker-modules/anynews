@@ -28,21 +28,23 @@
 	<h2>{{ lang.TXT_HEADER }}</h2>
 	
 	{% for news in newsItems %}
-		<p>
-			<strong>{{ news.TITLE }} ({{ news.TS_POSTED_WHEN | date(lang.DATE_FORMAT) }})</strong>
-		</p>
+		{% if news.TS_POSTED_WHEN > 0 %}
+			<p>
+				<strong>{{ news.TITLE }} ({{ news.TS_POSTED_WHEN | date(lang.DATE_FORMAT) }})</strong>
+			</p>
 
-		{{ lang.TXT_NUMBER_OF_COMMENTS }}: 
-		{{ news.COMMENTS }}
-		<br />
+			{{ lang.TXT_NUMBER_OF_COMMENTS }}: 
+			{{ news.COMMENTS }}
+			<br />
 	
-		{{ news.GROUP_IMAGE }} 
-		{{ news.CONTENT_SHORT}}
+			{{ news.GROUP_IMAGE }} 
+			{{ news.CONTENT_SHORT}}
 			
-		{% if news.CONTENT_LONG %}
-			<a href="{{ news.LINK }}">{{ lang.TXT_READMORE }}</a>
+			{% if news.CONTENT_LONG %}
+				<a href="{{ news.LINK }}">{{ lang.TXT_READMORE }}</a>
+			{% endif %}
+			<hr />
 		{% endif %}
-		<hr />
 	
 	{% else %}
 		{{ lang.TXT_NO_NEWS }}

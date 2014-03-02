@@ -51,20 +51,24 @@
 			<div id="slider">    
 				<ul class="navigation">
 					{% for news in newsItems %}
-						<li><a href="#anynews_{{ news.NEWS_ID }}">{{ lang.TXT_NEWS }} {{ news.NEWS_ID }}</a></li>
+						{% if news.TS_POSTED_WHEN > 0 %}
+							<li><a href="#anynews_{{ news.NEWS_ID }}">{{ lang.TXT_NEWS }} {{ news.NEWS_ID }}</a></li>
+						{% endif %}
 					{% endfor %}
 				</ul>
 
 				<div class="scroll">
 					<div class="scrollContainer">
 						{% for news in newsItems %}
-							<div class="panel" id="anynews_{{ news.NEWS_ID }}">
-								<h2>{{ news.TITLE }}</h2>
-								{{ news.CONTENT_SHORT }}
-								{% if news.CONTENT_LONG %}
-									<a href="{{ news.LINK }}">{{ lang.TXT_READMORE }}</a>
-								{% endif %}
-							</div>
+							{% if news.TS_POSTED_WHEN > 0 %}
+								<div class="panel" id="anynews_{{ news.NEWS_ID }}">
+									<h2>{{ news.TITLE }}</h2>
+									{{ news.CONTENT_SHORT }}
+									{% if news.CONTENT_LONG %}
+										<a href="{{ news.LINK }}">{{ lang.TXT_READMORE }}</a>
+									{% endif %}
+								</div>
+							{% endif %}
 						{% endfor %}
 					</div>
 				</div>

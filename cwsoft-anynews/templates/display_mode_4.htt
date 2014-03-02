@@ -48,13 +48,15 @@
 		<div class="flexslider">
 			<ul class="slides">
 				{% for news in newsItems %}
-					<li>
-						<h2>{{ news.TITLE }}</h2>
-						{{ news.CONTENT_SHORT }}
-						{% if news.CONTENT_LONG %}
-							<a href="{{ news.LINK }}">{{ lang.TXT_READMORE }}</a>
-						{% endif %}
-					</li>
+					{% if news.TS_POSTED_WHEN > 0 %}
+						<li>
+							<h2>{{ news.TITLE }}</h2>
+							{{ news.CONTENT_SHORT }}
+							{% if news.CONTENT_LONG %}
+								<a href="{{ news.LINK }}">{{ lang.TXT_READMORE }}</a>
+							{% endif %}
+						</li>
+					{% endif %}
 				{% endfor %}
 			</ul>
 		</div>

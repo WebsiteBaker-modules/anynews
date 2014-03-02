@@ -30,7 +30,9 @@
 	{% if newsItems %}
 	<ul>
 		{% for news in newsItems %}
-			<li><a href="{{ news.LINK }}">{{ news.TITLE }} ({{ news.TS_POSTED_WHEN | date(lang.DATE_FORMAT) }})</a></li>
+			{% if news.TS_POSTED_WHEN > 0 %}
+				<li><a href="{{ news.LINK }}">{{ news.TITLE }} ({{ news.TS_POSTED_WHEN | date(lang.DATE_FORMAT) }})</a></li>
+			{% endif %}
 		{% endfor %}
 	</ul>
 	
