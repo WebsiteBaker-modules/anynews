@@ -206,7 +206,7 @@ Add the HTML skeleton below to your custom template file. All Anynews output sho
 	</div>
 
 #### Step 2:
-Now we add control statements for the template parser [Twig](http://twig.sensiolabs.org/) used by Anynews. The line `{% for news in newsItems %}` loops over all news defined in the variable `newsItems` created by Anynews. The line `{% if news.TS_POSTED_WHEN > 0 %}` is a workaround for a bug in the WebsiteBaker News module and prevents that news not just created but not yet stored are shown. Inside the loop, news data extracted from the WebsiteBaker news module is accessible from the variable `news` created by Twig. Outputs enclosed in `{% else %}` and `{% endfor %}` is only displayed if no news exist at all.
+Now we add control statements for the template parser [Twig](http://twig.sensiolabs.org/) used by Anynews. The line `{% for news in newsItems %}` loops over all news defined in the variable `newsItems` created by Anynews. The line `{% if news.TS_POSTED_WHEN > 0 %}` is a workaround for a bug in the WebsiteBaker News module and prevents that news just created but not yet saved are already displayed. Inside the loop, news data extracted from the WebsiteBaker news module is accessible from the variable `news` created by Twig. Outputs enclosed in `{% else %}` and `{% endfor %}` is only displayed if no news exist at all.
 
 	<div class="mod_anynews">
 		<h1>Anynews Header (shown only once)</h1>
