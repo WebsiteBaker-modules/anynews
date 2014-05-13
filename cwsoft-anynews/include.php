@@ -255,12 +255,12 @@ if (! function_exists('getNewsItems')) {
 					'LINK'               => WB_URL . PAGES_DIRECTORY . $row['link'] . PAGE_EXTENSION,
 					'CONTENT_SHORT'      => $image . $row['content_short'],
 					'CONTENT_LONG'       => $row['content_long'],
-					'POSTED_WHEN'        => date($LANG['ANYNEWS'][0]['DATE_FORMAT'],$row['posted_when']),
-					'PUBLISHED_WHEN'     => date($LANG['ANYNEWS'][0]['DATE_FORMAT'], $row['published_when']),
-					'PUBLISHED_UNTIL'    => date($LANG['ANYNEWS'][0]['DATE_FORMAT'], $row['published_until']),
-					'TS_POSTED_WHEN'     => $row['posted_when'],
-					'TS_PUBLISHED_WHEN'  => $row['published_when'],
-					'TS_PUBLISHED_UNTIL' => $row['published_until'],
+					'POSTED_WHEN'        => date($LANG['ANYNEWS'][0]['DATE_FORMAT'], $row['posted_when'] + (int) TIMEZONE),
+					'PUBLISHED_WHEN'     => date($LANG['ANYNEWS'][0]['DATE_FORMAT'], $row['published_when'] + (int) TIMEZONE),
+					'PUBLISHED_UNTIL'    => date($LANG['ANYNEWS'][0]['DATE_FORMAT'], $row['published_until'] + (int) TIMEZONE),
+					'TS_POSTED_WHEN'     => $row['posted_when'] + (int) TIMEZONE,
+					'TS_PUBLISHED_WHEN'  => $row['published_when'] + (int) TIMEZONE,
+					'TS_PUBLISHED_UNTIL' => $row['published_until'] + (int) TIMEZONE,
 				);
 
 				// make custom placeholders available in Twig template: {{ newsItems.Counter.SHORT|LONG_REGEX_NAME_ID }}
