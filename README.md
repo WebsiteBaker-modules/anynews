@@ -108,6 +108,7 @@ Calling `getNewsItems` without configuration array uses the DEFAULTS below:
 		'group_id_type' => 'group_id',
 		'group_id' => 0,
 		'display_mode' => 1,
+		'start_news_item' => 0,
 		'max_news_items' => 10,
 		'max_news_length' => -1,
 		'strip_tags' => true,
@@ -148,6 +149,9 @@ Calling `getNewsItems` without configuration array uses the DEFAULTS below:
 	[1:details, 2:list, 3:better-coda-slider, 4:flexslider, 5..98 custom template *display_mode_X.htt*]
 	Hint: 99:cheat sheet with ALL Anynews placeholders available in the template files
 	
+- **start_news_item**: start showing news from the Nth news item onwards (Note: -1: last item, -2: 2nd last etc.)
+	[valid: -999..999]
+
 - **max_news_items**: max. number of news entries to show  
 	[valid: 1..999]
 	

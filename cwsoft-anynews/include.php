@@ -34,19 +34,20 @@ if (! function_exists('getNewsItems')) {
 
 		// default settings
 		$defaults = array(
+			'group_id_type' => 'group_id',    // type used by group_id to extract news entries (supported: 'group_id', 'page_id', 'section_id', 'post_id')
 			'group_id' => 0,                  // IDs of news to show, matching defined $group_id_type (default:=0, all news, 0..N, or array(2,4,5,N) to limit news to IDs matching $group_id_type)
-			'max_news_items' => 10,           // maximal number of news shown (default:= 10, min:=1, max:= 999)
-			'max_news_length' => -1,          // maximal length of the short news text shown (default:=-1 => full news length)
 			'display_mode' => 1,              // 1:=details (default); 2:=list; 3:=coda-slider; 4:flexslider; 4-98 (custom template: display_mode_X.htt); 99:=cheat sheet
-			'lang_id' => 'AUTO',              // language file to load and lang_id used if $lang_filer = true (default:= auto, examples: AUTO, DE, EN)
+			'start_news_item' => 0,           // start showing news from the Nth news item onwards (default:= 0, min:=-999, max:= 999); Note: -1: last item, -2: 2nd last etc.
+			'max_news_items' => 10,           // maximum number of news shown (default:= 10, min:=1, max:= 999)
+			'max_news_length' => -1,          // maximum length of the short news text shown (default:=-1 => full news length)
 			'strip_tags' => true,             // true:=remove tags from short and long text (default:=true); false:=don´t strip tags
 			'allowed_tags' => '<p><a><img>',  // tags not striped off (default:='<p><a><img>')
 			'custom_placeholder' => false,    // false:= none (default), array('MY_VAR_1' => '%TAG%#', ... 'MY_VAR_N' => '#regex_N#' ...)
 			'sort_by' => 1,                   // 1:=position (default), 2:=posted_when, 3:=published_when, 4:=random order, 5:=number of comments
 			'sort_order' => 1,                // 1:=descending (default), 2:=ascending
 			'not_older_than' => 0,            // 0:=disabled (default), 0-999 (only show news `published_when` date <=x days; 12 hours:=0.5)
-			'group_id_type' => 'group_id',    // type used by group_id to extract news entries (supported: 'group_id', 'page_id', 'section_id', 'post_id')
-			'lang_filter' => false            // flag to enable language filter (default:= false, show only news from a news page, which language fits $lang_id)
+			'lang_id' => 'AUTO',              // language file to load and lang_id used if $lang_filer = true (default:= auto, examples: AUTO, DE, EN)
+			'lang_filter' => false,	          // flag to enable language filter (default:= false, show only news from a news page, which language fits $lang_id)
 		);
 
 		// merge defaults and options array and remove unsupported keys
@@ -72,6 +73,7 @@ if (! function_exists('getNewsItems')) {
 		 * Sanitize user specified function parameters
 		 */
 		sanitizeUserInputs($group_id, 'i{0;0;999}');
+		sanitizeUserInputs($start_news_item, 'i{0;-999;999}');
 		sanitizeUserInputs($max_news_items, 'i{10;1;999}');
 		sanitizeUserInputs($max_news_length, 'i{-1;0;250}');
 		sanitizeUserInputs($display_mode, 'i{1;1;99}');
@@ -128,7 +130,7 @@ if (! function_exists('getNewsItems')) {
 		}
 		
 		/**
-		 * Work out SQL query for group_id, limiting news to display depedning by defined $news_filter
+		 * Work out SQL query for group_id, limiting news to display depending by defined $news_filter
 		 *  option 1: $group_id:=0 => '1'
 		 *  option 2: $group_id:=X => `group_id_type` = 'X'
 		 *  option 3: $group_id:=array(2,3) => `group_id_type` IN (2,3)
@@ -182,11 +184,10 @@ if (! function_exists('getNewsItems')) {
 		$sql_sort_order = ($sort_order == 1) ? 'DESC' : 'ASC';
 
 		/**
-		 * Perform SQL database query for Anynews
+		 * Build SQL query for Anynews
 		 */
 		$news_table = TABLE_PREFIX . 'mod_news_posts';
 		$comments_table = TABLE_PREFIX . 'mod_news_comments';
-
 		$sql = "SELECT t1.*, COUNT(`comment_id`) as `comments`
 			FROM `$news_table` as t1
 			LEFT JOIN `$comments_table` as t2
@@ -199,13 +200,31 @@ if (! function_exists('getNewsItems')) {
 			AND $sql_not_older_than
 			GROUP BY t1.`post_id`
 			ORDER BY $sql_order_by $sql_sort_order
-			LIMIT 0, $max_news_items
 		";
-		
+
+		// start from N-th last news item if $start_news_items is negative
+		if ($start_news_item < 0) {
+			// find total news items matching SQL query
+			$results = $database->query($sql);
+			$total_news = ($results) ? $results->numRows() : 0;
+
+			// adjust start_news_item to the N-th last news item
+			$start_news_item = $total_news + $start_news_item;
+			if ($start_news_item < 0) $start_news_item = 0;
+		}
+
+		// add user defined limits to the SQL query
+		$sql .= "
+			LIMIT $start_news_item, $max_news_items
+		";
+
 		/**
 		 * Process database query and output the template files
 		 */
+		// execute SQL query
 		$results = $database->query($sql);
+
+		// process results
 		$data['newsItems'] = array();
 		if ($results && $results->numRows() > 0) {
 			// fetch news group titles from news database table
@@ -283,16 +302,17 @@ if (! function_exists('getNewsItems')) {
 }
 
 /**
- * DEPRECATED: Serves as legacy wrapper for older cwsoft-anynews releases
- * BETTER USE: echo getNewsItems($options) in new projects
+ * DEPRECATED:  Legacy wrapper for outdated cwsoft-anynews releases prior to v2.8.0
+ * REPLACEMENT: echo getNewsItems($options);
+ * NOTE: New features will be implemented in getNewsItems() and will not be backported to displayNewsItems().
  * Passes over parameters to getNewsItems() and echos return string to screen
  *
  */
 if (! function_exists('displayNewsItmes')) {
 	function displayNewsItems(
 		$group_id = 0,                  // IDs of news to show, matching defined $group_id_type (default:=0, all news, 0..N, or array(2,4,5,N) to limit news to IDs matching $group_id_type)
-		$max_news_items = 10,           // maximal number of news shown (default:= 10, min:=1, max:= 999)
-		$max_news_length = -1,          // maximal length of the short news text shown (default:=-1 => full news length)
+		$max_news_items = 10,           // maximum number of news shown (default:= 10, min:=1, max:= 999)
+		$max_news_length = -1,          // maximum length of the short news text shown (default:=-1 => full news length)
 		$display_mode = 1,              // 1:=details (default); 2:=list; 3:=coda-slider; 4:flexslider; 4-98 (custom template: display_mode_X.htt); 99:=cheat sheet
 		$lang_id = 'AUTO',              // language file to load and lang_id used if $lang_filer = true (default:= auto, examples: AUTO, DE, EN)
 		$strip_tags = true,             // true:=remove tags from short and long text (default:=true); false:=don´t strip tags
@@ -308,19 +328,19 @@ if (! function_exists('displayNewsItmes')) {
 		// get cwsoft-anynews output for given parameters
 		$output = getNewsItems(
 			$options = array(
+				'group_id_type' => $group_id_type,
 				'group_id' => $group_id,
+				'display_mode' => $display_mode,
 				'max_news_items' => $max_news_items,
 				'max_news_length' => $max_news_length,
-				'display_mode' => $display_mode,
-				'lang_id' => $lang_id,
 				'strip_tags' => $strip_tags,
 				'allowed_tags' => $allowed_tags,
 				'custom_placeholder' => $custom_placeholder,
 				'sort_by' => $sort_by,
 				'sort_order' => $sort_order,
 				'not_older_than' => $not_older_than,
-				'group_id_type' => $group_id_type,
-				'lang_filter' => $lang_filter
+				'lang_id' => $lang_id,
+				'lang_filter' => $lang_filter,
 			)
 		);
 		echo $output;
