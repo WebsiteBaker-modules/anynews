@@ -185,12 +185,12 @@ Calling `getNewsItems` without configuration array uses the DEFAULTS below:
 	[default:= false, true:=only show news, which page language match given $lang_id]
 	
 ***Tip:*** 
-You can output a list with all *group_ids* and the *group titles* created by the WebsiteBaker news module, by adding the following code into a page/section of type code.
+To output *news title* and all possible Anynews *group_type_ids* (post_id, section_id, page_id, group_id), add the following code into a page/section of type code.
 
 	require_once(WB_PATH . '/modules/cwsoft-anynews/code/anynews_functions.php');
-	print_r(getNewsGroupTitles());
+	getGroupIdTypes($sort_column = "post_id", $sort_order = "ASC", $output = true);
 
-Visit the created page/section in your frontend and search for the *group_id(s)* you want to use in the Anynews function call. 
+Then visit the created page/section in your frontend and extract the *group_tpye_ids* you want to use in your Anynews function call.
 	
 ### Anynews Templates
 The HTML skeleton of the Anynews output is defined by template files **display_mode_X.htt** stored in the Anynews subfolder **templates**. The template file used is defined by the Anynews function parameter **$display_mode**, which defaults to 1 if no valid input is defined. To create your own Anynews template, create a new file in the Anynews template folder and rename it to **templates/display_mode_5.htt**. You can use the [cwsoft-addon-file-editor](https://github.com/cwsoft/wb-cwsoft-addon-file-editor#readme) to create and edit this file via the WebsiteBaker backend.

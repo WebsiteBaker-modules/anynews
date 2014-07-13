@@ -254,3 +254,43 @@ function strftime_filter($timestamp, $format, $locales) {
 	setlocale(LC_ALL, $locales);
 	return strftime($format, $timestamp);
 }
+
+/**
+ * Utility function to display possible Anynews group_id_types for each news entry
+ * Usefull to find news matching specific "post_ids", "section_ids", "page_ids" or "group_ids"
+*/
+function getGroupIdTypes($sort_column = "post_id", $sort_order = "ASC", $output = true)
+{
+	global $database;
+
+	// sanitize optional function parameters
+	$sort_columns = array('post_id', 'section_id', 'page_id', 'group_id', 'title');
+	$sort_column = in_array($sort_column, $sort_columns) ? $sort_column : 'post_id';
+	$sort_order = in_array($sort_order, array('ASC', 'DESC')) ? $sort_order: 'ASC';
+	$output = (bool) $output;
+
+	$table = TABLE_PREFIX . 'mod_news_posts';
+	$sql = "SELECT * FROM `$table` WHERE `active` = '1' ORDER BY `$sort_column` $sort_order";
+
+	// fetch data from the database
+	$results = $database->query($sql);
+
+	$news_ids = array();
+	while ($results && $row = $results->fetchRow()) {
+		$news_ids[] = array(
+			"title" => $row['title'],
+			"post_id" => $row['post_id'],
+			"section_id" => $row['section_id'],
+			"page_id" => $row['page_id'],
+			"group_id" => $row['group_id'],
+		);
+	}
+
+	if ($output) {
+		// output array in user readable form on screen
+		print("<pre>" . print_r($news_ids, true) . "</pre>");
+	} else {
+		// return array for further usage
+		return $news_ids;
+	}
+}
