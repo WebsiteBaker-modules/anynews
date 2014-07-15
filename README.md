@@ -1,12 +1,12 @@
 # cwsoft-anynews module for CMS WebsiteBaker 2.8.x
-The code snippet `cwsoft-anynews` (short form Anynews) is designed to fetch news entries from the [WebsiteBaker CMS](http://www.websitebaker2.org) news module. Invoke the cwsoft-anynews function where you want the news output to appear on your frontend. Optional configuration parameters, HTML templates, content placeholders and CSS definitions allows you to style the news output the way you want. The cwsoft-anynews snippet ships with four templates - including two jQuery sliding effects - ready to use out of the box.
+The code snippet `cwsoft-anynews` (short form Anynews) is designed to fetch news entries from the [WebsiteBaker CMS](http://www.websitebaker.org) news module. Invoke the cwsoft-anynews function where you want the news output to appear on your frontend. Optional configuration parameters, HTML templates, content placeholders and CSS definitions allows you to style the news output the way you want. The cwsoft-anynews snippet ships with four templates - including two jQuery sliding effects - ready to use out of the box.
 
 Power users define their own placeholders containing information extracted from the short and/or long news module description. Mastering cwsoft-anynews is possible - but requires you to study the information provided in the section [Customize](https://github.com/cwsoft/wb-cwsoft-anynews#customize).
 
 ## Download
 You can download an archive of the latest development branch of the `cwsoft-anynews` module using GitHubs [ZIP button](https://github.com/cwsoft/wb-cwsoft-anynews/archive/master.zip). The archives of previous module releases can be found in GitHubs [Tags section](https://github.com/cwsoft/wb-cwsoft-anynews/tags). The development history is tracked via [GitHub](https://github.com/cwsoft/wb-cwsoft-anynews/commits/master).
 
-***Please note:*** The archives downloaded from GitHub are not ready for installation in WebsiteBaker, as GitHub includes the archive subfolder. To create a working WebsiteBaker installation archive, unpack the downloaded archive on your local computer and zip the contents of the folder ***cwsoft-anynews*** (without the folder itself). Alternatively download an installable archive from the WebsiteBaker [module section](http://addons.websitebaker2.org/pages/en/browse-add-ons.php).
+***Please note:*** The archives downloaded from GitHub are not ready for installation in WebsiteBaker, as GitHub includes the archive subfolder. To create a working WebsiteBaker installation archive, unpack the downloaded archive on your local computer and zip the contents of the folder ***cwsoft-anynews*** (without the folder itself). Alternatively download an installable archive from the WebsiteBaker [module section](http://addons.websitebaker.org/pages/en/browse-add-ons.php).
 
 ## License
 The `cwsoft-anynews` code snippet is licensed under the [GNU General Public License (GPL) v3.0](http://www.gnu.org/licenses/gpl-3.0.html).
@@ -20,7 +20,7 @@ The minimum requirements to get cwsoft-anynews running on your WebsiteBaker inst
 - Optional: small modification of your template file to enable jQuery support
 
 ## Installation
-1. download archive from [GitHub](https://github.com/cwsoft/wb-cwsoft-anynews/archive/master.zip) or [WB repository](http://addons.websitebaker2.org/pages/en/browse-add-ons.php?id=0C80D11) (steps 2-3 only needed for GitHub archive)
+1. download archive from [GitHub](https://github.com/cwsoft/wb-cwsoft-anynews/archive/master.zip) or [WB repository](http://addons.websitebaker.org/pages/en/browse-add-ons.php?id=0C80D11) (steps 2-3 only needed for GitHub archive)
 2. unpack the archive on your local computer
 3. zip the contents of the folder ***cwsoft-anynews*** (without the folder itself)
 2. log into your WebsiteBaker backend and go to the `Add-ons/Modules` section
@@ -271,7 +271,7 @@ To change the news header of aboves example to green and the news text to blue, 
 You can track the status of known issues or report new issues found in cwsoft-anynews via GitHubs [issue tracking service](https://github.com/cwsoft/wb-cwsoft-anynews/issues). If you run into any issues with Anynews, please visit this page first and check if this issue is already known.
 
 ## Questions
-If you have questions or issues with Anynews, please visit the [English](http://www.websitebaker2.org/forum/index.php/topic,23355.0.html) WebsiteBaker forum support threads and ask for feedback.
+If you have questions or issues with Anynews, please visit the [English](http://www.websitebaker.org/forum/index.php/topic,23355.0.html) WebsiteBaker forum support threads and ask for feedback.
 
 ***Always provide the following information with your support request:***
 
@@ -287,11 +287,11 @@ If you have questions or issues with Anynews, please visit the [English](http://
 ## Credits
 Credits go to the following WebsiteBaker community members:
 
-- [BlackBird](http://www.websitebaker2.org/forum/index.php?action=profile;u=14154): maintenance/support (July 2009 to March 2010)
-- [D72](http://www.websitebaker2.org/forum/index.php?action=profile;u=7298), [Argos](http://www.websitebaker2.org/forum/index.php?action=profile;u=153): Dutch translation (NL.php)
+- [BlackBird](http://www.websitebaker.org/forum/index.php?action=profile;u=14154): maintenance/support (July 2009 to March 2010)
+- [D72](http://www.websitebaker.org/forum/index.php?action=profile;u=7298), [Argos](http://www.websitebaker.org/forum/index.php?action=profile;u=153): Dutch translation (NL.php)
 - Guillaume Vielliard: French translation (FR.php)
-- [eazybaker](http://www.websitebaker2.org/forum/index.php?action=profile;u=11394): Estonia translation (EE.php)
-- [Mirens](http://www.websitebaker2.org/forum/index.php?action=profile;u=13226): Serbian translation (RS.php)
-- [dana](http://www.websitebaker2.org/forum/index.php?action=profile;u=62603): Czech translation (CS.php)
-- [owk444](http://www.websitebaker2.org/forum/index.php?action=profile;u=81800): Russian translation (RU.php)
+- [eazybaker](http://www.websitebaker.org/forum/index.php?action=profile;u=11394): Estonia translation (EE.php)
+- [Mirens](http://www.websitebaker.org/forum/index.php?action=profile;u=13226): Serbian translation (RS.php)
+- [dana](http://www.websitebaker.org/forum/index.php?action=profile;u=62603): Czech translation (CS.php)
+- [owk444](http://www.websitebaker.org/forum/index.php?action=profile;u=81800): Russian translation (RU.php)
 - [fordfairlane](http://www.websitebaker.org/forum/index.php?action=profile;u=15221): Danish translation (DA.php)
