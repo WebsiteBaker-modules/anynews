@@ -53,6 +53,11 @@ foreach($options as $key => $value) {
 			// deal with fact that Droplets don't yet support urldecode by itself
 			${$key} = str_replace(array('&lt;', '%3C', '&gt;', '%3E'), array('<', '<', '>', '>'), ${$key});
 		}
+		if (in_array($key, array('strip_tags', 'lang_filter'))) {
+			// deal with boolean types ('false', 'true' are both True if converted to Boolean)
+			${$key} = str_replace(array('false', 'true'), array('0', '1'), strtolower(${$key}));
+		}
+		// strip leading and trailing single and double quotes
 		$options[$key] = trim(${$key}, '"\'');
 	}
 }
