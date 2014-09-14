@@ -49,6 +49,10 @@ foreach($options as $key => $value) {
 	if ($key == 'group_id') {
 		$options[$key] = explode(',', ${$key});
 	} else {
+		if (in_array($key, array('allowed_tags'))) {
+			// deal with fact that Droplets don't yet support urldecode by itself
+			${$key} = str_replace(array('&lt;', '%3C', '&gt;', '%3E'), array('<', '<', '>', '>'), ${$key});
+		}
 		$options[$key] = trim(${$key}, '"\'');
 	}
 }
