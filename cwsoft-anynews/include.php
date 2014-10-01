@@ -308,7 +308,7 @@ if (! function_exists('getNewsItems')) {
  * Passes over parameters to getNewsItems() and echos return string to screen
  *
  */
-if (! function_exists('displayNewsItmes')) {
+if (! function_exists('displayNewsItems')) {
 	function displayNewsItems(
 		$group_id = 0,                  // IDs of news to show, matching defined $group_id_type (default:=0, all news, 0..N, or array(2,4,5,N) to limit news to IDs matching $group_id_type)
 		$max_news_items = 10,           // maximum number of news shown (default:= 10, min:=1, max:= 999)
