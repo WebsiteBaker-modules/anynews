@@ -1,10 +1,10 @@
 # cwsoft-anynews module for CMS WebsiteBaker 2.8.x
 The code snippet `cwsoft-anynews` (short form Anynews) is designed to fetch news entries from the [WebsiteBaker CMS](http://www.websitebaker.org) news module. Invoke the cwsoft-anynews function where you want the news output to appear on your frontend. Optional configuration parameters, HTML templates, content placeholders and CSS definitions allows you to style the news output the way you want. The cwsoft-anynews snippet ships with four templates - including two jQuery sliding effects - ready to use out of the box.
 
-Power users define their own placeholders containing information extracted from the short and/or long news module description. Mastering cwsoft-anynews is possible - but requires you to study the information provided in the section [Customize](https://github.com/cwsoft/wb-cwsoft-anynews#customize).
+Power users define their own placeholders containing information extracted from the short and/or long news module description. Mastering cwsoft-anynews is possible - but requires you to study the information provided in the section [Customize](https://github.com/cwsoft/websitebaker-anynews#customize).
 
 ## Download
-You can download an archive of the latest development branch of the `cwsoft-anynews` module using GitHubs [ZIP button](https://github.com/cwsoft/wb-cwsoft-anynews/archive/master.zip). The archives of previous module releases can be found in GitHubs [Tags section](https://github.com/cwsoft/wb-cwsoft-anynews/tags). The development history is tracked via [GitHub](https://github.com/cwsoft/wb-cwsoft-anynews/commits/master).
+You can download an archive of the latest development branch of the `cwsoft-anynews` module using GitHubs [ZIP button](https://github.com/cwsoft/websitebaker-anynews/archive/master.zip). The archives of previous module releases can be found in GitHubs [Tags section](https://github.com/cwsoft/websitebaker-anynews/tags). The development history is tracked via [GitHub](https://github.com/cwsoft/websitebaker-anynews/commits/master).
 
 ***Please note:*** The archives downloaded from GitHub are not ready for installation in WebsiteBaker, as GitHub includes the archive subfolder. To create a working WebsiteBaker installation archive, unpack the downloaded archive on your local computer and zip the contents of the folder ***cwsoft-anynews*** (without the folder itself). Alternatively download an installable archive from the WebsiteBaker [module section](http://addons.websitebaker.org/pages/en/browse-add-ons.php).
 
@@ -20,14 +20,14 @@ The minimum requirements to get cwsoft-anynews running on your WebsiteBaker inst
 - Optional: small modification of your template file to enable jQuery support
 
 ## Installation
-1. download archive from [GitHub](https://github.com/cwsoft/wb-cwsoft-anynews/archive/master.zip) or [WB repository](http://addons.websitebaker.org/pages/en/browse-add-ons.php?id=0C80D11) (steps 2-3 only needed for GitHub archive)
+1. download archive from [GitHub](https://github.com/cwsoft/websitebaker-anynews/archive/master.zip) or [WB repository](http://addons.websitebaker.org/pages/en/browse-add-ons.php?id=0C80D11) (steps 2-3 only needed for GitHub archive)
 2. unpack the archive on your local computer
 3. zip the contents of the folder ***cwsoft-anynews*** (without the folder itself)
 2. log into your WebsiteBaker backend and go to the `Add-ons/Modules` section
 3. install the newly zipped archive via the WebsiteBaker installer
 
 ### Enable jQuery support (optional)
-If you want to use JavaScript effects or jQuery plugins with cwsoft-anynews, you need to add one code line to your frontend template. Open your WebsiteBaker frontend template file ***index.php*** in the [cwsoft-addon-file-editor](https://github.com/cwsoft/wb-cwsoft-addon-file-editor#readme) and search for the following lines. 
+If you want to use JavaScript effects or jQuery plugins with cwsoft-anynews, you need to add one code line to your frontend template. Open your WebsiteBaker frontend template file ***index.php*** in the [cwsoft-addon-file-editor](https://github.com/cwsoft/websitebaker-addon-file-editor#readme) and search for the following lines. 
 
 	if (function_exists('register_frontend_modfiles')) {
 		register_frontend_modfiles('css');
@@ -59,10 +59,10 @@ The cwsoft-anynews output is only visible at the pages/sections of your frontend
 		echo getNewsItems();
 	}
 
-**Please note:** The above code requires cwsoft-anynews v2.8.0 or higher. For older versions read the [README](https://github.com/cwsoft/wb-cwsoft-anynews/blob/v2.7.0/README.md) of your version.
+**Please note:** The above code requires cwsoft-anynews v2.8.0 or higher. For older versions read the [README](https://github.com/cwsoft/websitebaker-anynews/blob/v2.7.0/README.md) of your version.
 
 ### Use Anynews from your template
-To display news items at a fixed position on every page of your frontend, open the ***index.php*** file of your default frontend template with the [cwsoft-addon-file-editor](https://github.com/cwsoft/wb-cwsoft-addon-file-editor#readme). Then add the code below to the position in your template where you want the news output to appear.
+To display news items at a fixed position on every page of your frontend, open the ***index.php*** file of your default frontend template with the [cwsoft-addon-file-editor](https://github.com/cwsoft/websitebaker-addon-file-editor#readme). Then add the code below to the position in your template where you want the news output to appear.
 
 	<?php
 		if (function_exists('getNewsItems')) {
@@ -70,7 +70,7 @@ To display news items at a fixed position on every page of your frontend, open t
 		}
 	?>
 
-**Please note:** The above code requires cwsoft-anynews v2.8.0 or higher. For older versions read the [README](https://github.com/cwsoft/wb-cwsoft-anynews/blob/v2.7.0/README.md) of your version.
+**Please note:** The above code requires cwsoft-anynews v2.8.0 or higher. For older versions read the [README](https://github.com/cwsoft/websitebaker-anynews/blob/v2.7.0/README.md) of your version.
 
 Visit the frontend of your website and check the cwsoft-anynews output. Depending on the Anynews function parameters defined, the output may look as follows.
 
@@ -135,7 +135,7 @@ Calling `getNewsItems` without configuration array uses the DEFAULTS below:
 	);
 	echo getNewsItems($config);
 	
-**Please note:** The above code requires cwsoft-anynews v2.8.0 or higher. For older versions read the [README](https://github.com/cwsoft/wb-cwsoft-anynews/blob/v2.7.0/README.md) of your version.
+**Please note:** The above code requires cwsoft-anynews v2.8.0 or higher. For older versions read the [README](https://github.com/cwsoft/websitebaker-anynews/blob/v2.7.0/README.md) of your version.
 
 #### Supported configuration options
 
@@ -193,7 +193,7 @@ To output *news title* and all possible Anynews *group_type_ids* (post_id, secti
 Then visit the created page/section in your frontend and extract the *group_tpye_ids* you want to use in your Anynews function call.
 	
 ### Anynews Templates
-The HTML skeleton of the Anynews output is defined by template files **display_mode_X.htt** stored in the Anynews subfolder **templates**. The template file used is defined by the Anynews function parameter **$display_mode**, which defaults to 1 if no valid input is defined. To create your own Anynews template, create a new file in the Anynews template folder and rename it to **templates/display_mode_5.htt**. You can use the [cwsoft-addon-file-editor](https://github.com/cwsoft/wb-cwsoft-addon-file-editor#readme) to create and edit this file via the WebsiteBaker backend.
+The HTML skeleton of the Anynews output is defined by template files **display_mode_X.htt** stored in the Anynews subfolder **templates**. The template file used is defined by the Anynews function parameter **$display_mode**, which defaults to 1 if no valid input is defined. To create your own Anynews template, create a new file in the Anynews template folder and rename it to **templates/display_mode_5.htt**. You can use the [cwsoft-addon-file-editor](https://github.com/cwsoft/websitebaker-addon-file-editor#readme) to create and edit this file via the WebsiteBaker backend.
 
 #### Step 1:
 Add the HTML skeleton below to your custom template file. All Anynews output should be wrapped in a div with class "mod_anynews" to prevent CSS clashes with other modules, templates or the WebsiteBaker core. 
@@ -255,7 +255,7 @@ The Anynews default templates (*/templates/display_mode_X.htt*) wrap the Anynews
 		<p>Dummy news text to explain</p>
 	</div>
 	
-To change the news header of aboves example to green and the news text to blue, open the ***css/anynews.css*** file in the [cwsoft-addon-file-editor](https://github.com/cwsoft/wb-cwsoft-addon-file-editor#readme) and add the following CSS definitions.
+To change the news header of aboves example to green and the news text to blue, open the ***css/anynews.css*** file in the [cwsoft-addon-file-editor](https://github.com/cwsoft/websitebaker-addon-file-editor#readme) and add the following CSS definitions.
 
 	div.mod_anynews h2 {
 		color: green;
@@ -268,7 +268,7 @@ To change the news header of aboves example to green and the news text to blue, 
 ***Note:*** It is common practice to limit the scope of the CSS defintions to the div mod_anynews. This practice ensures that your CSS definitions do not overwrite styles defined in other modules, templates or the WebsiteBaker core. You should stick to this good practice when creating your own template files.
 	
 ## Known Issues
-You can track the status of known issues or report new issues found in cwsoft-anynews via GitHubs [issue tracking service](https://github.com/cwsoft/wb-cwsoft-anynews/issues). If you run into any issues with Anynews, please visit this page first and check if this issue is already known.
+You can track the status of known issues or report new issues found in cwsoft-anynews via GitHubs [issue tracking service](https://github.com/cwsoft/websitebaker-anynews/issues). If you run into any issues with Anynews, please visit this page first and check if this issue is already known.
 
 ## Questions
 If you have questions or issues with Anynews, please visit the [English](http://www.websitebaker.org/forum/index.php/topic,23355.0.html) WebsiteBaker forum support threads and ask for feedback.

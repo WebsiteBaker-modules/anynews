@@ -20,7 +20,7 @@
 */
 
 // Danish module description
-$module_description = 'This kodestump cwsoft-anynews gør det muligt at vise nyheder poster fra WebsiteBaker news modul på ethvert sted, du ønsker. Kalder funktionen fra en kode sektion eller din skabelon index.php fil. For nærmere oplysninger se <a href="https://github.com/cwsoft/wb-cwsoft-anynews#readme" target="_blank">GitHub</a>.';
+$module_description = 'This kodestump cwsoft-anynews gør det muligt at vise nyheder poster fra WebsiteBaker news modul på ethvert sted, du ønsker. Kalder funktionen fra en kode sektion eller din skabelon index.php fil. For nærmere oplysninger se <a href="https://github.com/cwsoft/websitebaker-anynews#readme" target="_blank">GitHub</a>.';
 
 // initialize global $LANG variable as array if needed
 global $LANG;

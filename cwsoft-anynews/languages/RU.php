@@ -20,7 +20,7 @@
 */
 
 // Russian module description
-$module_description = 'Сниппет cwsoft-anynews позволяет отображать записи из модуля новостей WebsiteBaker в любом месте по вашему желанию. Функция вызывается из секции типа "Code" или вашего файла шаблона index.php. Подробнее см. <a href="https://github.com/cwsoft/wb-cwsoft-anynews#readme" target="_blank">GitHub</a>.';
+$module_description = 'Сниппет cwsoft-anynews позволяет отображать записи из модуля новостей WebsiteBaker в любом месте по вашему желанию. Функция вызывается из секции типа "Code" или вашего файла шаблона index.php. Подробнее см. <a href="https://github.com/cwsoft/websitebaker-anynews#readme" target="_blank">GitHub</a>.';
 
 // initialize global $LANG variable as array if needed
 global $LANG;

@@ -20,7 +20,7 @@
 */
 
 // Czech module description
-$module_description = 'Tento modul cwsoft-anynews umožňuje zobrazovat vaše aktuality ze systému Websitebaker na jakémkoliv místě. Funkci můžete použít v sekci Code na jakékoliv stránce nebo ve vaší šabloně v souboru index.php. Detaily viz <a href="https://github.com/cwsoft/wb-cwsoft-anynews#readme" target="_blank">GitHub</a>.';
+$module_description = 'Tento modul cwsoft-anynews umožňuje zobrazovat vaše aktuality ze systému Websitebaker na jakémkoliv místě. Funkci můžete použít v sekci Code na jakékoliv stránce nebo ve vaší šabloně v souboru index.php. Detaily viz <a href="https://github.com/cwsoft/websitebaker-anynews#readme" target="_blank">GitHub</a>.';
 
 // initialize global $LANG variable as array if needed
 global $LANG;
