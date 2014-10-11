@@ -7,7 +7,7 @@
  * getNewsItems() via a page of type code or the index.php
  * file of the template.
  *
- * This file implements the jQuery flexslider news output ($display_mode = 4).
+ * This file implements the jQuery Flexslider news output ($display_mode = 4).
  *
  * USAGE:
  * Text defined in Anynews language files can be used via {{ lang.KEY }}
@@ -27,7 +27,7 @@
 
 <script type="text/javascript">
 	// check if jQuery is included via template index.php or equivalent method
-	showJqueryStatus("Anynews (flexslider)");
+	showJqueryStatus("Anynews (jQuery Flexslider)");
 
 	// include flexslider files
 	$.include([
@@ -36,8 +36,8 @@
 		'{{ WB_URL }}/modules/cwsoft-anynews/thirdparty/flexslider/jquery.flexslider-min.js',
 		
 		// include YOUR flexslider CSS and settings (adjust these two files to your needs)
-		'{{ WB_URL }}/modules/cwsoft-anynews/css/custom-settings-flexslider.css',
-		'{{ WB_URL }}/modules/cwsoft-anynews/javascript/custom-settings-flexslider.js'
+		'{{ WB_URL }}/modules/cwsoft-anynews/css/flexslider-custom.css',
+		'{{ WB_URL }}/modules/cwsoft-anynews/javascript/flexslider-config.js'
 	]); 
 </script>	
 
