@@ -6,9 +6,9 @@
  * getNewsItems() via a page of type code or the index.php
  * file of the template.
  *
- * User defined CSS settings for the thirdparty jQuery plugin better-coda-slider.
+ * User defined CSS settings for the thirdparty jQuery plugin Liquid Slider.
  * Detailed information about the jQuery plugin and it's settings can be found
- * on website of the authors: http://jqueryfordesigners.com/coda-slider-effect/
+ * on website of the author: http://liquidslider.com/
  * 
  * LICENSE: GNU General Public License 3.0
  * 
@@ -20,5 +20,19 @@
 */
 
 /**
- * Custom CSS to style the better-coda-slider effect 
+ * Custom CSS to overwrite Liquid Slider defaults if needed
 */
+.liquid-slider {
+	background-color: #f2f2f2;
+}
+
+/**
+ * Custom CSS styles to style the output to your needs
+*/
+#anynews-liquid-slider h2 {
+	color: inherent;
+}
+
+#anynews-liquid-slider p {
+	line-height: 1.5em;
+}
