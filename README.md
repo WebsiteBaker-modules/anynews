@@ -1,4 +1,9 @@
 # cwsoft-anynews module for CMS WebsiteBaker 2.8.x
+**PLEASE NOTE:**
+This repository is no longer actively maintained by myself. As the code is licensed under GNU GPL, feel free to fork this repository and change it to your liking.
+Have fun and don't forget to contribute back to [WebsiteBaker CMS](http://websitebaker.org).
+
+----------------------------------------
 The code snippet `cwsoft-anynews` (short form Anynews) is designed to fetch news entries from the [WebsiteBaker CMS](http://www.websitebaker.org) news module. Invoke the cwsoft-anynews function where you want the news output to appear on your frontend. Optional configuration parameters, HTML templates, content placeholders and CSS definitions allows you to style the news output the way you want. The cwsoft-anynews snippet ships with four templates - including two jQuery sliding effects - ready to use out of the box.
 
 Power users define their own placeholders containing information extracted from the short and/or long news module description. Mastering cwsoft-anynews is possible - but requires you to study the information provided in the section [Customize](https://github.com/cwsoft/websitebaker-anynews#customize).
