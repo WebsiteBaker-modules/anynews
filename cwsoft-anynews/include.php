@@ -48,6 +48,7 @@ if (! function_exists('getNewsItems')) {
 			'not_older_than' => 0,            // 0:=disabled (default), 0-999 (only show news `published_when` date <=x days; 12 hours:=0.5)
 			'lang_id' => 'AUTO',              // language file to load and lang_id used if $lang_filer = true (default:= auto, examples: AUTO, DE, EN)
 			'lang_filter' => false,	          // flag to enable language filter (default:= false, show only news from a news page, which language fits $lang_id)
+			'show_years' => 0,	          		// only show news from given years(default:= 0 to show all news or 2010,2013,2015 to show this news only)
 		);
 
 		// merge defaults and options array and remove unsupported keys
@@ -84,6 +85,7 @@ if (! function_exists('getNewsItems')) {
 		sanitizeUserInputs($not_older_than, 'd{0;0;999}');
 		sanitizeUserInputs($group_id_type, 'l{group_id;group_id;page_id;section_id;post_id}');
 		sanitizeUserInputs($lang_filter, 'b');
+		sanitizeUserInputs($show_years, 'i{0;1970;2038}');
 
 		/**
 		 * Create Twig template object and configure it
@@ -182,6 +184,25 @@ if (! function_exists('getNewsItems')) {
 		
 		// creates SQL query for sort order option
 		$sql_sort_order = ($sort_order == 1) ? 'DESC' : 'ASC';
+		
+		/**
+		 * Work out SQL query for show_years option
+		 */
+		$sql_show_years = "";
+		if ($show_years) { 
+			// check for multiple years or single year values
+			if (!is_array($show_years)) {
+				$show_years = array($show_years);
+			}
+			$sql_show_years = $sql_show_years.' AND (';
+			foreach ($show_years AS $iYear) {
+				if (!$iYear) {
+					$iYear = 1970;
+				}
+			$sql_show_years = $sql_show_years.' FROM_UNIXTIME( t1.`published_when`, "%Y" ) = '.$iYear.' OR'; 								
+			}
+			$sql_show_years = substr($sql_show_years, 0, -2).')';
+		}
 
 		/**
 		 * Build SQL query for Anynews
@@ -195,9 +216,10 @@ if (! function_exists('getNewsItems')) {
 			WHERE t1.`active` = '1'
 			AND $sql_group_id
 			AND $sql_lang_filter
-			AND (t1.`published_when` = '0' or t1.`published_when` <= '$server_time')
+			AND (t1.`published_when` = '0' OR t1.`published_when` <= '$server_time')
 			AND (t1.`published_until` = '0' OR t1.`published_until` >= '$server_time')
 			AND $sql_not_older_than
+			$sql_show_years
 			GROUP BY t1.`post_id`
 			ORDER BY $sql_order_by $sql_sort_order
 		";
